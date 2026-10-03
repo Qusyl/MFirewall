@@ -1,3 +1,6 @@
 <Solution>
+  <Folder Name="/Tests/">
+    <Project Path="Tests/MFirewallTests/MFirewallTests.csproj" />
+  </Folder>
   <Project Path="MFirewallApp/MFirewallApp.csproj" />
 </Solution>
