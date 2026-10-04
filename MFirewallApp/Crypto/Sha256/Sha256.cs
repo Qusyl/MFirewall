@@ -38,9 +38,9 @@ namespace MFirewallApp.Crypto.Sha256Hmac
             public uint H;
         }
         
-        public byte[] HashData(string message)
+        public byte[] HashData(byte[] data)
         {
-            var messageBytes = Encoding.UTF8.GetBytes(message);
+            var messageBytes = data;
 
             var padded = PaddingMessage(messageBytes);
 
@@ -61,17 +61,13 @@ namespace MFirewallApp.Crypto.Sha256Hmac
                 H7 = 0x5be0cd19
             };
 
-            int len = message.Length;
+            int len = data.Length;
 
             int pdLen = padded.Length;
 
             int bloLen = blocks.Length;
 
-
-            System.Console.WriteLine(
-              $"MLEN = {len}\n"
-              + $"PDLEN = {pdLen}\n"
-              + $"BLOLEN = {bloLen}\n");
+          
             foreach(var block in blocks)
             {
                 var words = CreateWords(block);
@@ -106,7 +102,7 @@ namespace MFirewallApp.Crypto.Sha256Hmac
             }
 
             string hex = BitConverter.ToString(hashed).Replace("-", "");
-            System.Console.WriteLine(hex);
+         
             return hashed;
         }
         private uint[] CreateWords(byte[] block)
@@ -136,7 +132,7 @@ namespace MFirewallApp.Crypto.Sha256Hmac
             for (int i = 0; i < k.Length; i++)
             {
                 k[i] = GenerateConstant(konsts[i]);
-                System.Console.WriteLine($"{i} константа = {k[i]:X8}");
+                
             }
             return k;
         }
@@ -148,7 +144,7 @@ namespace MFirewallApp.Crypto.Sha256Hmac
             {
                 len++;
             } while (len < messageSize + 9 || len % 64 != 0);
-            System.Console.WriteLine($"Найдено: {len}");
+       
             return len;
         }
         private byte[] PaddingMessage(byte[] message)
@@ -327,15 +323,7 @@ namespace MFirewallApp.Crypto.Sha256Hmac
             state.H5 += workingState.F;
             state.H6 += workingState.G;
             state.H7 += workingState.H;
-            System.Console.WriteLine(
-            $"A: 0x{state.H0:X8}\n" +
-            $"B: 0x{state.H1:X8}\n" +
-            $"C: 0x{state.H2:X8}\n" +
-            $"D: 0x{state.H3:X8}\n" +
-            $"E: 0x{state.H4:X8}\n" +
-            $"F: 0x{state.H5:X8}\n" +
-            $"G: 0x{state.H6:X8}\n" +
-            $"H: 0x{state.H7:X8}\n");
+           
             
         }
         

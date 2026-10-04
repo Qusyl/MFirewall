@@ -1,6 +1,11 @@
 <Solution>
+  <Folder Name="/Api/">
+    <Project Path="Api/MFirewallApi/MFirewallApi.csproj" />
+  </Folder>
   <Folder Name="/Tests/">
     <Project Path="Tests/MFirewallTests/MFirewallTests.csproj" />
   </Folder>
+  <Project Path="Domain/Domain.csproj" />
+  <Project Path="Infrastructure/Infrastructure.csproj" />
   <Project Path="MFirewallApp/MFirewallApp.csproj" />
 </Solution>

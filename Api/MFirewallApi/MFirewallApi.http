@@ -1,0 +1,6 @@
+@MFirewallApi_HostAddress = http://localhost:5118
+
+GET {{MFirewallApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
