@@ -1,21 +1,34 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Threading.Tasks;
+using System.Buffers.Binary;
 
 namespace Domain.Values
 {
-    [StructLayout(LayoutKind.Sequential, Pack = 1)]
-    public struct UdpHeader
+    public readonly struct UdpHeader
     {
-        public ushort SourcePort;
-        public ushort DestinationPort;
-        public ushort Length;
-        public ushort Checksum;
+        public ushort SourcePort { get; }
+        public ushort DestinationPort { get; }
+        public ushort Length { get; }
+        public ushort Checksum { get; }
 
-        public ushort SourcePortHost => (ushort)System.Net.IPAddress.NetworkToHostOrder((ushort)SourcePort);
-        public ushort DestinationPortHost => (ushort)System.Net.IPAddress.NetworkToHostOrder((ushort)DestinationPort);
-        public ushort LengthHost => (ushort)System.Net.IPAddress.NetworkToHostOrder((ushort)Length);
+        private UdpHeader(ushort sourcePort, ushort destinationPort, ushort length, ushort checksum)
+        {
+            SourcePort = sourcePort;
+            DestinationPort = destinationPort;
+            Length = length;
+            Checksum = checksum;
+        }
+
+        public static UdpHeader Parse(ReadOnlySpan<byte> bytes)
+        {
+            if (bytes.Length < 8)
+                throw new ArgumentException(
+                    $"UDP header requires >= 8 bytes",
+                    nameof(bytes));
+
+            return new UdpHeader(
+                sourcePort:BinaryPrimitives.ReadUInt16BigEndian(bytes),
+                destinationPort:BinaryPrimitives.ReadUInt16BigEndian(bytes[2..]),
+                length:BinaryPrimitives.ReadUInt16BigEndian(bytes[4..]),
+                checksum:BinaryPrimitives.ReadUInt16BigEndian(bytes[6..]));
+        }
     }
 }

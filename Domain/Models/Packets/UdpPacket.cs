@@ -12,5 +12,10 @@ namespace Domain.Models.Packets
         public UdpHeader Header { get; set; }
 
         public byte[] Payload { get; set; }
+
+        public UdpPacket(ReadOnlySpan<byte> bytes, int Id) : base(Id)
+        {
+            Header = UdpHeader.Parse(bytes);
+        }
     }
 }

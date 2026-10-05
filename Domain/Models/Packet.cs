@@ -1,12 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Domain.Models
 {
-    public abstract class Packet
+    public abstract class Packet(uint Id)
     {
-        
+        public uint Id { get; set; } = Id;
     }
 }

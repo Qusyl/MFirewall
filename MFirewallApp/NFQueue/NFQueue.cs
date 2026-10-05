@@ -1,6 +1,7 @@
 using System.Buffers.Binary;
 using System.Runtime.InteropServices;
 using System.Threading.Channels;
+using Domain.Models;
 using Domain.Values;
 using MFirewallApp.FileSystem;
 
@@ -18,6 +19,8 @@ namespace MFirewallApp.NFQueue
 
         private const short POLLIN = 0x0001;
         private const int ENOBUFS = 105;
+
+        private IntPtr _queueHandle;
 
         private static Channel<CapturedPacket> _channel;
 
@@ -88,6 +91,18 @@ namespace MFirewallApp.NFQueue
         public Task OpenNfqueueAsync(CancellationToken ct) =>
             Task.Run(() => Run(ct), ct);
 
+        public void SetVerdict(Verdict.Verdict verdict, uint Id)
+        {
+            if (verdict is Verdict.Verdict.ACCEPT)
+            {
+                nfq_set_verdict(_queueHandle, Id, NF_ACCEPT, 0, IntPtr.Zero);
+            }
+            else
+            {
+                nfq_set_verdict(_queueHandle, Id, NF_DROP, 0, IntPtr.Zero);
+            }
+        }
+
 
         private void Run(CancellationToken ct)
         {
@@ -108,7 +123,7 @@ namespace MFirewallApp.NFQueue
 
                 qh = CreateQueue(h);
                 if (qh == IntPtr.Zero) return;
-
+                _queueHandle = qh;
                 int fd = nfq_fd(h);
                 byte[] buffer = new byte[65536];
                 var pfd = new[] { new PollFd { fd = fd, events = POLLIN } };

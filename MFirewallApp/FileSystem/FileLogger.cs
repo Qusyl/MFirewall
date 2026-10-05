@@ -9,8 +9,10 @@ namespace MFirewallApp.FileSystem
     {
         public static void AppendLogFile(string log)
         {
-            File.AppendAllText("Logs/log.txt",log);
-        } 
+            File.AppendAllText("Logs/log.txt", BuildLog(log));
+        }
+
+        private static string BuildLog(string log) => $"[{DateTime.UtcNow.ToString("dd-MM-yyyy")}]: {log}";
        
     }
 }
