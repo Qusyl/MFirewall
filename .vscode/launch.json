@@ -1,0 +1,49 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": ".NET CORE LAUNCH",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/Api/MFirewallApi/bin/Debug/net10.0/MFirewallApi.dll",
+            "args":[],
+            "cwd": "${workspaceFolder}",
+            "stopAtEntry": false,
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "Now listening on:\\s+(https?://\\S+)"
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            
+        },
+        {
+            "name": ".NET LAUNCH AS ROOT",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/Api/MFirewallApi/bin/Debug/net10.0/MFirewallApi.dll",
+            "args":[],
+            "cwd": "${workspaceFolder}",
+            "stopAtEntry": false,
+            "console": "internalConsole",
+            "env": {
+                "ASPNETCORE_ENVIRONMENT":"Development"
+            },
+            
+"pipeTransport": {
+    "pipeCwd": "${workspaceFolder}",
+    "pipeProgram": "/home/denis/.local/bin/vsdbg-root",
+    "pipeArgs": [],
+    "debuggerPath": "/home/denis/.vscode/extensions/ms-dotnettools.csharp-2.160.4-linux-x64/.debugger/vsdbg",
+    "quoteArgs": false
+}
+
+        }
+    ]
+}

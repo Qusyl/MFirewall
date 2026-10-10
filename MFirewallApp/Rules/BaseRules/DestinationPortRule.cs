@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Domain.Models.Packets;
+using MFirewallApp.FileSystem;
 using MFirewallApp.Interface;
 
 namespace MFirewallApp.Rules.BaseRules
@@ -27,10 +28,12 @@ namespace MFirewallApp.Rules.BaseRules
 
                 if (port != -1)
                 {
-                    if (port == configuration.DestinationPortRule)
-                    {
-                        return Verdict.Verdict.DROP;
-                    }
+                if (port == configuration.DestinationPortRule)
+                {
+                    FileLogger.AppendLogFile($"[{RuleName}]: {Verdict.Verdict.DROP.ToString()}");
+                    return Verdict.Verdict.DROP;
+                }
+                    FileLogger.AppendLogFile($"[{RuleName}]: {Verdict.Verdict.ACCEPT.ToString()}");
                     return Verdict.Verdict.ACCEPT;
                 }
             

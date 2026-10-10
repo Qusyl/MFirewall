@@ -1,8 +1,9 @@
 
 namespace Domain.Models
 {
-    public abstract class Packet(uint Id)
+    public abstract class Packet(string type)
     {
-        public uint Id { get; set; } = Id;
+        public string PacketType { get; } = type;
+       
     }
 }

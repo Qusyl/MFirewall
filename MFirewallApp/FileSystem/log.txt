@@ -1,26 +1,116 @@
-[09-10-2026]: [09-10-2026 10:07:43] Открываем nfqueue...
-[09-10-2026]: [09-10-2026 10:07:43] NFQueue: привязывание протокола...
-[09-10-2026]: [09-10-2026 10:07:43] NFQueue: привязывание протокола успешно!
-[09-10-2026]: [09-10-2026 10:07:43] NFQueue: создание очереди...
-[09-10-2026]: [09-10-2026 10:07:43] NFQueue: установка режима копирования...
-[09-10-2026]: [09-10-2026 10:07:43] NFQueue: режим копирования успешно установлен!
-[09-10-2026]: [09-10-2026 10:07:43] NFQueue: очередь успешно создана!
-[09-10-2026]: [09-10-2026 10:07:43] NFQueue: запущен и готов к работе!
-[09-10-2026]: NFQueue: получен сырой пакет, ID=1, размер=84 байт
-[09-10-2026]: [PacketCaptureService]: Определение типа пакета...
-[09-10-2026]: [PacketCaptureService]: Тип установлен! Пакет Icmp
-[09-10-2026]: NFQueue: получен сырой пакет, ID=2, размер=84 байт
-[09-10-2026]: [PacketCaptureService]: Определение типа пакета...
-[09-10-2026]: [PacketCaptureService]: Тип установлен! Пакет Icmp
-[09-10-2026]: NFQueue: получен сырой пакет, ID=3, размер=84 байт
-[09-10-2026]: [PacketCaptureService]: Определение типа пакета...
-[09-10-2026]: [PacketCaptureService]: Тип установлен! Пакет Icmp
-[09-10-2026]: NFQueue: получен сырой пакет, ID=4, размер=84 байт
-[09-10-2026]: [PacketCaptureService]: Определение типа пакета...
-[09-10-2026]: [PacketCaptureService]: Тип установлен! Пакет Icmp
-[09-10-2026]: NFQueue: получен сырой пакет, ID=5, размер=84 байт
-[09-10-2026]: [PacketCaptureService]: Определение типа пакета...
-[09-10-2026]: [PacketCaptureService]: Тип установлен! Пакет Icmp
-[09-10-2026]: NFQueue: получен сырой пакет, ID=6, размер=84 байт
-[09-10-2026]: [PacketCaptureService]: Определение типа пакета...
-[09-10-2026]: [PacketCaptureService]: Тип установлен! Пакет Icmp
+[10-10-2026]: port_scan_rule
+31:45] Открываем nfqueue...
+[10-10-2026]: destination_ip_rule
+[10-10-2026]: destination_port_rule
+[10-10-2026]: protocol_rule
+[10-10-2026]: source_ip_rule
+[10-10-2026]: [10-10-2026 19:31:45] NFQueue: привязывание протокола...
+[10-10-2026]: [10-10-2026 19:31:45] NFQueue: привязывание протокола успешно!
+[10-10-2026]: [10-10-2026 19:31:45] NFQueue: создание очереди...
+[10-10-2026]: [10-10-2026 19:31:45] NFQueue: установка режима копирования...
+[10-10-2026]: [10-10-2026 19:31:45] NFQueue: режим копирования успешно установлен!
+[10-10-2026]: [10-10-2026 19:31:45] NFQueue: очередь успешно создана!
+[10-10-2026]: [10-10-2026 19:31:45] NFQueue: запущен и готов к работе!
+[10-10-2026]: NFQueue: получен сырой пакет, ID=1, размер=84 байт
+[10-10-2026]: [PacketCaptureService]: Определение типа пакета...
+[10-10-2026]: [port_scan_rule]: NO_MATCH
+[10-10-2026]: [destination_ip_rule]: NO_MATCH
+[10-10-2026]: [protocol_rule]: NO_MATCH
+[10-10-2026]: [source_ip_rule]: NO_MATCH
+[10-10-2026]: [source_port_rule]: NO_MATCH
+[10-10-2026]: Результат проверок: ACCEPT
+[10-10-2026]: NFQueue: получен сырой пакет, ID=2, размер=84 байт
+[10-10-2026]: [PacketCaptureService]: Определение типа пакета...
+[10-10-2026]: [port_scan_rule]: NO_MATCH
+[10-10-2026]: [destination_ip_rule]: NO_MATCH
+[10-10-2026]: [protocol_rule]: NO_MATCH
+[10-10-2026]: [source_ip_rule]: NO_MATCH
+[10-10-2026]: [source_port_rule]: NO_MATCH
+[10-10-2026]: Результат проверок: ACCEPT
+[10-10-2026]: NFQueue: получен сырой пакет, ID=3, размер=84 байт
+[10-10-2026]: [PacketCaptureService]: Определение типа пакета...
+[10-10-2026]: [port_scan_rule]: NO_MATCH
+[10-10-2026]: [destination_ip_rule]: NO_MATCH
+[10-10-2026]: [protocol_rule]: NO_MATCH
+[10-10-2026]: [source_ip_rule]: NO_MATCH
+[10-10-2026]: [source_port_rule]: NO_MATCH
+[10-10-2026]: Результат проверок: ACCEPT
+[10-10-2026]: NFQueue: получен сырой пакет, ID=4, размер=84 байт
+[10-10-2026]: [PacketCaptureService]: Определение типа пакета...
+[10-10-2026]: [port_scan_rule]: NO_MATCH
+[10-10-2026]: [destination_ip_rule]: NO_MATCH
+[10-10-2026]: [protocol_rule]: NO_MATCH
+[10-10-2026]: [source_ip_rule]: NO_MATCH
+[10-10-2026]: [source_port_rule]: NO_MATCH
+[10-10-2026]: Результат проверок: ACCEPT
+[10-10-2026]: NFQueue: получен сырой пакет, ID=5, размер=84 байт
+[10-10-2026]: [PacketCaptureService]: Определение типа пакета...
+[10-10-2026]: [port_scan_rule]: NO_MATCH
+[10-10-2026]: [destination_ip_rule]: NO_MATCH
+[10-10-2026]: [protocol_rule]: NO_MATCH
+[10-10-2026]: [source_ip_rule]: NO_MATCH
+[10-10-2026]: [source_port_rule]: NO_MATCH
+[10-10-2026]: Результат проверок: ACCEPT
+[10-10-2026]: NFQueue: получен сырой пакет, ID=6, размер=84 байт
+[10-10-2026]: [PacketCaptureService]: Определение типа пакета...
+[10-10-2026]: [port_scan_rule]: NO_MATCH
+[10-10-2026]: [destination_ip_rule]: NO_MATCH
+[10-10-2026]: [protocol_rule]: NO_MATCH
+[10-10-2026]: [source_ip_rule]: NO_MATCH
+[10-10-2026]: [source_port_rule]: NO_MATCH
+[10-10-2026]: Результат проверок: ACCEPT
+[10-10-2026]: NFQueue: получен сырой пакет, ID=7, размер=84 байт
+[10-10-2026]: [PacketCaptureService]: Определение типа пакета...
+[10-10-2026]: [port_scan_rule]: NO_MATCH
+[10-10-2026]: [destination_ip_rule]: NO_MATCH
+[10-10-2026]: [protocol_rule]: NO_MATCH
+[10-10-2026]: [source_ip_rule]: NO_MATCH
+[10-10-2026]: [source_port_rule]: NO_MATCH
+[10-10-2026]: Результат проверок: ACCEPT
+[10-10-2026]: NFQueue: получен сырой пакет, ID=8, размер=84 байт
+[10-10-2026]: [PacketCaptureService]: Определение типа пакета...
+[10-10-2026]: [port_scan_rule]: NO_MATCH
+[10-10-2026]: [destination_ip_rule]: NO_MATCH
+[10-10-2026]: [protocol_rule]: NO_MATCH
+[10-10-2026]: [source_ip_rule]: NO_MATCH
+[10-10-2026]: [source_port_rule]: NO_MATCH
+[10-10-2026]: Результат проверок: ACCEPT
+[10-10-2026]: NFQueue: получен сырой пакет, ID=9, размер=84 байт
+[10-10-2026]: [PacketCaptureService]: Определение типа пакета...
+[10-10-2026]: [port_scan_rule]: NO_MATCH
+[10-10-2026]: [destination_ip_rule]: NO_MATCH
+[10-10-2026]: [protocol_rule]: NO_MATCH
+[10-10-2026]: [source_ip_rule]: NO_MATCH
+[10-10-2026]: [source_port_rule]: NO_MATCH
+[10-10-2026]: Результат проверок: ACCEPT
+[10-10-2026]: NFQueue: получен сырой пакет, ID=10, размер=84 байт
+[10-10-2026]: [PacketCaptureService]: Определение типа пакета...
+[10-10-2026]: [port_scan_rule]: NO_MATCH
+[10-10-2026]: [destination_ip_rule]: NO_MATCH
+[10-10-2026]: [protocol_rule]: NO_MATCH
+[10-10-2026]: [source_ip_rule]: NO_MATCH
+[10-10-2026]: [source_port_rule]: NO_MATCH
+[10-10-2026]: Результат проверок: ACCEPT
+[10-10-2026]: NFQueue: получен сырой пакет, ID=11, размер=84 байт
+[10-10-2026]: [PacketCaptureService]: Определение типа пакета...
+[10-10-2026]: [port_scan_rule]: NO_MATCH
+[10-10-2026]: [destination_ip_rule]: NO_MATCH
+[10-10-2026]: [protocol_rule]: NO_MATCH
+[10-10-2026]: [source_ip_rule]: NO_MATCH
+[10-10-2026]: [source_port_rule]: NO_MATCH
+[10-10-2026]: Результат проверок: ACCEPT
+[10-10-2026]: NFQueue: получен сырой пакет, ID=12, размер=84 байт
+[10-10-2026]: [PacketCaptureService]: Определение типа пакета...
+[10-10-2026]: [port_scan_rule]: NO_MATCH
+[10-10-2026]: [destination_ip_rule]: NO_MATCH
+[10-10-2026]: [protocol_rule]: NO_MATCH
+[10-10-2026]: [source_ip_rule]: NO_MATCH
+[10-10-2026]: [source_port_rule]: NO_MATCH
+[10-10-2026]: Результат проверок: ACCEPT
+[10-10-2026]: NFQueue: получен сырой пакет, ID=13, размер=84 байт
+[10-10-2026]: [PacketCaptureService]: Определение типа пакета...
+[10-10-2026]: [port_scan_rule]: NO_MATCH
+[10-10-2026]: [destination_ip_rule]: NO_MATCH
+[10-10-2026]: [protocol_rule]: DROP
+[10-10-2026]: Результат проверок: DROP
+[10-10-2026]: NFQueue: получен сырой пакет, ID=14, размер=84 байт

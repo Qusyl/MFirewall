@@ -6,9 +6,12 @@ namespace Domain.Models.Packets
     {
         public IcmpHeader Header { get; set; }
         public byte[] Payload { get; set; }
-        public IcmpPacket(ReadOnlySpan<byte> bytes, uint Id) : base(Id)
+
+        public IcmpPacket(ReadOnlySpan<byte> bytes) : base("Icmp")
         {
             Header = IcmpHeader.Parse(bytes);
+            int headerSize = 8;
+            Payload = bytes[headerSize..].ToArray();
         }
     }
 }

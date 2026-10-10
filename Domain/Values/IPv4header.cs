@@ -1,5 +1,6 @@
 using System.Buffers.Binary;
 using System.Net;
+using Domain.Values;
 
 public struct Ipv4Header
 {
@@ -13,7 +14,7 @@ public struct Ipv4Header
     public bool MoreFragments;
     public ushort FragmentOffset;
     public byte TimeToLive;
-    public byte Protocol;
+    public ProtocolFromBytes Protocol;
     public ushort HeaderChecksum;
     public IPAddress SourceAddress;
     public IPAddress DestinationAddress;
@@ -42,7 +43,7 @@ public struct Ipv4Header
             MoreFragments = (flagsAndOffset & 0x2000) != 0,
             FragmentOffset = (ushort)(flagsAndOffset & 0x1FFF),
             TimeToLive = buffer[8],
-            Protocol = buffer[9],
+            Protocol =(ProtocolFromBytes)buffer[9],
             HeaderChecksum = BinaryPrimitives.ReadUInt16BigEndian(buffer[10..]),
             SourceAddress = new IPAddress(buffer.Slice(12, 4)),
             DestinationAddress = new IPAddress(buffer.Slice(16, 4)),

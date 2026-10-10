@@ -10,9 +10,13 @@ namespace Domain.Models.Packets
 
         public byte[] Payload { get; set; }
 
-        public TcpPacket(ReadOnlySpan<byte> bytes, int Id) : base(Id)
+        public TcpPacket(ReadOnlySpan<byte> bytes) : base("Tcp")
         {
             Header = TcpHeader.Parse(bytes);
+            int headerSize = Header.HeaderLengthInBytes;
+        
+            Options = bytes[20..headerSize].ToArray();
+            Payload = bytes[headerSize..].ToArray();
         }
     }
 }

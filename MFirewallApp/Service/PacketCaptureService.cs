@@ -21,12 +21,19 @@ namespace MFirewallApp.Service
             _scopeFactory = factory;
 
             FileLogger.ClearLogFile();
+
+           
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             var nfQueueTask = nFQueue.OpenNfqueueAsync(stoppingToken);
             using var scope = _scopeFactory.CreateScope();
+            var rules = scope.ServiceProvider.GetServices<IPacketRule>();
+            foreach(var rule in rules)
+            {
+                Log(rule.RuleName);
+            }
             var receiver = scope.ServiceProvider.GetRequiredService<IPacketCaptureReceiver>();
             var ruleDision = scope.ServiceProvider.GetRequiredService<IRuleService>();
         
@@ -41,9 +48,9 @@ namespace MFirewallApp.Service
                     Log($"[{nameof(PacketCaptureService)}]: Определение типа пакета...");
                  
 
-                        // var verdict = ruleDision.CheckRules(definePacket);
+                        var verdict = ruleDision.CheckRules(ipV4Packet);
                         
-                        nFQueue.SetVerdict(Verdict.Verdict.ACCEPT, rawPacket.ID);
+                        nFQueue.SetVerdict(verdict, rawPacket.ID);
                 }
                 catch (OperationCanceledException op)
                 {

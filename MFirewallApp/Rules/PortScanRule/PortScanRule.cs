@@ -1,6 +1,7 @@
 using System.Collections.Concurrent;
 using Domain.Models.Packets;
 using Domain.Values;
+using MFirewallApp.FileSystem;
 using MFirewallApp.Interface;
 
 
@@ -53,24 +54,25 @@ namespace MFirewallApp.Rules.PortScanRule
 
                 var now = DateTimeOffset.UtcNow;
 
-
-
-
                 var thresholdMaxCount = configuration.UniquePortsThreshold;
 
                 var window = TimeSpan.FromSeconds(configuration.SynWindow);
-                
-                    var threshold = now - window;
 
-                    ClearExpiredPorts(threshold);
+                var threshold = now - window;
 
-                    var countPorts = _attempts[packetSource];
+                ClearExpiredPorts(threshold);
 
-                    if (countPorts.Count >= thresholdMaxCount)
-                    {
-                        return Verdict.Verdict.DROP;
-                    }
+                var countPorts = _attempts[packetSource];
+
+                if (countPorts.Count >= thresholdMaxCount)
+                {
+                    FileLogger.AppendLogFile($"[{RuleName}]: {Verdict.Verdict.DROP.ToString()}");
+                    return Verdict.Verdict.DROP;
+                }
+                FileLogger.AppendLogFile($"[{RuleName}]: {Verdict.Verdict.ACCEPT.ToString()}");
+                return Verdict.Verdict.ACCEPT;
             }
+            FileLogger.AppendLogFile($"[{RuleName}]: {Verdict.Verdict.NO_MATCH.ToString()}");
                return Verdict.Verdict.NO_MATCH;
         }
     }

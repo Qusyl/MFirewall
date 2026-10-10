@@ -9,25 +9,38 @@ namespace Domain.Models.Packets
     public class IPv4Packet 
     {
         public Ipv4Header Header { get; set; }
+        public ReadOnlyMemory<byte> Payload { get;  }
 
         public IPv4Packet(ReadOnlySpan<byte> bytes)
         {
             Header = Ipv4Header.Parse(bytes);
+
+            int iHl = Ihl(bytes[0]);
+
+            int IhlSize = iHl * 4;
+            
+            Payload = bytes[IhlSize..].ToArray();
+
         }
 
-        public ReadOnlyMemory<byte> Payloads { get; set; }
         
-        public Packet ExtractPacket(uint id)
+
+        public Packet ExtractPacket()
         {
             Packet packet = Header.Protocol switch
             {
-                6 => new TcpPacket(Payloads.Span,id),
-                1 => new IcmpPacket(Payloads.Span,id),
-                17 => new UdpPacket(Payloads.Span,id),
+                Values.ProtocolFromBytes.TCP => new TcpPacket(Payload.Span),
+                Values.ProtocolFromBytes.Icmp => new IcmpPacket(Payload.Span),
+                Values.ProtocolFromBytes.Udp => new UdpPacket(Payload.Span),
                 _ => throw new SwitchExpressionException("Packet not defined")
             };
 
             return packet;
+        }
+        
+        private int Ihl(byte firstByte)
+        {
+            return firstByte & 0x0F;
         }
     }
 }

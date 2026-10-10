@@ -1,0 +1,17 @@
+{
+    "RuleConfiguration":
+    {
+        "RuleStrategy": "FIRST_MATCHING",
+        "Parameters" : 
+        {
+            "DestinationIpRule" : "",
+            "DestinationPortRule" : -1,
+            "ProtocolRule" : "None",
+            "SourceIpRule" : "",
+            "SourcePortRule": -1,
+            "UniquePortsThreshold" : 20,
+            "SynWindow" : 20
+        }
+    }
+   
+}
