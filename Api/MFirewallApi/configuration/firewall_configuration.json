@@ -1,0 +1,62 @@
+{
+    "FirewallConfiguration":
+    {
+        "RuleStrategy": "FIRST_MATCHING",
+        "FirewallProtection":
+        {
+            "DestinationIpOptions": 
+            {
+                "Enable": false,
+                "DestinationAddress": ""
+            },
+            "DestinationPortOptions":
+            {
+                "Enable":false,
+                "DestinationPort" : 0
+            },
+            "SourceIpOptions":
+            {
+                "Enable":false,
+                "SourceAddress": ""
+            },
+            "SourcePortOptions":
+            {
+                "Enable":false,
+                "SourcePort":0
+            },
+            "ProtocolOptions":
+            {
+                "Enable":false,
+                "Protocol":"Tcp"
+            },
+            "TcpPortScanOptions":
+            {
+                "Enable":true,
+                "UniquePacketsThreshold":5,
+                "WindowSeconds":3
+            },
+
+            "UdpPortScanOptions":
+            {
+                "Enable":true,
+                "UniquePacketsThreshold":10,
+                "WindowSeconds":3
+            },
+            "TcpSynFloodOptions":
+            {
+                "Enable":true,
+                "MaxSynPackets": 100,
+                "WindowSeconds": 3
+
+            },
+            "UdpFloodOptions":
+            {
+                "Enable":true,
+                "MaxPackets": 300,
+                "WindowSeconds":3
+            }
+        }
+        
+    }
+   
+}

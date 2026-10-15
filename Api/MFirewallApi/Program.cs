@@ -19,7 +19,7 @@ builder.Services.AddRules();
 
 
 
-builder.Services.Configure<RuleConfiguration>(builder.Configuration.GetSection("RuleConfiguration"));
+builder.Services.Configure<FirewallConfiguration>(builder.Configuration.GetSection("FirewallConfiguration"));
 builder.Services.AddOpenApi();
 
 builder.Services.AddProblemDetails();
