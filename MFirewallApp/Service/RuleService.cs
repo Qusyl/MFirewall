@@ -11,9 +11,9 @@ namespace MFirewallApp.Service
     {
         private IEnumerable<IPacketRule> _rules;
 
-        private readonly IOptionsMonitor<RuleConfiguration> _configurations;
+        private readonly IOptionsMonitor<FirewallConfiguration> _configurations;
 
-        public RuleService(IEnumerable<IPacketRule> rules, IOptionsMonitor<RuleConfiguration> optionsMonitor)
+        public RuleService(IEnumerable<IPacketRule> rules, IOptionsMonitor<FirewallConfiguration> optionsMonitor)
         {
             _rules = rules;
             _configurations = optionsMonitor;
@@ -42,7 +42,7 @@ namespace MFirewallApp.Service
             {
                 return Verdict.Verdict.DROP;
             }
-            var parameters = _configurations.CurrentValue.Parameters;
+            var parameters = _configurations.CurrentValue.FirewallProtection;
             foreach (var rule in _rules)
             {
 
@@ -65,7 +65,7 @@ namespace MFirewallApp.Service
                 return Verdict.Verdict.DROP;
             }
             var score = 0;
-            var parameters = _configurations.CurrentValue.Parameters;
+            var parameters = _configurations.CurrentValue.FirewallProtection;
             foreach (var rule in _rules)
             {
 

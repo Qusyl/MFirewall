@@ -43,9 +43,8 @@ namespace MFirewallApp.Service
                 Log($"NFQueue: получен сырой пакет, ID={rawPacket.ID}, размер={rawPacket.Data.Length} байт");
                 try
                 {
-
                     var ipV4Packet = new IPv4Packet(rawPacket.Data);
-                    Log($"[{nameof(PacketCaptureService)}]: Определение типа пакета...");
+                    Log($"[{nameof(PacketCaptureService)}]: ТИП: {ipV4Packet.ExtractPacket().PacketType}");
                  
 
                         var verdict = ruleDision.CheckRules(ipV4Packet);

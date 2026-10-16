@@ -1,116 +1,1237 @@
-[10-10-2026]: port_scan_rule
-31:45] Открываем nfqueue...
-[10-10-2026]: destination_ip_rule
-[10-10-2026]: destination_port_rule
-[10-10-2026]: protocol_rule
-[10-10-2026]: source_ip_rule
-[10-10-2026]: [10-10-2026 19:31:45] NFQueue: привязывание протокола...
-[10-10-2026]: [10-10-2026 19:31:45] NFQueue: привязывание протокола успешно!
-[10-10-2026]: [10-10-2026 19:31:45] NFQueue: создание очереди...
-[10-10-2026]: [10-10-2026 19:31:45] NFQueue: установка режима копирования...
-[10-10-2026]: [10-10-2026 19:31:45] NFQueue: режим копирования успешно установлен!
-[10-10-2026]: [10-10-2026 19:31:45] NFQueue: очередь успешно создана!
-[10-10-2026]: [10-10-2026 19:31:45] NFQueue: запущен и готов к работе!
-[10-10-2026]: NFQueue: получен сырой пакет, ID=1, размер=84 байт
-[10-10-2026]: [PacketCaptureService]: Определение типа пакета...
-[10-10-2026]: [port_scan_rule]: NO_MATCH
-[10-10-2026]: [destination_ip_rule]: NO_MATCH
-[10-10-2026]: [protocol_rule]: NO_MATCH
-[10-10-2026]: [source_ip_rule]: NO_MATCH
-[10-10-2026]: [source_port_rule]: NO_MATCH
-[10-10-2026]: Результат проверок: ACCEPT
-[10-10-2026]: NFQueue: получен сырой пакет, ID=2, размер=84 байт
-[10-10-2026]: [PacketCaptureService]: Определение типа пакета...
-[10-10-2026]: [port_scan_rule]: NO_MATCH
-[10-10-2026]: [destination_ip_rule]: NO_MATCH
-[10-10-2026]: [protocol_rule]: NO_MATCH
-[10-10-2026]: [source_ip_rule]: NO_MATCH
-[10-10-2026]: [source_port_rule]: NO_MATCH
-[10-10-2026]: Результат проверок: ACCEPT
-[10-10-2026]: NFQueue: получен сырой пакет, ID=3, размер=84 байт
-[10-10-2026]: [PacketCaptureService]: Определение типа пакета...
-[10-10-2026]: [port_scan_rule]: NO_MATCH
-[10-10-2026]: [destination_ip_rule]: NO_MATCH
-[10-10-2026]: [protocol_rule]: NO_MATCH
-[10-10-2026]: [source_ip_rule]: NO_MATCH
-[10-10-2026]: [source_port_rule]: NO_MATCH
-[10-10-2026]: Результат проверок: ACCEPT
-[10-10-2026]: NFQueue: получен сырой пакет, ID=4, размер=84 байт
-[10-10-2026]: [PacketCaptureService]: Определение типа пакета...
-[10-10-2026]: [port_scan_rule]: NO_MATCH
-[10-10-2026]: [destination_ip_rule]: NO_MATCH
-[10-10-2026]: [protocol_rule]: NO_MATCH
-[10-10-2026]: [source_ip_rule]: NO_MATCH
-[10-10-2026]: [source_port_rule]: NO_MATCH
-[10-10-2026]: Результат проверок: ACCEPT
-[10-10-2026]: NFQueue: получен сырой пакет, ID=5, размер=84 байт
-[10-10-2026]: [PacketCaptureService]: Определение типа пакета...
-[10-10-2026]: [port_scan_rule]: NO_MATCH
-[10-10-2026]: [destination_ip_rule]: NO_MATCH
-[10-10-2026]: [protocol_rule]: NO_MATCH
-[10-10-2026]: [source_ip_rule]: NO_MATCH
-[10-10-2026]: [source_port_rule]: NO_MATCH
-[10-10-2026]: Результат проверок: ACCEPT
-[10-10-2026]: NFQueue: получен сырой пакет, ID=6, размер=84 байт
-[10-10-2026]: [PacketCaptureService]: Определение типа пакета...
-[10-10-2026]: [port_scan_rule]: NO_MATCH
-[10-10-2026]: [destination_ip_rule]: NO_MATCH
-[10-10-2026]: [protocol_rule]: NO_MATCH
-[10-10-2026]: [source_ip_rule]: NO_MATCH
-[10-10-2026]: [source_port_rule]: NO_MATCH
-[10-10-2026]: Результат проверок: ACCEPT
-[10-10-2026]: NFQueue: получен сырой пакет, ID=7, размер=84 байт
-[10-10-2026]: [PacketCaptureService]: Определение типа пакета...
-[10-10-2026]: [port_scan_rule]: NO_MATCH
-[10-10-2026]: [destination_ip_rule]: NO_MATCH
-[10-10-2026]: [protocol_rule]: NO_MATCH
-[10-10-2026]: [source_ip_rule]: NO_MATCH
-[10-10-2026]: [source_port_rule]: NO_MATCH
-[10-10-2026]: Результат проверок: ACCEPT
-[10-10-2026]: NFQueue: получен сырой пакет, ID=8, размер=84 байт
-[10-10-2026]: [PacketCaptureService]: Определение типа пакета...
-[10-10-2026]: [port_scan_rule]: NO_MATCH
-[10-10-2026]: [destination_ip_rule]: NO_MATCH
-[10-10-2026]: [protocol_rule]: NO_MATCH
-[10-10-2026]: [source_ip_rule]: NO_MATCH
-[10-10-2026]: [source_port_rule]: NO_MATCH
-[10-10-2026]: Результат проверок: ACCEPT
-[10-10-2026]: NFQueue: получен сырой пакет, ID=9, размер=84 байт
-[10-10-2026]: [PacketCaptureService]: Определение типа пакета...
-[10-10-2026]: [port_scan_rule]: NO_MATCH
-[10-10-2026]: [destination_ip_rule]: NO_MATCH
-[10-10-2026]: [protocol_rule]: NO_MATCH
-[10-10-2026]: [source_ip_rule]: NO_MATCH
-[10-10-2026]: [source_port_rule]: NO_MATCH
-[10-10-2026]: Результат проверок: ACCEPT
-[10-10-2026]: NFQueue: получен сырой пакет, ID=10, размер=84 байт
-[10-10-2026]: [PacketCaptureService]: Определение типа пакета...
-[10-10-2026]: [port_scan_rule]: NO_MATCH
-[10-10-2026]: [destination_ip_rule]: NO_MATCH
-[10-10-2026]: [protocol_rule]: NO_MATCH
-[10-10-2026]: [source_ip_rule]: NO_MATCH
-[10-10-2026]: [source_port_rule]: NO_MATCH
-[10-10-2026]: Результат проверок: ACCEPT
-[10-10-2026]: NFQueue: получен сырой пакет, ID=11, размер=84 байт
-[10-10-2026]: [PacketCaptureService]: Определение типа пакета...
-[10-10-2026]: [port_scan_rule]: NO_MATCH
-[10-10-2026]: [destination_ip_rule]: NO_MATCH
-[10-10-2026]: [protocol_rule]: NO_MATCH
-[10-10-2026]: [source_ip_rule]: NO_MATCH
-[10-10-2026]: [source_port_rule]: NO_MATCH
-[10-10-2026]: Результат проверок: ACCEPT
-[10-10-2026]: NFQueue: получен сырой пакет, ID=12, размер=84 байт
-[10-10-2026]: [PacketCaptureService]: Определение типа пакета...
-[10-10-2026]: [port_scan_rule]: NO_MATCH
-[10-10-2026]: [destination_ip_rule]: NO_MATCH
-[10-10-2026]: [protocol_rule]: NO_MATCH
-[10-10-2026]: [source_ip_rule]: NO_MATCH
-[10-10-2026]: [source_port_rule]: NO_MATCH
-[10-10-2026]: Результат проверок: ACCEPT
-[10-10-2026]: NFQueue: получен сырой пакет, ID=13, размер=84 байт
-[10-10-2026]: [PacketCaptureService]: Определение типа пакета...
-[10-10-2026]: [port_scan_rule]: NO_MATCH
-[10-10-2026]: [destination_ip_rule]: NO_MATCH
-[10-10-2026]: [protocol_rule]: DROP
-[10-10-2026]: Результат проверок: DROP
-[10-10-2026]: NFQueue: получен сырой пакет, ID=14, размер=84 байт
+[16-10-2026]: port_scan_rule
+49:36] Открываем nfqueue...
+[16-10-2026]: port_flood_rule
+[16-10-2026]: destination_ip_rule
+[16-10-2026]: destination_port_rule
+[16-10-2026]: protocol_rule
+[16-10-2026]: source_ip_rule
+[16-10-2026]: source_port_rule
+[16-10-2026]: [16-10-2026 17:49:36] NFQueue: привязывание протокола...
+[16-10-2026]: [16-10-2026 17:49:36] NFQueue: привязывание протокола успешно!
+[16-10-2026]: [16-10-2026 17:49:36] NFQueue: создание очереди...
+[16-10-2026]: [16-10-2026 17:49:36] NFQueue: установка режима копирования...
+[16-10-2026]: [16-10-2026 17:49:36] NFQueue: режим копирования успешно установлен!
+[16-10-2026]: [16-10-2026 17:49:36] NFQueue: очередь успешно создана!
+[16-10-2026]: [16-10-2026 17:49:36] NFQueue: запущен и готов к работе!
+[16-10-2026]: NFQueue: получен сырой пакет, ID=1, размер=148 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=59078, UniquePorts=1, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: ACCEPT
+[16-10-2026]: [destination_ip_rule]: NO_MATCH
+[16-10-2026]: [protocol_rule]: NO_MATCH
+[16-10-2026]: [source_ip_rule]: NO_MATCH
+[16-10-2026]: Результат проверок: ACCEPT
+[16-10-2026]: NFQueue: получен сырой пакет, ID=2, размер=214 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=55039, UniquePorts=2, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: ACCEPT
+[16-10-2026]: [destination_ip_rule]: NO_MATCH
+[16-10-2026]: [protocol_rule]: NO_MATCH
+[16-10-2026]: [source_ip_rule]: NO_MATCH
+[16-10-2026]: Результат проверок: ACCEPT
+[16-10-2026]: NFQueue: получен сырой пакет, ID=3, размер=269 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=35427, UniquePorts=3, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: ACCEPT
+[16-10-2026]: [destination_ip_rule]: NO_MATCH
+[16-10-2026]: [protocol_rule]: NO_MATCH
+[16-10-2026]: [source_ip_rule]: NO_MATCH
+[16-10-2026]: Результат проверок: ACCEPT
+[16-10-2026]: NFQueue: получен сырой пакет, ID=4, размер=275 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=55039, UniquePorts=3, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: ACCEPT
+[16-10-2026]: [destination_ip_rule]: NO_MATCH
+[16-10-2026]: [protocol_rule]: NO_MATCH
+[16-10-2026]: [source_ip_rule]: NO_MATCH
+[16-10-2026]: Результат проверок: ACCEPT
+[16-10-2026]: NFQueue: получен сырой пакет, ID=5, размер=214 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=43890, UniquePorts=4, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: ACCEPT
+[16-10-2026]: [destination_ip_rule]: NO_MATCH
+[16-10-2026]: [protocol_rule]: NO_MATCH
+[16-10-2026]: [source_ip_rule]: NO_MATCH
+[16-10-2026]: Результат проверок: ACCEPT
+[16-10-2026]: NFQueue: получен сырой пакет, ID=6, размер=275 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=43890, UniquePorts=4, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: ACCEPT
+[16-10-2026]: [destination_ip_rule]: NO_MATCH
+[16-10-2026]: [protocol_rule]: NO_MATCH
+[16-10-2026]: [source_ip_rule]: NO_MATCH
+[16-10-2026]: Результат проверок: ACCEPT
+[16-10-2026]: NFQueue: получен сырой пакет, ID=7, размер=185 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=14365, UniquePorts=5, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: ACCEPT
+[16-10-2026]: [destination_ip_rule]: NO_MATCH
+[16-10-2026]: [protocol_rule]: NO_MATCH
+[16-10-2026]: [source_ip_rule]: NO_MATCH
+[16-10-2026]: Результат проверок: ACCEPT
+[16-10-2026]: NFQueue: получен сырой пакет, ID=8, размер=235 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=36047, UniquePorts=6, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: ACCEPT
+[16-10-2026]: [destination_ip_rule]: NO_MATCH
+[16-10-2026]: [protocol_rule]: NO_MATCH
+[16-10-2026]: [source_ip_rule]: NO_MATCH
+[16-10-2026]: Результат проверок: ACCEPT
+[16-10-2026]: NFQueue: получен сырой пакет, ID=9, размер=193 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=45770, UniquePorts=7, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: ACCEPT
+[16-10-2026]: [destination_ip_rule]: NO_MATCH
+[16-10-2026]: [protocol_rule]: NO_MATCH
+[16-10-2026]: [source_ip_rule]: NO_MATCH
+[16-10-2026]: Результат проверок: ACCEPT
+[16-10-2026]: NFQueue: получен сырой пакет, ID=10, размер=240 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=45770, UniquePorts=7, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: ACCEPT
+[16-10-2026]: [destination_ip_rule]: NO_MATCH
+[16-10-2026]: [protocol_rule]: NO_MATCH
+[16-10-2026]: [source_ip_rule]: NO_MATCH
+[16-10-2026]: Результат проверок: ACCEPT
+[16-10-2026]: NFQueue: получен сырой пакет, ID=11, размер=290 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=52220, UniquePorts=8, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: ACCEPT
+[16-10-2026]: [destination_ip_rule]: NO_MATCH
+[16-10-2026]: [protocol_rule]: NO_MATCH
+[16-10-2026]: [source_ip_rule]: NO_MATCH
+[16-10-2026]: Результат проверок: ACCEPT
+[16-10-2026]: NFQueue: получен сырой пакет, ID=12, размер=258 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=52220, UniquePorts=8, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: ACCEPT
+[16-10-2026]: [destination_ip_rule]: NO_MATCH
+[16-10-2026]: [protocol_rule]: NO_MATCH
+[16-10-2026]: [source_ip_rule]: NO_MATCH
+[16-10-2026]: Результат проверок: ACCEPT
+[16-10-2026]: NFQueue: получен сырой пакет, ID=13, размер=148 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=50105, UniquePorts=9, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: ACCEPT
+[16-10-2026]: [destination_ip_rule]: NO_MATCH
+[16-10-2026]: [protocol_rule]: NO_MATCH
+[16-10-2026]: [source_ip_rule]: NO_MATCH
+[16-10-2026]: Результат проверок: ACCEPT
+[16-10-2026]: NFQueue: получен сырой пакет, ID=14, размер=290 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=43764, UniquePorts=10, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=15, размер=258 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=43764, UniquePorts=10, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=16, размер=174 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=54532, UniquePorts=11, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=17, размер=214 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=40054, UniquePorts=12, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=18, размер=89 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=56574, UniquePorts=13, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=19, размер=174 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=54842, UniquePorts=14, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=20, размер=87 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=42156, UniquePorts=15, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=21, размер=136 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=42156, UniquePorts=15, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=22, размер=87 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=40088, UniquePorts=16, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=23, размер=136 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=40088, UniquePorts=16, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=24, размер=214 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=33950, UniquePorts=17, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=25, размер=220 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=38761, UniquePorts=18, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=26, размер=90 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=36463, UniquePorts=19, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=27, размер=123 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=47833, UniquePorts=20, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=28, размер=89 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=55768, UniquePorts=15, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=29, размер=158 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=42298, UniquePorts=16, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=30, размер=220 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=60649, UniquePorts=17, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=31, размер=214 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=45457, UniquePorts=18, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=32, размер=90 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=51314, UniquePorts=17, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=33, размер=123 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=34409, UniquePorts=18, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=34, размер=214 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=57016, UniquePorts=17, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=35, размер=275 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=57016, UniquePorts=17, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=36, размер=269 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=57231, UniquePorts=17, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=37, размер=89 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=36002, UniquePorts=18, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=38, размер=158 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=38455, UniquePorts=19, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=39, размер=214 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=33895, UniquePorts=15, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=40, размер=275 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=33895, UniquePorts=15, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=41, размер=220 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=34839, UniquePorts=15, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=42, размер=90 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=57834, UniquePorts=15, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=43, размер=290 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=43764, UniquePorts=14, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=44, размер=258 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=43764, UniquePorts=14, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=45, размер=174 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=38915, UniquePorts=15, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=46, размер=89 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=34320, UniquePorts=16, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=47, размер=214 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=47337, UniquePorts=15, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=48, размер=89 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=56574, UniquePorts=16, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=49, размер=73 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=44116, UniquePorts=12, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=50, размер=117 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=60361, UniquePorts=13, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=51, размер=174 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=54842, UniquePorts=14, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=52, размер=87 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=42156, UniquePorts=15, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=53, размер=136 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=42156, UniquePorts=15, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=54, размер=87 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=40088, UniquePorts=16, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=55, размер=136 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=40088, UniquePorts=16, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=56, размер=214 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=33950, UniquePorts=14, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=57, размер=209 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=51985, UniquePorts=15, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=58, размер=138 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=11954, UniquePorts=16, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=59, размер=79 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=61390, UniquePorts=17, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=60, размер=120 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=62316, UniquePorts=18, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=61, размер=123 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=41736, UniquePorts=19, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=62, размер=73 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=50100, UniquePorts=20, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=63, размер=117 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=42850, UniquePorts=21, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=64, размер=158 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=42298, UniquePorts=22, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=65, размер=209 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=10403, UniquePorts=22, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=66, размер=138 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=1300, UniquePorts=23, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=67, размер=220 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=60649, UniquePorts=23, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=68, размер=79 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=28649, UniquePorts=24, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=69, размер=120 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=47814, UniquePorts=25, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=70, размер=90 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=51314, UniquePorts=25, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=71, размер=123 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=34409, UniquePorts=26, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=72, размер=214 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=57016, UniquePorts=26, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=73, размер=259 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=57016, UniquePorts=26, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=74, размер=269 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=57231, UniquePorts=26, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=75, размер=89 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=36002, UniquePorts=26, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=76, размер=158 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=41021, UniquePorts=27, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=77, размер=84 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=53371, UniquePorts=27, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=78, размер=220 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=54455, UniquePorts=27, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=79, размер=90 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=60560, UniquePorts=26, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=80, размер=275 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=33895, UniquePorts=24, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=81, размер=259 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=33895, UniquePorts=24, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=82, размер=220 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=34839, UniquePorts=24, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=83, размер=275 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=44127, UniquePorts=23, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=84, размер=259 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=44127, UniquePorts=23, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=85, размер=90 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=57834, UniquePorts=24, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=86, размер=290 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=57988, UniquePorts=20, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=87, размер=258 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=57988, UniquePorts=20, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=88, размер=174 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=38915, UniquePorts=21, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=89, размер=89 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=34320, UniquePorts=22, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=90, размер=158 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=54208, UniquePorts=23, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=91, размер=275 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=47337, UniquePorts=21, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=92, размер=174 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=55825, UniquePorts=16, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=93, размер=87 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=49780, UniquePorts=17, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=94, размер=136 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=49780, UniquePorts=17, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=95, размер=87 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=33441, UniquePorts=18, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=96, размер=136 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=33441, UniquePorts=18, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=97, размер=275 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=55508, UniquePorts=16, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=98, размер=123 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=41736, UniquePorts=16, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=99, размер=123 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=35839, UniquePorts=11, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=100, размер=112 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=52674, UniquePorts=11, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=101, размер=169 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=40240, UniquePorts=12, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=102, размер=174 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=59551, UniquePorts=13, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=103, размер=158 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=41021, UniquePorts=11, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=104, размер=275 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=33978, UniquePorts=12, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=105, размер=84 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=53371, UniquePorts=12, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=106, размер=112 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=53395, UniquePorts=13, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=107, размер=169 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=19648, UniquePorts=14, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=108, размер=220 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=54455, UniquePorts=15, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=109, размер=90 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=60560, UniquePorts=16, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=110, размер=275 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=49726, UniquePorts=14, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=111, размер=259 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=49726, UniquePorts=14, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=112, размер=84 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=45033, UniquePorts=14, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=113, размер=220 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=57521, UniquePorts=15, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=114, размер=275 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=44127, UniquePorts=16, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=115, размер=259 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=44127, UniquePorts=16, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=116, размер=90 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=44951, UniquePorts=17, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=117, размер=123 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=46746, UniquePorts=18, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=118, размер=220 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=59295, UniquePorts=18, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=119, размер=234 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=57988, UniquePorts=19, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=120, размер=258 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=57988, UniquePorts=19, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=121, размер=90 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=52718, UniquePorts=20, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=122, размер=163 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=7691, UniquePorts=21, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=123, размер=124 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=61418, UniquePorts=22, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=124, размер=89 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=48361, UniquePorts=23, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=125, размер=158 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=54208, UniquePorts=24, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=126, размер=123 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=52128, UniquePorts=25, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=127, размер=174 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=55825, UniquePorts=22, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=128, размер=87 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=49780, UniquePorts=23, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=129, размер=136 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=49780, UniquePorts=23, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=130, размер=163 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=52330, UniquePorts=24, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=131, размер=124 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=19493, UniquePorts=25, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=132, размер=87 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=33441, UniquePorts=26, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=133, размер=136 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=33441, UniquePorts=26, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=134, размер=275 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=55508, UniquePorts=25, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=135, размер=112 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=4428, UniquePorts=23, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=136, размер=169 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=10160, UniquePorts=24, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=137, размер=112 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=32087, UniquePorts=20, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=138, размер=169 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=62990, UniquePorts=21, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=139, размер=123 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=35839, UniquePorts=19, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=140, размер=174 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=59551, UniquePorts=17, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=141, размер=174 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=46770, UniquePorts=16, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=142, размер=275 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=33978, UniquePorts=14, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=143, размер=84 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=58091, UniquePorts=15, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=144, размер=220 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=34472, UniquePorts=16, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=145, размер=90 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=50604, UniquePorts=17, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=146, размер=123 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=34617, UniquePorts=13, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=147, размер=275 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=49726, UniquePorts=14, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=148, размер=259 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=49726, UniquePorts=14, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=149, размер=84 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=45033, UniquePorts=14, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=150, размер=220 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=57521, UniquePorts=15, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=151, размер=275 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=59391, UniquePorts=16, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=152, размер=259 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=59391, UniquePorts=16, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=153, размер=90 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=44951, UniquePorts=17, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=154, размер=123 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=46746, UniquePorts=18, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=155, размер=220 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=59295, UniquePorts=17, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=156, размер=90 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=52718, UniquePorts=18, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=157, размер=89 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=48361, UniquePorts=19, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=158, размер=158 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=58611, UniquePorts=20, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=159, размер=123 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=52128, UniquePorts=21, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=160, размер=123 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=57286, UniquePorts=17, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=161, размер=174 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=36911, UniquePorts=5, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: ACCEPT
+[16-10-2026]: [destination_ip_rule]: NO_MATCH
+[16-10-2026]: [protocol_rule]: NO_MATCH
+[16-10-2026]: [source_ip_rule]: NO_MATCH
+[16-10-2026]: Результат проверок: ACCEPT
+[16-10-2026]: NFQueue: получен сырой пакет, ID=162, размер=264 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=10499, UniquePorts=6, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: ACCEPT
+[16-10-2026]: [destination_ip_rule]: NO_MATCH
+[16-10-2026]: [protocol_rule]: NO_MATCH
+[16-10-2026]: [source_ip_rule]: NO_MATCH
+[16-10-2026]: Результат проверок: ACCEPT
+[16-10-2026]: NFQueue: получен сырой пакет, ID=163, размер=248 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=15093, UniquePorts=7, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: ACCEPT
+[16-10-2026]: [destination_ip_rule]: NO_MATCH
+[16-10-2026]: [protocol_rule]: NO_MATCH
+[16-10-2026]: [source_ip_rule]: NO_MATCH
+[16-10-2026]: Результат проверок: ACCEPT
+[16-10-2026]: NFQueue: получен сырой пакет, ID=164, размер=174 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=46770, UniquePorts=8, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: ACCEPT
+[16-10-2026]: [destination_ip_rule]: NO_MATCH
+[16-10-2026]: [protocol_rule]: NO_MATCH
+[16-10-2026]: [source_ip_rule]: NO_MATCH
+[16-10-2026]: Результат проверок: ACCEPT
+[16-10-2026]: NFQueue: получен сырой пакет, ID=165, размер=275 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=54927, UniquePorts=6, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: ACCEPT
+[16-10-2026]: [destination_ip_rule]: NO_MATCH
+[16-10-2026]: [protocol_rule]: NO_MATCH
+[16-10-2026]: [source_ip_rule]: NO_MATCH
+[16-10-2026]: Результат проверок: ACCEPT
+[16-10-2026]: NFQueue: получен сырой пакет, ID=166, размер=84 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=58091, UniquePorts=7, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: ACCEPT
+[16-10-2026]: [destination_ip_rule]: NO_MATCH
+[16-10-2026]: [protocol_rule]: NO_MATCH
+[16-10-2026]: [source_ip_rule]: NO_MATCH
+[16-10-2026]: Результат проверок: ACCEPT
+[16-10-2026]: NFQueue: получен сырой пакет, ID=167, размер=220 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=34472, UniquePorts=8, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: ACCEPT
+[16-10-2026]: [destination_ip_rule]: NO_MATCH
+[16-10-2026]: [protocol_rule]: NO_MATCH
+[16-10-2026]: [source_ip_rule]: NO_MATCH
+[16-10-2026]: Результат проверок: ACCEPT
+[16-10-2026]: NFQueue: получен сырой пакет, ID=168, размер=90 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=50604, UniquePorts=9, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: ACCEPT
+[16-10-2026]: [destination_ip_rule]: NO_MATCH
+[16-10-2026]: [protocol_rule]: NO_MATCH
+[16-10-2026]: [source_ip_rule]: NO_MATCH
+[16-10-2026]: Результат проверок: ACCEPT
+[16-10-2026]: NFQueue: получен сырой пакет, ID=169, размер=123 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=34617, UniquePorts=10, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=170, размер=84 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=47693, UniquePorts=10, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=171, размер=275 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=59391, UniquePorts=11, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=172, размер=259 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=59391, UniquePorts=11, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=173, размер=123 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=52430, UniquePorts=12, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=174, размер=220 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=58658, UniquePorts=13, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=175, размер=90 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=59088, UniquePorts=14, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=176, размер=123 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=33535, UniquePorts=15, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=177, размер=158 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=58611, UniquePorts=16, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=178, размер=123 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=49250, UniquePorts=17, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=179, размер=123 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=57286, UniquePorts=14, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=180, размер=275 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=39227, UniquePorts=7, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: ACCEPT
+[16-10-2026]: [destination_ip_rule]: NO_MATCH
+[16-10-2026]: [protocol_rule]: NO_MATCH
+[16-10-2026]: [source_ip_rule]: NO_MATCH
+[16-10-2026]: Результат проверок: ACCEPT
+[16-10-2026]: NFQueue: получен сырой пакет, ID=181, размер=259 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=39227, UniquePorts=7, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: ACCEPT
+[16-10-2026]: [destination_ip_rule]: NO_MATCH
+[16-10-2026]: [protocol_rule]: NO_MATCH
+[16-10-2026]: [source_ip_rule]: NO_MATCH
+[16-10-2026]: Результат проверок: ACCEPT
+[16-10-2026]: NFQueue: получен сырой пакет, ID=182, размер=123 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=41273, UniquePorts=3, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: ACCEPT
+[16-10-2026]: [destination_ip_rule]: NO_MATCH
+[16-10-2026]: [protocol_rule]: NO_MATCH
+[16-10-2026]: [source_ip_rule]: NO_MATCH
+[16-10-2026]: Результат проверок: ACCEPT
+[16-10-2026]: NFQueue: получен сырой пакет, ID=183, размер=84 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=47693, UniquePorts=3, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: ACCEPT
+[16-10-2026]: [destination_ip_rule]: NO_MATCH
+[16-10-2026]: [protocol_rule]: NO_MATCH
+[16-10-2026]: [source_ip_rule]: NO_MATCH
+[16-10-2026]: Результат проверок: ACCEPT
+[16-10-2026]: NFQueue: получен сырой пакет, ID=184, размер=275 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=32793, UniquePorts=4, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: ACCEPT
+[16-10-2026]: [destination_ip_rule]: NO_MATCH
+[16-10-2026]: [protocol_rule]: NO_MATCH
+[16-10-2026]: [source_ip_rule]: NO_MATCH
+[16-10-2026]: Результат проверок: ACCEPT
+[16-10-2026]: NFQueue: получен сырой пакет, ID=185, размер=259 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=32793, UniquePorts=4, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: ACCEPT
+[16-10-2026]: [destination_ip_rule]: NO_MATCH
+[16-10-2026]: [protocol_rule]: NO_MATCH
+[16-10-2026]: [source_ip_rule]: NO_MATCH
+[16-10-2026]: Результат проверок: ACCEPT
+[16-10-2026]: NFQueue: получен сырой пакет, ID=186, размер=275 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=42324, UniquePorts=5, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: ACCEPT
+[16-10-2026]: [destination_ip_rule]: NO_MATCH
+[16-10-2026]: [protocol_rule]: NO_MATCH
+[16-10-2026]: [source_ip_rule]: NO_MATCH
+[16-10-2026]: Результат проверок: ACCEPT
+[16-10-2026]: NFQueue: получен сырой пакет, ID=187, размер=259 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=42324, UniquePorts=5, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: ACCEPT
+[16-10-2026]: [destination_ip_rule]: NO_MATCH
+[16-10-2026]: [protocol_rule]: NO_MATCH
+[16-10-2026]: [source_ip_rule]: NO_MATCH
+[16-10-2026]: Результат проверок: ACCEPT
+[16-10-2026]: NFQueue: получен сырой пакет, ID=188, размер=275 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=46406, UniquePorts=6, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: ACCEPT
+[16-10-2026]: [destination_ip_rule]: NO_MATCH
+[16-10-2026]: [protocol_rule]: NO_MATCH
+[16-10-2026]: [source_ip_rule]: NO_MATCH
+[16-10-2026]: Результат проверок: ACCEPT
+[16-10-2026]: NFQueue: получен сырой пакет, ID=189, размер=259 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=46406, UniquePorts=6, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: ACCEPT
+[16-10-2026]: [destination_ip_rule]: NO_MATCH
+[16-10-2026]: [protocol_rule]: NO_MATCH
+[16-10-2026]: [source_ip_rule]: NO_MATCH
+[16-10-2026]: Результат проверок: ACCEPT
+[16-10-2026]: NFQueue: получен сырой пакет, ID=190, размер=275 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=44464, UniquePorts=7, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: ACCEPT
+[16-10-2026]: [destination_ip_rule]: NO_MATCH
+[16-10-2026]: [protocol_rule]: NO_MATCH
+[16-10-2026]: [source_ip_rule]: NO_MATCH
+[16-10-2026]: Результат проверок: ACCEPT
+[16-10-2026]: NFQueue: получен сырой пакет, ID=191, размер=259 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=44464, UniquePorts=7, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: ACCEPT
+[16-10-2026]: [destination_ip_rule]: NO_MATCH
+[16-10-2026]: [protocol_rule]: NO_MATCH
+[16-10-2026]: [source_ip_rule]: NO_MATCH
+[16-10-2026]: Результат проверок: ACCEPT
+[16-10-2026]: NFQueue: получен сырой пакет, ID=192, размер=123 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=52430, UniquePorts=8, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: ACCEPT
+[16-10-2026]: [destination_ip_rule]: NO_MATCH
+[16-10-2026]: [protocol_rule]: NO_MATCH
+[16-10-2026]: [source_ip_rule]: NO_MATCH
+[16-10-2026]: Результат проверок: ACCEPT
+[16-10-2026]: NFQueue: получен сырой пакет, ID=193, размер=220 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=58658, UniquePorts=9, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: ACCEPT
+[16-10-2026]: [destination_ip_rule]: NO_MATCH
+[16-10-2026]: [protocol_rule]: NO_MATCH
+[16-10-2026]: [source_ip_rule]: NO_MATCH
+[16-10-2026]: Результат проверок: ACCEPT
+[16-10-2026]: NFQueue: получен сырой пакет, ID=194, размер=90 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=59088, UniquePorts=10, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=195, размер=130 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=10617, UniquePorts=11, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=196, размер=89 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=30397, UniquePorts=12, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=197, размер=123 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=33535, UniquePorts=13, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=198, размер=123 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=49250, UniquePorts=14, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=199, размер=89 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=1338, UniquePorts=14, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=200, размер=130 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=52961, UniquePorts=15, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=201, размер=123 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=35565, UniquePorts=16, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: DROP
+[16-10-2026]: Результат проверок: DROP
+[16-10-2026]: NFQueue: получен сырой пакет, ID=202, размер=100 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=52910, UniquePorts=5, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: ACCEPT
+[16-10-2026]: [destination_ip_rule]: NO_MATCH
+[16-10-2026]: [protocol_rule]: NO_MATCH
+[16-10-2026]: [source_ip_rule]: NO_MATCH
+[16-10-2026]: Результат проверок: ACCEPT
+[16-10-2026]: NFQueue: получен сырой пакет, ID=203, размер=123 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=54820, UniquePorts=6, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: ACCEPT
+[16-10-2026]: [destination_ip_rule]: NO_MATCH
+[16-10-2026]: [protocol_rule]: NO_MATCH
+[16-10-2026]: [source_ip_rule]: NO_MATCH
+[16-10-2026]: Результат проверок: ACCEPT
+[16-10-2026]: NFQueue: получен сырой пакет, ID=204, размер=123 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=49684, UniquePorts=3, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: ACCEPT
+[16-10-2026]: [destination_ip_rule]: NO_MATCH
+[16-10-2026]: [protocol_rule]: NO_MATCH
+[16-10-2026]: [source_ip_rule]: NO_MATCH
+[16-10-2026]: Результат проверок: ACCEPT
+[16-10-2026]: NFQueue: получен сырой пакет, ID=205, размер=257 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=40112, UniquePorts=4, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: ACCEPT
+[16-10-2026]: [destination_ip_rule]: NO_MATCH
+[16-10-2026]: [protocol_rule]: NO_MATCH
+[16-10-2026]: [source_ip_rule]: NO_MATCH
+[16-10-2026]: Результат проверок: ACCEPT
+[16-10-2026]: NFQueue: получен сырой пакет, ID=206, размер=241 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=40112, UniquePorts=4, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: ACCEPT
+[16-10-2026]: [destination_ip_rule]: NO_MATCH
+[16-10-2026]: [protocol_rule]: NO_MATCH
+[16-10-2026]: [source_ip_rule]: NO_MATCH
+[16-10-2026]: Результат проверок: ACCEPT
+[16-10-2026]: NFQueue: получен сырой пакет, ID=207, размер=123 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=35565, UniquePorts=3, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: ACCEPT
+[16-10-2026]: [destination_ip_rule]: NO_MATCH
+[16-10-2026]: [protocol_rule]: NO_MATCH
+[16-10-2026]: [source_ip_rule]: NO_MATCH
+[16-10-2026]: Результат проверок: ACCEPT
+[16-10-2026]: NFQueue: получен сырой пакет, ID=208, размер=275 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=37556, UniquePorts=1, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: ACCEPT
+[16-10-2026]: [destination_ip_rule]: NO_MATCH
+[16-10-2026]: [protocol_rule]: NO_MATCH
+[16-10-2026]: [source_ip_rule]: NO_MATCH
+[16-10-2026]: Результат проверок: ACCEPT
+[16-10-2026]: NFQueue: получен сырой пакет, ID=209, размер=259 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=37556, UniquePorts=1, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: ACCEPT
+[16-10-2026]: [destination_ip_rule]: NO_MATCH
+[16-10-2026]: [protocol_rule]: NO_MATCH
+[16-10-2026]: [source_ip_rule]: NO_MATCH
+[16-10-2026]: Результат проверок: ACCEPT
+[16-10-2026]: NFQueue: получен сырой пакет, ID=210, размер=275 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=52549, UniquePorts=2, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: ACCEPT
+[16-10-2026]: [destination_ip_rule]: NO_MATCH
+[16-10-2026]: [protocol_rule]: NO_MATCH
+[16-10-2026]: [source_ip_rule]: NO_MATCH
+[16-10-2026]: Результат проверок: ACCEPT
+[16-10-2026]: NFQueue: получен сырой пакет, ID=211, размер=259 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=52549, UniquePorts=2, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: ACCEPT
+[16-10-2026]: [destination_ip_rule]: NO_MATCH
+[16-10-2026]: [protocol_rule]: NO_MATCH
+[16-10-2026]: [source_ip_rule]: NO_MATCH
+[16-10-2026]: Результат проверок: ACCEPT
+[16-10-2026]: NFQueue: получен сырой пакет, ID=212, размер=275 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=58159, UniquePorts=3, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: ACCEPT
+[16-10-2026]: [destination_ip_rule]: NO_MATCH
+[16-10-2026]: [protocol_rule]: NO_MATCH
+[16-10-2026]: [source_ip_rule]: NO_MATCH
+[16-10-2026]: Результат проверок: ACCEPT
+[16-10-2026]: NFQueue: получен сырой пакет, ID=213, размер=259 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=58159, UniquePorts=3, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: ACCEPT
+[16-10-2026]: [destination_ip_rule]: NO_MATCH
+[16-10-2026]: [protocol_rule]: NO_MATCH
+[16-10-2026]: [source_ip_rule]: NO_MATCH
+[16-10-2026]: Результат проверок: ACCEPT
+[16-10-2026]: NFQueue: получен сырой пакет, ID=214, размер=214 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=43709, UniquePorts=1, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: ACCEPT
+[16-10-2026]: [destination_ip_rule]: NO_MATCH
+[16-10-2026]: [protocol_rule]: NO_MATCH
+[16-10-2026]: [source_ip_rule]: NO_MATCH
+[16-10-2026]: Результат проверок: ACCEPT
+[16-10-2026]: NFQueue: получен сырой пакет, ID=215, размер=259 байт
+[16-10-2026]: [PacketCaptureService]: ТИП: Udp
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: Source=127.0.0.53, Destination=127.0.0.1, Port=43709, UniquePorts=1, Threshold=10
+[16-10-2026]: [UDP_PORT_SCAN_DETECTOR]: ACCEPT
+[16-10-2026]: [destination_ip_rule]: NO_MATCH
+[16-10-2026]: [protocol_rule]: NO_MATCH
+[16-10-2026]: [source_ip_rule]: NO_MATCH
+[16-10-2026]: Результат проверок: ACCEPT

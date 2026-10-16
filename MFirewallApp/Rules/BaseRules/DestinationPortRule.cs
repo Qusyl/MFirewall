@@ -15,8 +15,12 @@ namespace MFirewallApp.Rules.BaseRules
 
         public int RuleScore => 40;
 
-        public Verdict.Verdict Check(IPv4Packet packet,RuleParameters configuration)
+        public Verdict.Verdict Check(IPv4Packet packet,FirewallProtection configuration)
         {
+            if (!configuration.DestinationIpOptions.Enable)
+            {
+                return Verdict.Verdict.NO_MATCH;
+            }
                 var transportPacket = packet.ExtractPacket();
                 int port = transportPacket switch
                 {
@@ -28,7 +32,7 @@ namespace MFirewallApp.Rules.BaseRules
 
                 if (port != -1)
                 {
-                if (port == configuration.DestinationPortRule)
+                if (port == configuration.DestinationPortOptions.DestinationPort)
                 {
                     FileLogger.AppendLogFile($"[{RuleName}]: {Verdict.Verdict.DROP.ToString()}");
                     return Verdict.Verdict.DROP;

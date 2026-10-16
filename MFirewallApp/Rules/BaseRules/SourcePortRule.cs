@@ -1,8 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
+
 using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
 using Domain.Models.Packets;
 using MFirewallApp.FileSystem;
 using MFirewallApp.Interface;
@@ -15,8 +12,12 @@ namespace MFirewallApp.Rules.BaseRules
 
         public int RuleScore => 15;
 
-        public Verdict.Verdict Check(IPv4Packet packet, RuleParameters configuration)
+        public Verdict.Verdict Check(IPv4Packet packet, FirewallProtection configuration)
         {
+            if (!configuration.SourcePortOptions.Enable)
+            {
+                return Verdict.Verdict.NO_MATCH;
+            }
                 var transportPacket = packet.ExtractPacket();
                 int port = transportPacket switch
                 {
@@ -28,7 +29,7 @@ namespace MFirewallApp.Rules.BaseRules
 
                 if (port != -1)
                 {
-                if (port == configuration.SourcePortRule)
+                if (port == configuration.SourcePortOptions.SourcePort)
                 {
                     FileLogger.AppendLogFile($"[{RuleName}]: {Verdict.Verdict.DROP.ToString()}");
                     return Verdict.Verdict.DROP;

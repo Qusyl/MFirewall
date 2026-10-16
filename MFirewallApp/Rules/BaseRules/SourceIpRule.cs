@@ -10,15 +10,16 @@ namespace MFirewallApp.Rules.BaseRules
 
         public int RuleScore => 35;
 
-        public Verdict.Verdict Check(IPv4Packet packet, RuleParameters configuration)
+        public Verdict.Verdict Check(IPv4Packet packet, FirewallProtection configuration)
         {
-            if (string.IsNullOrWhiteSpace(configuration.SourceIpRule))
+            if (!configuration.SourceIpOptions.Enable)
             {
+
                 FileLogger.AppendLogFile($"[{RuleName}]: {Verdict.Verdict.NO_MATCH.ToString()}");
                  return Verdict.Verdict.NO_MATCH;
             }
-
-            if (configuration.SourceIpRule == packet.Header.SourceAddress.ToString())
+                
+            if (configuration.SourceIpOptions.SourceAddress == packet.Header.SourceAddress.ToString())
             {
                 FileLogger.AppendLogFile($"[{RuleName}]: {Verdict.Verdict.DROP.ToString()}");
                 return Verdict.Verdict.DROP;

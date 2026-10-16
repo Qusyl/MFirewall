@@ -13,6 +13,6 @@ namespace MFirewallApp.Interface
     {
         public int RuleScore { get; }
         string RuleName { get; }
-        Verdict.Verdict Check(IPv4Packet packet, RuleParameters configuration);
+        Verdict.Verdict Check(IPv4Packet packet, FirewallProtection configuration);
     }
 }

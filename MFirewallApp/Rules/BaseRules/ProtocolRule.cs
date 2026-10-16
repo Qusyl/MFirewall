@@ -15,14 +15,14 @@ namespace MFirewallApp.Rules.BaseRules
 
         public int RuleScore => 10;
 
-        public Verdict.Verdict Check(IPv4Packet packet, RuleParameters configuration)
+        public Verdict.Verdict Check(IPv4Packet packet, FirewallProtection configuration)
         {
-            if(configuration.ProtocolRule == ProtocolFromBytes.None)
+            if(!configuration.ProtocolOptions.Enable)
             {
                 FileLogger.AppendLogFile($"[{RuleName}]: {Verdict.Verdict.NO_MATCH.ToString()}");
                 return Verdict.Verdict.NO_MATCH;
             }
-            if (configuration.ProtocolRule == packet.Header.Protocol)
+            if (configuration.ProtocolOptions.Protocol == packet.Header.Protocol)
             {
                 FileLogger.AppendLogFile($"[{RuleName}]: {Verdict.Verdict.DROP.ToString()}");
                 return Verdict.Verdict.DROP;

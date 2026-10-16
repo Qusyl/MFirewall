@@ -8,6 +8,7 @@ namespace MFirewallApp.Rules
 {
     public class RuleParameters
     {
+        
     public string DestinationIpRule { get; set; } = string.Empty;
     public int DestinationPortRule { get; set; }
     public ProtocolFromBytes ProtocolRule { get; set; } = ProtocolFromBytes.None;
@@ -15,5 +16,6 @@ namespace MFirewallApp.Rules
     public int SourcePortRule { get; set; }
     public int UniquePortsThreshold { get; set; }
     public int SynWindow { get; set; }
+
     }
 }
