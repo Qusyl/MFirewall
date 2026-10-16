@@ -10,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // var contentPath = builder.Environment.ContentRootPath;  production
 var contentPath = "/home/denis/Documents/Kursovie/Security/Api/MFirewallApi";
-var configPath = Path.Combine(contentPath, "configuration", "rule_configuration.json");
+var configPath = Path.Combine(contentPath, "configuration", "firewall_configuration.json");
 builder.Configuration
 .SetBasePath(AppContext.BaseDirectory)
 .AddJsonFile(configPath, optional: false, reloadOnChange: true);

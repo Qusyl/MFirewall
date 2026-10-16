@@ -54,6 +54,36 @@
                 "Enable":true,
                 "MaxPackets": 300,
                 "WindowSeconds":3
+            },
+            "RateLimitOptions":
+            {
+                "Enable":true,
+                "Algorithm": "FIXED_WINDOW",
+                "TokenBucket":
+                {
+                    "Enable":false,
+                    "Capacity":100,
+                    "TokenPerSeconds":50,
+                    "TokenPerPacket":5
+                },
+                "Ip": 
+                {
+                    "Enable":true,
+                    "MaxPackets":10,
+                    "WindowSeconds":1
+                },
+                "Port": 
+                {
+                    "Enable":true,
+                    "MaxPackets":10,
+                    "WindowSeconds":1
+                },
+                "Protocol": 
+                {
+                    "Enable":true,
+                    "MaxPackets":2,
+                    "WindowSeconds":1
+                }
             }
         }
         
