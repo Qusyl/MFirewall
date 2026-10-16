@@ -1,4 +1,5 @@
 using System.Buffers.Binary;
+using System.Net;
 
 namespace Domain.Values
 {
@@ -6,6 +7,10 @@ namespace Domain.Values
     {
         public ushort SourcePort { get; }
         public ushort DestinationPort { get; }
+
+        public IPAddress DestinationAddress { get; }
+
+        public IPAddress SourceAddress{ get; }
         public ushort Length { get; }
         public ushort Checksum { get; }
 

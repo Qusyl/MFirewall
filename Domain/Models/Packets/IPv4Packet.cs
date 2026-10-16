@@ -29,9 +29,9 @@ namespace Domain.Models.Packets
         {
             Packet packet = Header.Protocol switch
             {
-                Values.ProtocolFromBytes.TCP => new TcpPacket(Payload.Span),
-                Values.ProtocolFromBytes.Icmp => new IcmpPacket(Payload.Span),
-                Values.ProtocolFromBytes.Udp => new UdpPacket(Payload.Span),
+                Values.Protocol.TCP => new TcpPacket(Payload.Span),
+                Values.Protocol.ICMP => new IcmpPacket(Payload.Span),
+                Values.Protocol.UDP => new UdpPacket(Payload.Span),
                 _ => throw new SwitchExpressionException("Packet not defined")
             };
 

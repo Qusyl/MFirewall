@@ -14,7 +14,7 @@ public struct Ipv4Header
     public bool MoreFragments;
     public ushort FragmentOffset;
     public byte TimeToLive;
-    public ProtocolFromBytes Protocol;
+    public Protocol Protocol;
     public ushort HeaderChecksum;
     public IPAddress SourceAddress;
     public IPAddress DestinationAddress;
@@ -43,7 +43,13 @@ public struct Ipv4Header
             MoreFragments = (flagsAndOffset & 0x2000) != 0,
             FragmentOffset = (ushort)(flagsAndOffset & 0x1FFF),
             TimeToLive = buffer[8],
-            Protocol =(ProtocolFromBytes)buffer[9],
+            Protocol =(ProtocolFromBytes)buffer[9] switch
+            {
+                ProtocolFromBytes.None => Domain.Values.Protocol.NONE,
+                ProtocolFromBytes.Icmp => Domain.Values.Protocol.ICMP,
+                ProtocolFromBytes.Udp => Domain.Values.Protocol.UDP,
+                ProtocolFromBytes.TCP => Domain.Values.Protocol.TCP
+            },
             HeaderChecksum = BinaryPrimitives.ReadUInt16BigEndian(buffer[10..]),
             SourceAddress = new IPAddress(buffer.Slice(12, 4)),
             DestinationAddress = new IPAddress(buffer.Slice(16, 4)),

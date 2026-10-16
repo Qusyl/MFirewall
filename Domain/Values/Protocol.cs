@@ -4,6 +4,7 @@ namespace Domain.Values
     {
         TCP,
         ICMP,
-        UDP
+        UDP,
+        NONE
     }
 }
