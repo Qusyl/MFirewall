@@ -3,6 +3,7 @@ using System.Runtime.CompilerServices;
 using Domain.Models.Packets;
 using MFirewallApp.FileSystem;
 using MFirewallApp.Interface;
+using MFirewallApp.Verdict;
 
 namespace MFirewallApp.Rules.BaseRules
 {
@@ -12,11 +13,11 @@ namespace MFirewallApp.Rules.BaseRules
 
         public int RuleScore => 15;
 
-        public Verdict.Verdict Check(IPv4Packet packet, FirewallProtection configuration)
+        public PacketDecision Check(IPv4Packet packet, FirewallProtection configuration)
         {
             if (!configuration.SourcePortOptions.Enable)
             {
-                return Verdict.Verdict.NO_MATCH;
+                return new PacketDecision(packet.Header.Identification, Verdict.Verdict.NO_MATCH, "Not enabled", RuleName);
             }
                 var transportPacket = packet.ExtractPacket();
                 int port = transportPacket switch
@@ -28,17 +29,18 @@ namespace MFirewallApp.Rules.BaseRules
                 };
 
                 if (port != -1)
-                {
-                if (port == configuration.SourcePortOptions.SourcePort)
+            {
+                var configPort = configuration.SourcePortOptions.SourcePort;
+                if (port == configPort )
                 {
                     FileLogger.AppendLogFile($"[{RuleName}]: {Verdict.Verdict.DROP.ToString()}");
-                    return Verdict.Verdict.DROP;
+                    return new PacketDecision(packet.Header.Identification, Verdict.Verdict.DROP, $"SOURCE PORT matched [{port}][{configPort}]", RuleName);
                 }
                     FileLogger.AppendLogFile($"[{RuleName}]: {Verdict.Verdict.ACCEPT.ToString()}");
-                    return Verdict.Verdict.ACCEPT;
+                    return new PacketDecision(packet.Header.Identification, Verdict.Verdict.ACCEPT, $"SOURCE PORT not matched [{port}][{configPort}]", RuleName);
                 }
-            FileLogger.AppendLogFile($"[{RuleName}]: {Verdict.Verdict.NO_MATCH.ToString()}");
-            return Verdict.Verdict.NO_MATCH;
+            
+            return new PacketDecision(packet.Header.Identification, Verdict.Verdict.NO_MATCH, "Packet type not supported for current rule", RuleName);
         }
     }
 }

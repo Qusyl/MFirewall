@@ -23,6 +23,16 @@
             
         },
         {
+            "name":"Launch UI",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build-avalonia",
+            "program": "${workspaceFolder}/AppUI/bin/Debug/net10.0/MFirewallAppUI.dll",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal"
+        },
+
+        {
             "name": ".NET LAUNCH AS ROOT",
             "type": "coreclr",
             "request": "launch",
@@ -44,6 +54,13 @@
     "quoteArgs": false
 }
 
+        }
+    ],
+    "compounds": [
+        {
+            "name": "API + UI",
+            "configurations": [".NET LAUNCH AS ROOT", "Launch UI"],
+            "stopAll": true
         }
     ]
 }

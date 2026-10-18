@@ -1,6 +1,7 @@
 using System.Collections.Concurrent;
 using Domain.Models.Packets;
 using Domain.Values;
+using MFirewallApp.Verdict;
 
 namespace MFirewallApp.Rules.PortScanRule.Detectors.PortScan
 {
@@ -12,7 +13,7 @@ namespace MFirewallApp.Rules.PortScanRule.Detectors.PortScan
         {
             _attempts = attempts;
         }
-        public abstract Verdict.Verdict ShouldBlock(IPv4Packet packet, FirewallProtection configuration);
+        public abstract PacketDecision ShouldBlock(IPv4Packet packet, FirewallProtection configuration);
         protected void ClearExpiredPorts(DateTimeOffset thresholdTime)
         {
              foreach (var (source, sourcePorts) in _attempts)

@@ -1,0 +1,226 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="MFirewallAppUI.MainWindow"
+        x:CompileBindings="False"
+        Title="Конфигуратор фаервола"
+        Width="620" Height="760">
+
+  <Window.Styles>
+    <Style Selector="TextBlock.lbl">
+      <Setter Property="Width" Value="220"/>
+      <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+    <Style Selector="StackPanel.row">
+      <Setter Property="Orientation" Value="Horizontal"/>
+    </Style>
+    <Style Selector="NumericUpDown">
+      <Setter Property="Width" Value="160"/>
+      <Setter Property="Minimum" Value="0"/>
+      <Setter Property="FormatString" Value="0"/>
+    </Style>
+    <Style Selector="StackPanel.row > TextBox, StackPanel.row > ComboBox">
+      <Setter Property="Width" Value="200"/>
+    </Style>
+    <Style Selector="Expander">
+      <Setter Property="HorizontalAlignment" Value="Stretch"/>
+      <Setter Property="Margin" Value="0,0,0,6"/>
+    </Style>
+  </Window.Styles>
+
+  <!-- DataContext окна = FirewallConfiguration (корень твоего JSON) -->
+  <DockPanel>
+
+    <Border DockPanel.Dock="Bottom" Padding="12" BorderThickness="0,1,0,0" BorderBrush="Gray">
+      <StackPanel Orientation="Horizontal" Spacing="10">
+        <Button x:Name="LoadButton" Content="Загрузить из JSON" Click="OnLoadClick"/>
+        <Button x:Name="SaveButton" Content="Сохранить в JSON" Click="OnSaveClick"/>
+        <TextBlock x:Name="StatusText" VerticalAlignment="Center"/>
+      </StackPanel>
+    </Border>
+
+    <ScrollViewer>
+      <StackPanel Margin="12" Spacing="4">
+
+        <Expander Header="Общие настройки" IsExpanded="True">
+          <StackPanel Spacing="6">
+            <StackPanel Classes="row">
+              <TextBlock Classes="lbl" Text="RuleStrategy"/>
+              <ComboBox x:Name="RuleStrategyBox" SelectedItem="{Binding RuleStrategy}"/>
+            </StackPanel>
+          </StackPanel>
+        </Expander>
+
+        <Expander Header="Фильтрация: IP и порты" IsExpanded="True">
+          <StackPanel Spacing="10" DataContext="{Binding FirewallProtection}">
+
+            <StackPanel Spacing="6" DataContext="{Binding DestinationIpOptions}">
+              <CheckBox Content="Destination IP" IsChecked="{Binding Enable}"/>
+              <StackPanel Classes="row">
+                <TextBlock Classes="lbl" Text="DestinationAddress"/>
+                <TextBox Text="{Binding DestinationAddress}" Watermark="192.168.0.1"/>
+              </StackPanel>
+            </StackPanel>
+
+            <StackPanel Spacing="6" DataContext="{Binding DestinationPortOptions}">
+              <CheckBox Content="Destination Port" IsChecked="{Binding Enable}"/>
+              <StackPanel Classes="row">
+                <TextBlock Classes="lbl" Text="DestinationPort"/>
+                <NumericUpDown Value="{Binding DestinationPort}" Maximum="65535"/>
+              </StackPanel>
+            </StackPanel>
+
+            <StackPanel Spacing="6" DataContext="{Binding SourceIpOptions}">
+              <CheckBox Content="Source IP" IsChecked="{Binding Enable}"/>
+              <StackPanel Classes="row">
+                <TextBlock Classes="lbl" Text="SourceAddress"/>
+                <TextBox Text="{Binding SourceAddress}" Watermark="10.0.0.5"/>
+              </StackPanel>
+            </StackPanel>
+
+            <StackPanel Spacing="6" DataContext="{Binding SourcePortOptions}">
+              <CheckBox Content="Source Port" IsChecked="{Binding Enable}"/>
+              <StackPanel Classes="row">
+                <TextBlock Classes="lbl" Text="SourcePort"/>
+                <NumericUpDown Value="{Binding SourcePort}" Maximum="65535"/>
+              </StackPanel>
+            </StackPanel>
+
+            <StackPanel Spacing="6" DataContext="{Binding ProtocolOptions}">
+              <CheckBox Content="Protocol" IsChecked="{Binding Enable}"/>
+              <StackPanel Classes="row">
+                <TextBlock Classes="lbl" Text="Protocol"/>
+                <ComboBox x:Name="ProtocolBox" SelectedItem="{Binding Protocol}"/>
+              </StackPanel>
+            </StackPanel>
+
+          </StackPanel>
+        </Expander>
+
+        <Expander Header="Защита от сканирования портов">
+          <StackPanel Spacing="10" DataContext="{Binding FirewallProtection}">
+
+            <StackPanel Spacing="6" DataContext="{Binding TcpPortScanOptions}">
+              <CheckBox Content="TCP port scan" IsChecked="{Binding Enable}"/>
+              <StackPanel Classes="row">
+                <TextBlock Classes="lbl" Text="UniquePacketsThreshold"/>
+                <NumericUpDown Value="{Binding UniquePacketsThreshold}"/>
+              </StackPanel>
+              <StackPanel Classes="row">
+                <TextBlock Classes="lbl" Text="WindowSeconds"/>
+                <NumericUpDown Value="{Binding WindowSeconds}"/>
+              </StackPanel>
+            </StackPanel>
+
+            <StackPanel Spacing="6" DataContext="{Binding UdpPortScanOptions}">
+              <CheckBox Content="UDP port scan" IsChecked="{Binding Enable}"/>
+              <StackPanel Classes="row">
+                <TextBlock Classes="lbl" Text="UniquePacketsThreshold"/>
+                <NumericUpDown Value="{Binding UniquePacketsThreshold}"/>
+              </StackPanel>
+              <StackPanel Classes="row">
+                <TextBlock Classes="lbl" Text="WindowSeconds"/>
+                <NumericUpDown Value="{Binding WindowSeconds}"/>
+              </StackPanel>
+            </StackPanel>
+
+          </StackPanel>
+        </Expander>
+
+        <Expander Header="Защита от флуда">
+          <StackPanel Spacing="10" DataContext="{Binding FirewallProtection}">
+
+            <StackPanel Spacing="6" DataContext="{Binding TcpSynFloodOptions}">
+              <CheckBox Content="TCP SYN flood" IsChecked="{Binding Enable}"/>
+              <StackPanel Classes="row">
+                <TextBlock Classes="lbl" Text="MaxSynPackets"/>
+                <NumericUpDown Value="{Binding MaxSynPackets}"/>
+              </StackPanel>
+              <StackPanel Classes="row">
+                <TextBlock Classes="lbl" Text="WindowSeconds"/>
+                <NumericUpDown Value="{Binding WindowSeconds}"/>
+              </StackPanel>
+            </StackPanel>
+
+            <StackPanel Spacing="6" DataContext="{Binding UdpFloodOptions}">
+              <CheckBox Content="UDP flood" IsChecked="{Binding Enable}"/>
+              <StackPanel Classes="row">
+                <TextBlock Classes="lbl" Text="MaxPackets"/>
+                <NumericUpDown Value="{Binding MaxPackets}"/>
+              </StackPanel>
+              <StackPanel Classes="row">
+                <TextBlock Classes="lbl" Text="WindowSeconds"/>
+                <NumericUpDown Value="{Binding WindowSeconds}"/>
+              </StackPanel>
+            </StackPanel>
+
+          </StackPanel>
+        </Expander>
+
+        <Expander Header="Rate limit">
+          <StackPanel Spacing="10" DataContext="{Binding FirewallProtection.RateLimitOptions}">
+
+            <CheckBox Content="Rate limit включён" IsChecked="{Binding Enable}"/>
+            <StackPanel Classes="row">
+              <TextBlock Classes="lbl" Text="Algorithm"/>
+              <ComboBox x:Name="AlgorithmBox" SelectedItem="{Binding Algorithm}"/>
+            </StackPanel>
+
+            <StackPanel Spacing="6" DataContext="{Binding TokenBucket}">
+              <CheckBox Content="Token bucket" IsChecked="{Binding Enable}"/>
+              <StackPanel Classes="row">
+                <TextBlock Classes="lbl" Text="Capacity"/>
+                <NumericUpDown Value="{Binding Capacity}"/>
+              </StackPanel>
+              <StackPanel Classes="row">
+                <TextBlock Classes="lbl" Text="TokenPerSeconds"/>
+                <NumericUpDown Value="{Binding TokenPerSeconds}"/>
+              </StackPanel>
+              <StackPanel Classes="row">
+                <TextBlock Classes="lbl" Text="TokenPerPacket"/>
+                <NumericUpDown Value="{Binding TokenPerPacket}"/>
+              </StackPanel>
+            </StackPanel>
+
+            <StackPanel Spacing="6" DataContext="{Binding Ip}">
+              <CheckBox Content="Лимит по IP" IsChecked="{Binding Enable}"/>
+              <StackPanel Classes="row">
+                <TextBlock Classes="lbl" Text="MaxPackets"/>
+                <NumericUpDown Value="{Binding MaxPackets}"/>
+              </StackPanel>
+              <StackPanel Classes="row">
+                <TextBlock Classes="lbl" Text="WindowSeconds"/>
+                <NumericUpDown Value="{Binding WindowSeconds}"/>
+              </StackPanel>
+            </StackPanel>
+
+            <StackPanel Spacing="6" DataContext="{Binding Port}">
+              <CheckBox Content="Лимит по порту" IsChecked="{Binding Enable}"/>
+              <StackPanel Classes="row">
+                <TextBlock Classes="lbl" Text="MaxPackets"/>
+                <NumericUpDown Value="{Binding MaxPackets}"/>
+              </StackPanel>
+              <StackPanel Classes="row">
+                <TextBlock Classes="lbl" Text="WindowSeconds"/>
+                <NumericUpDown Value="{Binding WindowSeconds}"/>
+              </StackPanel>
+            </StackPanel>
+
+            <StackPanel Spacing="6" DataContext="{Binding Protocol}">
+              <CheckBox Content="Лимит по протоколу" IsChecked="{Binding Enable}"/>
+              <StackPanel Classes="row">
+                <TextBlock Classes="lbl" Text="MaxPackets"/>
+                <NumericUpDown Value="{Binding MaxPackets}"/>
+              </StackPanel>
+              <StackPanel Classes="row">
+                <TextBlock Classes="lbl" Text="WindowSeconds"/>
+                <NumericUpDown Value="{Binding WindowSeconds}"/>
+              </StackPanel>
+            </StackPanel>
+
+          </StackPanel>
+        </Expander>
+
+      </StackPanel>
+    </ScrollViewer>
+  </DockPanel>
+</Window>

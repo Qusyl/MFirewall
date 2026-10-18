@@ -5,6 +5,7 @@ using MFirewallApp.Rules;
 using MFirewallApp.Service;
 using Infrastructure.Extensions;
 using MFirewallApp.FileSystem;
+using MFirewallApp.Rules.StatefulRule;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,8 +27,11 @@ builder.Services.AddProblemDetails();
 
 builder.Services.AddHostedService<PacketCaptureService>();
 
+builder.Services.AddSingleton<IConnectionTracker, ConnectionTracker>();
+
 builder.Services.AddScoped<IPacketCaptureReceiver, LinuxPacketCaptureReceiver>();
 
+builder.Services.AddScoped<IPacketProcessingService, PacketProcessingService>();
 builder.Services.AddScoped<IRuleService, RuleService>();
 
 builder.Services.AddExceptionHandler<MFirewallExceptionHandler>();

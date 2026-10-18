@@ -1,92 +1,72 @@
 {
-    "FirewallConfiguration":
-    {
-        "RuleStrategy": "FIRST_MATCHING",
-        "FirewallProtection":
-        {
-            "DestinationIpOptions": 
-            {
-                "Enable": false,
-                "DestinationAddress": ""
-            },
-            "DestinationPortOptions":
-            {
-                "Enable":false,
-                "DestinationPort" : 0
-            },
-            "SourceIpOptions":
-            {
-                "Enable":false,
-                "SourceAddress": ""
-            },
-            "SourcePortOptions":
-            {
-                "Enable":false,
-                "SourcePort":0
-            },
-            "ProtocolOptions":
-            {
-                "Enable":false,
-                "Protocol":"Tcp"
-            },
-            "TcpPortScanOptions":
-            {
-                "Enable":true,
-                "UniquePacketsThreshold":5,
-                "WindowSeconds":3
-            },
-
-            "UdpPortScanOptions":
-            {
-                "Enable":true,
-                "UniquePacketsThreshold":10,
-                "WindowSeconds":3
-            },
-            "TcpSynFloodOptions":
-            {
-                "Enable":true,
-                "MaxSynPackets": 100,
-                "WindowSeconds": 3
-
-            },
-            "UdpFloodOptions":
-            {
-                "Enable":true,
-                "MaxPackets": 300,
-                "WindowSeconds":3
-            },
-            "RateLimitOptions":
-            {
-                "Enable":true,
-                "Algorithm": "FIXED_WINDOW",
-                "TokenBucket":
-                {
-                    "Enable":false,
-                    "Capacity":100,
-                    "TokenPerSeconds":50,
-                    "TokenPerPacket":5
-                },
-                "Ip": 
-                {
-                    "Enable":true,
-                    "MaxPackets":10,
-                    "WindowSeconds":1
-                },
-                "Port": 
-                {
-                    "Enable":true,
-                    "MaxPackets":10,
-                    "WindowSeconds":1
-                },
-                "Protocol": 
-                {
-                    "Enable":true,
-                    "MaxPackets":2,
-                    "WindowSeconds":1
-                }
-            }
+  "FirewallConfiguration": {
+    "RuleStrategy": "FIRST_MATCHING",
+    "FirewallProtection": {
+      "DestinationIpOptions": {
+        "Enable": false,
+        "DestinationAddress": ""
+      },
+      "DestinationPortOptions": {
+        "Enable": false,
+        "DestinationPort": 10808
+      },
+      "SourceIpOptions": {
+        "Enable": false,
+        "SourceAddress": ""
+      },
+      "SourcePortOptions": {
+        "Enable": false,
+        "SourcePort": 0
+      },
+      "ProtocolOptions": {
+        "Enable": true,
+        "Protocol": 1
+      },
+      "TcpPortScanOptions": {
+        "Enable": false,
+        "UniquePacketsThreshold": 10,
+        "WindowSeconds": 3
+      },
+      "UdpPortScanOptions": {
+        "Enable": false,
+        "UniquePacketsThreshold": 10,
+        "WindowSeconds": 3
+      },
+      "TcpSynFloodOptions": {
+        "Enable": false,
+        "MaxSynPackets": 100,
+        "WindowSeconds": 3
+      },
+      "UdpFloodOptions": {
+        "Enable": false,
+        "MaxPackets": 300,
+        "WindowSeconds": 3
+      },
+      "RateLimitOptions": {
+        "Enable": false,
+        "Algorithm": "FIXED_WINDOW",
+        "TokenBucket": {
+          "Enable": false,
+          "Capacity": 100,
+          "TokenPerSeconds": 50,
+          "TokenPerPacket": 5
+        },
+        "Ip": {
+          "Enable": false,
+          "MaxPackets": 100,
+          "WindowSeconds": 1
+        },
+        "Port": {
+          "Enable": false,
+          "MaxPackets": 100,
+          "WindowSeconds": 1
+        },
+        "Protocol": {
+          "Enable": false,
+          "MaxPackets": 100,
+          "WindowSeconds": 1
         }
-        
+      }
     }
-   
+  }
 }

@@ -1,11 +1,12 @@
 
 using Domain.Models.Packets;
+using MFirewallApp.Verdict;
 
 namespace MFirewallApp.Interface
 {
     public interface IRuleService
     {
         
-        Verdict.Verdict CheckRules(IPv4Packet packet);
+        PacketDecision CheckRules(IPv4Packet packet);
     }
 }

@@ -1,6 +1,7 @@
 using Domain.Models.Packets;
 using MFirewallApp.FileSystem;
 using MFirewallApp.Interface;
+using MFirewallApp.Verdict;
 
 namespace MFirewallApp.Rules.BaseRules
 {
@@ -10,23 +11,24 @@ namespace MFirewallApp.Rules.BaseRules
 
         public int RuleScore => 35;
 
-        public Verdict.Verdict Check(IPv4Packet packet,FirewallProtection configuration)
+        public PacketDecision Check(IPv4Packet packet,FirewallProtection configuration)
         {
+            var configAddress = configuration.DestinationIpOptions.DestinationAddress;
+            var packetAddress = packet.Header.DestinationAddress.ToString();
             if (!configuration.DestinationIpOptions.Enable)
             {
-                FileLogger.AppendLogFile($"[{RuleName}]: {Verdict.Verdict.NO_MATCH.ToString()}");
-                return Verdict.Verdict.NO_MATCH;
+                
+                return new PacketDecision(packet.Header.Identification, Verdict.Verdict.NO_MATCH, "Not enabled", RuleName);
             }
 
-            if (configuration.DestinationIpOptions.DestinationAddress == packet.Header.DestinationAddress.ToString())
+            if (configAddress == packetAddress)
             {
                 FileLogger.AppendLogFile($"[{RuleName}]: {Verdict.Verdict.DROP.ToString()}");
-                return Verdict.Verdict.DROP;
+                return new PacketDecision(packet.Header.Identification, Verdict.Verdict.DROP, $"IP matched [{configAddress}][{packetAddress}]", RuleName);
             }
 
-            return Verdict.Verdict.ACCEPT;
-            
-          
+            return new PacketDecision(packet.Header.Identification, Verdict.Verdict.ACCEPT, $"IP not mached [{configAddress}][{packetAddress}]", RuleName);
+        
         }
     }
 }

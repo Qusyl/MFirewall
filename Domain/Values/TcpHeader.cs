@@ -17,6 +17,8 @@ public struct TcpHeader
     public bool IsAck;
     public bool IsFin;
 
+    public bool IsRst;
+
     public static TcpHeader Parse(ReadOnlySpan<byte> buffer)
     {
         if (buffer.Length < 20)
@@ -41,6 +43,7 @@ public struct TcpHeader
             IsSyn = (dataOffsetAndFlags & 0x0002) != 0,
             IsAck = (dataOffsetAndFlags & 0x0010) != 0,
             IsFin = (dataOffsetAndFlags & 0x0001) != 0,
+            IsRst = (dataOffsetAndFlags & 0x0004) != 0
         };
     }
 }

@@ -12,6 +12,17 @@
                 "/consoleloggerparameters:NoSummary;ForceNoColor"
             ],
             "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build-avalonia",
+            "command": "dotnet",
+            "type":"process",
+            "args": [
+                "build",
+                "${workspaceFolder}/AppUI/MFirewallAppUI.csproj",
+                "/property:GenerateFullPaths=true"
+            ],
+            "problemMatcher": "$msCompile"
         }
     ]
 }

@@ -4,7 +4,7 @@ using MFirewallApp.FileSystem;
 using MFirewallApp.Interface;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+
 
 namespace MFirewallApp.Service
 {
@@ -12,17 +12,13 @@ namespace MFirewallApp.Service
     {
         private readonly IServiceScopeFactory _scopeFactory;
 
-
         private readonly NFQueue.NFQueue nFQueue;
         public PacketCaptureService(IServiceScopeFactory factory)
         {
             nFQueue = new NFQueue.NFQueue();
 
             _scopeFactory = factory;
-
             FileLogger.ClearLogFile();
-
-           
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -35,10 +31,12 @@ namespace MFirewallApp.Service
                 Log(rule.RuleName);
             }
             var receiver = scope.ServiceProvider.GetRequiredService<IPacketCaptureReceiver>();
-            var ruleDision = scope.ServiceProvider.GetRequiredService<IRuleService>();
+
+            var packetProcessor = scope.ServiceProvider.GetRequiredService<IPacketProcessingService>();
         
             while (!stoppingToken.IsCancellationRequested)
             {
+                FileLogger.CheckMemorySizeLimit(50);
                 var rawPacket = await receiver.ReceiveAsync(nFQueue.Reader(), stoppingToken);
                 Log($"NFQueue: получен сырой пакет, ID={rawPacket.ID}, размер={rawPacket.Data.Length} байт");
                 try
@@ -47,9 +45,9 @@ namespace MFirewallApp.Service
                     Log($"[{nameof(PacketCaptureService)}]: ТИП: {ipV4Packet.ExtractPacket().PacketType}");
                  
 
-                        var verdict = ruleDision.CheckRules(ipV4Packet);
+                        var verdict = packetProcessor.Process(ipV4Packet);
                         
-                        nFQueue.SetVerdict(verdict, rawPacket.ID);
+                        nFQueue.SetVerdict(verdict.Verdict, rawPacket.ID);
                 }
                 catch (OperationCanceledException op)
                 {

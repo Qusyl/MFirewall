@@ -6,6 +6,7 @@ using Domain.Models;
 using Domain.Models.Packets;
 using Domain.Values;
 using MFirewallApp.Rules;
+using MFirewallApp.Verdict;
 
 namespace MFirewallApp.Interface
 {
@@ -13,6 +14,6 @@ namespace MFirewallApp.Interface
     {
         public int RuleScore { get; }
         string RuleName { get; }
-        Verdict.Verdict Check(IPv4Packet packet, FirewallProtection configuration);
+        PacketDecision Check(IPv4Packet packet, FirewallProtection configuration);
     }
 }

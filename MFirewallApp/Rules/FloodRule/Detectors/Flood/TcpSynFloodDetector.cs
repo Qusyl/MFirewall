@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Domain.Models.Packets;
 using Domain.Values;
+using MFirewallApp.Verdict;
 
 namespace MFirewallApp.Rules.FloodRule.Detectors.Flood
 {
@@ -14,20 +15,20 @@ namespace MFirewallApp.Rules.FloodRule.Detectors.Flood
         {
         }
 
-        public override Verdict.Verdict ShouldBlock(IPv4Packet packet, FirewallProtection configuration)
+        public override PacketDecision ShouldBlock(IPv4Packet packet, FirewallProtection configuration)
         {
             if (!configuration.TcpSynFloodOptions.Enable)
             {
-                return Verdict.Verdict.NO_MATCH;
+                return new PacketDecision(packet.Header.Identification, Verdict.Verdict.NO_MATCH, "Not enabled", "tcp syn flood detector");
             }
 
             if (packet.ExtractPacket() is TcpPacket tcp)
             {
                 if (tcp.Header.IsAck || !tcp.Header.IsSyn)
                 {
-                    return Verdict.Verdict.NO_MATCH;
+                    return new PacketDecision(packet.Header.Identification, Verdict.Verdict.NO_MATCH, "Not syn", "tcp syn flood detector");
                 }
-
+        
                 var maxPackets = configuration.TcpSynFloodOptions.MaxSynPackets;
                 var window = TimeSpan.FromSeconds(configuration.TcpSynFloodOptions.WindowSeconds);
                 var now = DateTimeOffset.UtcNow;
@@ -40,7 +41,7 @@ namespace MFirewallApp.Rules.FloodRule.Detectors.Flood
                 {
                     if (!history.TryRegister(now, window, maxPackets))
                     {
-                        return Verdict.Verdict.DROP;
+                        return new PacketDecision(packet.Header.Identification, Verdict.Verdict.DROP, $"tcp packets exceeded [{maxPackets}]", "udp flood detector");
                     }
                 }
 
@@ -50,10 +51,10 @@ namespace MFirewallApp.Rules.FloodRule.Detectors.Flood
 
                 _history.TryAdd(packetSource, newHistory);
 
-                return Verdict.Verdict.ACCEPT;
+                return new PacketDecision(packet.Header.Identification, Verdict.Verdict.ACCEPT, "No reason for drop", "tcp syn flood detector");
             }
 
-            return Verdict.Verdict.NO_MATCH;
+            return new PacketDecision(packet.Header.Identification, Verdict.Verdict.NO_MATCH, "Packet is not tcp", "udp flood detector");
         }
     }
 }

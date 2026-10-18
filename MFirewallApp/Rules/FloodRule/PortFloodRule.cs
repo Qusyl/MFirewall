@@ -5,6 +5,7 @@ using Domain.Models.Packets;
 using Domain.Values;
 using MFirewallApp.Interface;
 using MFirewallApp.Rules.FloodRule.Detectors.Flood;
+using MFirewallApp.Verdict;
 
 namespace MFirewallApp.Rules.FloodRule
 {
@@ -18,7 +19,7 @@ namespace MFirewallApp.Rules.FloodRule
 
         private readonly ConcurrentDictionary<PacketSource, PacketHistory> tcpHistory = new();
 
-        public Verdict.Verdict Check(IPv4Packet packet, FirewallProtection configuration)
+        public PacketDecision Check(IPv4Packet packet, FirewallProtection configuration)
         {
 
             var transportPacket = packet.ExtractPacket();

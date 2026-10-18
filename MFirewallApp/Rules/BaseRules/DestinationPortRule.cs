@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Domain.Models.Packets;
 using MFirewallApp.FileSystem;
 using MFirewallApp.Interface;
+using MFirewallApp.Verdict;
 
 namespace MFirewallApp.Rules.BaseRules
 {
@@ -15,13 +16,14 @@ namespace MFirewallApp.Rules.BaseRules
 
         public int RuleScore => 40;
 
-        public Verdict.Verdict Check(IPv4Packet packet,FirewallProtection configuration)
+        public PacketDecision Check(IPv4Packet packet,FirewallProtection configuration)
         {
-            if (!configuration.DestinationIpOptions.Enable)
+            if (!configuration.DestinationPortOptions.Enable)
             {
-                return Verdict.Verdict.NO_MATCH;
+                return new PacketDecision(packet.Header.Identification, Verdict.Verdict.NO_MATCH, "Not enabled", RuleName);
             }
-                var transportPacket = packet.ExtractPacket();
+            var transportPacket = packet.ExtractPacket();
+                
                 int port = transportPacket switch
                 {
                     UdpPacket udp => udp.Header.DestinationPort,
@@ -29,19 +31,21 @@ namespace MFirewallApp.Rules.BaseRules
                     IcmpPacket icmpPacket => -1,
                     _ => throw new SwitchExpressionException($"Not found packet type : {transportPacket.PacketType}")
                 };
-
+           
                 if (port != -1)
-                {
-                if (port == configuration.DestinationPortOptions.DestinationPort)
+            {
+                var configPort = configuration.DestinationPortOptions.DestinationPort;
+                 FileLogger.AppendLogFile($"{port} = {configPort} ? ");
+                if (port == configPort)
                 {
                     FileLogger.AppendLogFile($"[{RuleName}]: {Verdict.Verdict.DROP.ToString()}");
-                    return Verdict.Verdict.DROP;
+                    return new PacketDecision(packet.Header.Identification, Verdict.Verdict.DROP, $"Destination port matched [{port}] [{configPort}]", RuleName);
                 }
                     FileLogger.AppendLogFile($"[{RuleName}]: {Verdict.Verdict.ACCEPT.ToString()}");
-                    return Verdict.Verdict.ACCEPT;
+                    return new PacketDecision(packet.Header.Identification, Verdict.Verdict.ACCEPT, $"Destination port not matched [{port}] [{configPort}]", RuleName);
                 }
             
-            return Verdict.Verdict.NO_MATCH;
+            return new PacketDecision(packet.Header.Identification, Verdict.Verdict.NO_MATCH, "Packet type not supported for current rule", RuleName);
         }
     }
 }

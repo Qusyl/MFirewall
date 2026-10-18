@@ -2,6 +2,7 @@ using System.Collections.Concurrent;
 using Domain.Models.Packets;
 using Domain.Values;
 using MFirewallApp.FileSystem;
+using MFirewallApp.Verdict;
 namespace MFirewallApp.Rules.PortScanRule.Detectors.PortScan
 {
     public class UdpPortScanDetector : PortScanDetector
@@ -10,7 +11,7 @@ namespace MFirewallApp.Rules.PortScanRule.Detectors.PortScan
         {
             
         }
-        public override Verdict.Verdict ShouldBlock(IPv4Packet packet, FirewallProtection configuration)
+        public override PacketDecision ShouldBlock(IPv4Packet packet, FirewallProtection configuration)
         {
             if (packet.ExtractPacket() is UdpPacket udp)
             {
@@ -42,15 +43,15 @@ namespace MFirewallApp.Rules.PortScanRule.Detectors.PortScan
                 if (countPorts.Count >= portThreshold)
                 {
                     FileLogger.AppendLogFile($"[UDP_PORT_SCAN_DETECTOR]: {Verdict.Verdict.DROP.ToString()}");
-                    return Verdict.Verdict.DROP;
+                    return new PacketDecision(packet.Header.Identification, Verdict.Verdict.DROP, $"unique ports count exceeded [{countPorts.Count}]", "udp port scan detector");
                 }
 
                 FileLogger.AppendLogFile($"[UDP_PORT_SCAN_DETECTOR]: {Verdict.Verdict.ACCEPT.ToString()}");
-                return Verdict.Verdict.ACCEPT;
+                return new PacketDecision(packet.Header.Identification, Verdict.Verdict.ACCEPT, "no reason for drop", "udp port scan detector");
 
             }
-            FileLogger.AppendLogFile($"[UDP_PORT_SCAN_DETECTOR]: {Verdict.Verdict.NO_MATCH.ToString()}");
-            return Verdict.Verdict.NO_MATCH;
+            
+            return new PacketDecision(packet.Header.Identification, Verdict.Verdict.DROP, "packet is not udp", "udp port scan detector");
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Concurrent;
 using Domain.Models.Packets;
 using Domain.Values;
+using MFirewallApp.Verdict;
 
 namespace MFirewallApp.Rules.FloodRule.Detectors.Flood
 {
@@ -13,7 +14,7 @@ namespace MFirewallApp.Rules.FloodRule.Detectors.Flood
         {
             _history = history;
         }
-        public abstract Verdict.Verdict ShouldBlock(IPv4Packet packet, FirewallProtection configuration);
+        public abstract PacketDecision ShouldBlock(IPv4Packet packet, FirewallProtection configuration);
 
         protected void ClearExpiredPackets(DateTimeOffset now, TimeSpan window)
         {

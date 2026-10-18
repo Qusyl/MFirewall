@@ -2,6 +2,9 @@
   <Folder Name="/Api/">
     <Project Path="Api/MFirewallApi/MFirewallApi.csproj" />
   </Folder>
+  <Folder Name="/AppUI/">
+    <Project Path="AppUI/MFirewallAppUI.csproj" />
+  </Folder>
   <Folder Name="/Tests/">
     <Project Path="Tests/MFirewallTests/MFirewallTests.csproj" />
   </Folder>

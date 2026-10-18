@@ -3,6 +3,7 @@ using Domain.Models.Packets;
 using Domain.Values;
 using MFirewallApp.Interface;
 using MFirewallApp.Rules.PortScanRule.Detectors.PortScan;
+using MFirewallApp.Verdict;
 
 
 namespace MFirewallApp.Rules.PortScanRule
@@ -17,13 +18,13 @@ namespace MFirewallApp.Rules.PortScanRule
         public string RuleName => "port_scan_rule";
 
         public int RuleScore => 100;
-        public Verdict.Verdict Check(IPv4Packet packet, FirewallProtection configuration)
+        public PacketDecision Check(IPv4Packet packet, FirewallProtection configuration)
         {
             var detector = PortScanDetectorFactory.Create(packet, _attempts);
 
             if(detector is null)
             {
-                return Verdict.Verdict.NO_MATCH;
+                return new PacketDecision(packet.Header.Identification, Verdict.Verdict.DROP, "Packet is null", RuleName);
             }
 
             return detector.ShouldBlock(packet, configuration);

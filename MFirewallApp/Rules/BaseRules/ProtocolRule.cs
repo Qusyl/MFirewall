@@ -6,6 +6,7 @@ using Domain.Models.Packets;
 using Domain.Values;
 using MFirewallApp.FileSystem;
 using MFirewallApp.Interface;
+using MFirewallApp.Verdict;
 
 namespace MFirewallApp.Rules.BaseRules
 {
@@ -15,22 +16,26 @@ namespace MFirewallApp.Rules.BaseRules
 
         public int RuleScore => 10;
 
-        public Verdict.Verdict Check(IPv4Packet packet, FirewallProtection configuration)
+        public PacketDecision Check(IPv4Packet packet, FirewallProtection configuration)
         {
-            if(!configuration.ProtocolOptions.Enable)
+            if (!configuration.ProtocolOptions.Enable)
             {
-                FileLogger.AppendLogFile($"[{RuleName}]: {Verdict.Verdict.NO_MATCH.ToString()}");
-                return Verdict.Verdict.NO_MATCH;
+              
+                return new PacketDecision(packet.Header.Identification, Verdict.Verdict.NO_MATCH, "Not enabled", RuleName);
             }
-            if (configuration.ProtocolOptions.Protocol == packet.Header.Protocol)
+
+            var configProtocol = configuration.ProtocolOptions.Protocol;
+
+            var packetProtocol = packet.Header.Protocol;
+
+            FileLogger.AppendLogFile($"[PROTOCOL_RULE] {packetProtocol} = {configProtocol}?");
+            if ( configProtocol==packetProtocol )
             {
                 FileLogger.AppendLogFile($"[{RuleName}]: {Verdict.Verdict.DROP.ToString()}");
-                return Verdict.Verdict.DROP;
+                return new PacketDecision(packet.Header.Identification, Verdict.Verdict.DROP, $"Protocol matched [{configProtocol}][{packetProtocol}]", RuleName);
             }
             FileLogger.AppendLogFile($"[{RuleName}]: {Verdict.Verdict.ACCEPT.ToString()}");
-            return Verdict.Verdict.ACCEPT;
-        
-         
+            return new PacketDecision(packet.Header.Identification, Verdict.Verdict.ACCEPT, $"Protocol not matched [{configProtocol}][{packetProtocol}]", RuleName);
         }
     }
 }

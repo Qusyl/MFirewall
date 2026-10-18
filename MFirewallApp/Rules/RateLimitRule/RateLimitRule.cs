@@ -7,6 +7,7 @@ using Domain.Values;
 using MFirewallApp.Interface;
 using MFirewallApp.Rules.FloodRule.Detectors.Flood;
 using MFirewallApp.Rules.PortScanRule.Options;
+using MFirewallApp.Verdict;
 
 
 namespace MFirewallApp.Rules.RateLimitRule
@@ -21,7 +22,7 @@ namespace MFirewallApp.Rules.RateLimitRule
 
         private readonly ConcurrentDictionary<RateLimitKey, TokenBucketState> _bucketStorage = new();
 
-        public Verdict.Verdict Check(IPv4Packet packet, FirewallProtection configuration)
+        public PacketDecision Check(IPv4Packet packet, FirewallProtection configuration)
         {
             var options = configuration.RateLimitOptions;
 
@@ -32,7 +33,7 @@ namespace MFirewallApp.Rules.RateLimitRule
 
             return TokenBucket(packet, options);
         }
-        private Verdict.Verdict TokenBucket(IPv4Packet packet, RateLimitOptions options)
+        private PacketDecision TokenBucket(IPv4Packet packet, RateLimitOptions options)
         {
             var currentIp = packet.Header.SourceAddress;
             var transportPacket = packet.ExtractPacket();
@@ -68,7 +69,7 @@ namespace MFirewallApp.Rules.RateLimitRule
 
                     if (state.Tokens < 1)
                     {
-                        return Verdict.Verdict.DROP;
+                        return new PacketDecision(packet.Header.Identification, Verdict.Verdict.DROP, $"Token limit exceeded for current IP", RuleName);
                     }
                     state.Tokens -= options.TokenBucket.TokenPerPacket;
                 }
@@ -96,7 +97,7 @@ namespace MFirewallApp.Rules.RateLimitRule
 
                     if (state.Tokens < 1)
                     {
-                        return Verdict.Verdict.DROP;
+                         return new PacketDecision(packet.Header.Identification, Verdict.Verdict.DROP, $"Token limit exceeded for current PORT", RuleName);
                     }
                     state.Tokens -= options.TokenBucket.TokenPerPacket;
                 }
@@ -123,16 +124,16 @@ namespace MFirewallApp.Rules.RateLimitRule
 
                     if (state.Tokens < 1)
                     {
-                        return Verdict.Verdict.DROP;
+                         return new PacketDecision(packet.Header.Identification, Verdict.Verdict.DROP, $"Token limit exceeded for current protocol", RuleName);
                     }
                     state.Tokens -= options.TokenBucket.TokenPerPacket;
                 }
               
             }
-            return Verdict.Verdict.ACCEPT;
+             return new PacketDecision(packet.Header.Identification, Verdict.Verdict.ACCEPT, "No reason for drop", RuleName);
         }
 
-        private Verdict.Verdict FixedWindow(IPv4Packet packet, RateLimitOptions options)
+        private PacketDecision FixedWindow(IPv4Packet packet, RateLimitOptions options)
         {
             var currentIp = packet.Header.SourceAddress;
             var transportPacket = packet.ExtractPacket();
@@ -169,7 +170,7 @@ namespace MFirewallApp.Rules.RateLimitRule
 
                     if(state.PacketCount > options.Ip.MaxPackets)
                     {
-                         return Verdict.Verdict.DROP;
+                         return new PacketDecision(packet.Header.Identification, Verdict.Verdict.DROP, $"Packet IP count exceed {state.PacketCount}/{options.Ip.MaxPackets}", RuleName);
                     }
                 }
             }
@@ -198,7 +199,7 @@ namespace MFirewallApp.Rules.RateLimitRule
 
                     if(state.PacketCount > options.Port.MaxPackets)
                     {
-                         return Verdict.Verdict.DROP;
+                         return new PacketDecision(packet.Header.Identification, Verdict.Verdict.NO_MATCH, "Not enabled", RuleName);
                     }
                 }
             }
@@ -226,11 +227,11 @@ namespace MFirewallApp.Rules.RateLimitRule
 
                     if(state.PacketCount > options.Protocol.MaxPackets)
                     {
-                         return Verdict.Verdict.DROP;
+                         return new PacketDecision(packet.Header.Identification, Verdict.Verdict.DROP, $"Packets protocol count exceeded {state.PacketCount}/{options.Protocol.MaxPackets}", RuleName);
                     }
                 }
             }
-            return Verdict.Verdict.ACCEPT;
+            return new PacketDecision(packet.Header.Identification, Verdict.Verdict.ACCEPT, "No reason for drop", RuleName);
         }
     }
 }
