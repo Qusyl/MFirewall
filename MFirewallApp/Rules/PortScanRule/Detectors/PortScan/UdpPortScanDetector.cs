@@ -42,11 +42,11 @@ namespace MFirewallApp.Rules.PortScanRule.Detectors.PortScan
                 $"Threshold={portThreshold}");
                 if (countPorts.Count >= portThreshold)
                 {
-                    FileLogger.AppendLogFile($"[UDP_PORT_SCAN_DETECTOR]: {Verdict.Verdict.DROP.ToString()}");
+                    
                     return new PacketDecision(packet.Header.Identification, Verdict.Verdict.DROP, $"unique ports count exceeded [{countPorts.Count}]", "udp port scan detector");
                 }
 
-                FileLogger.AppendLogFile($"[UDP_PORT_SCAN_DETECTOR]: {Verdict.Verdict.ACCEPT.ToString()}");
+               
                 return new PacketDecision(packet.Header.Identification, Verdict.Verdict.ACCEPT, "no reason for drop", "udp port scan detector");
 
             }

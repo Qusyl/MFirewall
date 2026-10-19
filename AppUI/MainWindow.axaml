@@ -27,14 +27,15 @@
     </Style>
   </Window.Styles>
 
-  <!-- DataContext окна = FirewallConfiguration (корень твоего JSON) -->
   <DockPanel>
 
     <Border DockPanel.Dock="Bottom" Padding="12" BorderThickness="0,1,0,0" BorderBrush="Gray">
       <StackPanel Orientation="Horizontal" Spacing="10">
         <Button x:Name="LoadButton" Content="Загрузить из JSON" Click="OnLoadClick"/>
         <Button x:Name="SaveButton" Content="Сохранить в JSON" Click="OnSaveClick"/>
+         <Button x:Name="JournalLogs" Content="Журнал" Click="OnLogWindow_Click"/>
         <TextBlock x:Name="StatusText" VerticalAlignment="Center"/>
+        <TextBlock x:Name="SignalText" VerticalAlignment="Center"/>
       </StackPanel>
     </Border>
 

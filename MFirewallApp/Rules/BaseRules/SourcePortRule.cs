@@ -33,10 +33,10 @@ namespace MFirewallApp.Rules.BaseRules
                 var configPort = configuration.SourcePortOptions.SourcePort;
                 if (port == configPort )
                 {
-                    FileLogger.AppendLogFile($"[{RuleName}]: {Verdict.Verdict.DROP.ToString()}");
+                    
                     return new PacketDecision(packet.Header.Identification, Verdict.Verdict.DROP, $"SOURCE PORT matched [{port}][{configPort}]", RuleName);
                 }
-                    FileLogger.AppendLogFile($"[{RuleName}]: {Verdict.Verdict.ACCEPT.ToString()}");
+                  
                     return new PacketDecision(packet.Header.Identification, Verdict.Verdict.ACCEPT, $"SOURCE PORT not matched [{port}][{configPort}]", RuleName);
                 }
             

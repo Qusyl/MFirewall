@@ -35,13 +35,13 @@ namespace MFirewallApp.Rules.BaseRules
                 if (port != -1)
             {
                 var configPort = configuration.DestinationPortOptions.DestinationPort;
-                 FileLogger.AppendLogFile($"{port} = {configPort} ? ");
+                
                 if (port == configPort)
                 {
-                    FileLogger.AppendLogFile($"[{RuleName}]: {Verdict.Verdict.DROP.ToString()}");
+                   
                     return new PacketDecision(packet.Header.Identification, Verdict.Verdict.DROP, $"Destination port matched [{port}] [{configPort}]", RuleName);
                 }
-                    FileLogger.AppendLogFile($"[{RuleName}]: {Verdict.Verdict.ACCEPT.ToString()}");
+                  
                     return new PacketDecision(packet.Header.Identification, Verdict.Verdict.ACCEPT, $"Destination port not matched [{port}] [{configPort}]", RuleName);
                 }
             

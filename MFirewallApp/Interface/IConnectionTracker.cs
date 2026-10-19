@@ -9,7 +9,7 @@ namespace MFirewallApp.Interface
 {
     public interface IConnectionTracker
     {
-        public PacketDecision ProcessConnection(IPv4Packet packet);
+        public Task<PacketDecision> ProcessConnectionAsync(IPv4Packet packet);
 
         public int CleanupExpiredConnections(TimeSpan timeout);
 

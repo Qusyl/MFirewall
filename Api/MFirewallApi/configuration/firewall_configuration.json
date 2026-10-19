@@ -19,8 +19,8 @@
         "SourcePort": 0
       },
       "ProtocolOptions": {
-        "Enable": true,
-        "Protocol": 1
+        "Enable": false,
+        "Protocol": 3
       },
       "TcpPortScanOptions": {
         "Enable": false,

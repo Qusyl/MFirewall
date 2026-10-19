@@ -7,6 +7,6 @@ namespace MFirewallApp.Interface
     public interface IRuleService
     {
         
-        PacketDecision CheckRules(IPv4Packet packet);
+        Task<PacketDecision> CheckRules(IPv4Packet packet);
     }
 }

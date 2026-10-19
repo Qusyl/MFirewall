@@ -1,8 +1,10 @@
 using System.Collections.Concurrent;
 using System.Text;
 using Domain.Models.Packets;
+using MFirewallApp.Analyse;
 using MFirewallApp.FileSystem;
 using MFirewallApp.Interface;
+using MFirewallApp.Service;
 using MFirewallApp.Verdict;
 namespace MFirewallApp.Rules.StatefulRule
 {
@@ -12,7 +14,17 @@ namespace MFirewallApp.Rules.StatefulRule
 
         private readonly object _locker = new();
 
-        public PacketDecision ProcessConnection(IPv4Packet packet)
+        private readonly ConnectionQueue conQueue;
+
+        private readonly ReportQueue repQueue;
+
+        public ConnectionTracker(ConnectionQueue connectionQueue, ReportQueue reportQueue)
+        {
+            conQueue = connectionQueue;
+            repQueue = reportQueue;
+        }
+
+        public async Task<PacketDecision> ProcessConnectionAsync(IPv4Packet packet)
         {
             if (packet.ExtractPacket() is not TcpPacket tcp)
             {
@@ -29,33 +41,8 @@ namespace MFirewallApp.Rules.StatefulRule
             Domain.Values.Protocol.TCP);
 
             var reversedKey = connectionKey.Reverse();
-            var hasDirect = _connectionTables.TryGetValue(
-    connectionKey,
-    out var directState);
-
-var hasReverse = _connectionTables.TryGetValue(
-    reversedKey,
-    out var reverseState);
-
-            Console.WriteLine(
-    $"[CONNECTION LOOKUP] " +
-    $"Src={connectionKey.SourceIp}:{connectionKey.SourcePort}, " +
-    $"Dst={connectionKey.DestionationIp}:{connectionKey.DestinationPort}, " +
-    $"SYN={tcp.Header.IsSyn}, " +
-    $"ACK={tcp.Header.IsAck}, " +
-    $"FIN={tcp.Header.IsFin}, " +
-    $"RST={tcp.Header.IsRst}, " +
-    $"Direct={hasDirect} ({directState?.Status}), " +
-    $"Reverse={hasReverse} ({reverseState?.Status})");
-    Console.WriteLine(
-    $"[TCP FLAGS] " +
-    $"{packet.Header.SourceAddress}:{tcp.Header.SourcePort} -> " +
-    $"{packet.Header.DestinationAddress}:{tcp.Header.DestinationPort} | " +
-    $"SYN={tcp.Header.IsSyn}, " +
-    $"ACK={tcp.Header.IsAck}, " +
-    $"FIN={tcp.Header.IsFin}, " +
-    $"RST={tcp.Header.IsRst}");
-
+            
+            
             if (tcp.Header.IsRst)
             {
                 lock (_locker)
@@ -64,9 +51,11 @@ var hasReverse = _connectionTables.TryGetValue(
                     _connectionTables.TryRemove(reversedKey, out _);
                 }
 
-                SaveConnectionTable();
+                
+                var decision = new PacketDecision(packet.Header.Identification, Verdict.Verdict.NO_MATCH, "Tcp connection reset", "Stateful rule");
+               
 
-                return new PacketDecision(packet.Header.Identification, Verdict.Verdict.NO_MATCH, "Tcp connection reset", "Stateful rule");
+                return decision;
                
             }
 
@@ -92,15 +81,9 @@ var hasReverse = _connectionTables.TryGetValue(
 
                 else if (tcp.Header.IsSyn && tcp.Header.IsAck)
                 {
-                    Console.WriteLine(
-        $"[SYN-ACK] " +
-        $"{connectionKey.SourceIp}:{connectionKey.SourcePort} -> " +
-        $"{connectionKey.DestionationIp}:{connectionKey.DestinationPort}");
+                    
 
-                    Console.WriteLine(
-                        $"[SYN-ACK LOOKUP] Reverse={reversedKey.SourceIp}:" +
-                        $"{reversedKey.SourcePort} -> " +
-                        $"{reversedKey.DestionationIp}:{reversedKey.DestinationPort}");
+                  
                     if (_connectionTables.TryGetValue(
                             reversedKey, out var state) &&
                         state.Status == TcpConnectionStatus.SynSent)
@@ -129,15 +112,33 @@ var hasReverse = _connectionTables.TryGetValue(
             SaveConnectionTable();
 
             var isNewSyn = tcp.Header.IsSyn && !tcp.Header.IsAck;
+           
+           
             if (known)
             {
+                ConnectionState connectionState;
+                if (_connectionTables.ContainsKey(connectionKey))
+                {
+                    connectionState = _connectionTables[connectionKey];
+                    conQueue.Equeue(new ConnectionSnapshot(connectionKey, connectionState));
+                }
+                if (_connectionTables.ContainsKey(reversedKey))
+                {
+                    connectionState = _connectionTables[reversedKey];
+                    conQueue.Equeue(new ConnectionSnapshot(reversedKey, connectionState));
+                }
+                
+
                 return new PacketDecision(packet.Header.Identification, Verdict.Verdict.ACCEPT, "Tracked connection", "Stateful rule");
             }
             if (isNewSyn)
             {
-                return new PacketDecision(packet.Header.Identification, Verdict.Verdict.NO_MATCH, "New connection",     "Stateful rule");
+                return new PacketDecision(packet.Header.Identification, Verdict.Verdict.NO_MATCH, "New connection", "Stateful rule");
             }
-            return new PacketDecision(packet.Header.Identification, Verdict.Verdict.DROP, "Unknown connection",     "Stateful rule");
+            var dropDecision = new PacketDecision(packet.Header.Identification, Verdict.Verdict.DROP, "Unknown connection", "Stateful rule");
+            
+            repQueue.Equeue(new FirewallReport(DateTimeOffset.UtcNow,dropDecision));
+            return dropDecision;
         }
 
         public int CleanupExpiredConnections(TimeSpan timeout)
@@ -177,27 +178,10 @@ var hasReverse = _connectionTables.TryGetValue(
         {
 
             var path = "/home/denis/Documents/Kursovie/Security/MFirewallApp/FileSystem/connection_table.txt";
-            Console.WriteLine(
-    $"[SAVE TABLE] Entries={_connectionTables.Count}, " +
-    $"Path={path}");
+           
             var sb = new StringBuilder();
             ResetTable();
-            foreach (var (connectionKey, state) in _connectionTables)
-            {
-                 Console.WriteLine(
-        $"[TABLE] {connectionKey.SourceIp}:{connectionKey.SourcePort} -> " +
-        $"{connectionKey.DestionationIp}:{connectionKey.DestinationPort}, " +
-        $"Status={state.Status}");
-                sb.Append("--------------------------------------" + Environment.NewLine);
-                sb.Append($"|{connectionKey.SourceIp}:{connectionKey.SourcePort} --> {connectionKey.DestionationIp}:{connectionKey.DestinationPort}|\n");
-                sb.Append($"STATUS: {state.Status.ToString()}|\n");
-                sb.Append($"CREATED_AT: {state.CreatedAt.ToString("dd-MM-yyyy HH:mm:ss")}|\n");
-                sb.Append($"LAST_ACTIVE: {state.LastActive.ToString("dd-MM-yyyy HH:mm:ss")}|\n");
-                sb.Append($"CLIENT_FIN: {state.ClientFinSeen}|\n");
-                sb.Append($"SERVER_FIN: {state.ServerFinSeen}|\n");
-                sb.Append("--------------------------------------" + Environment.NewLine);
-            }
-            File.WriteAllText(path, sb.ToString());
+            
         }
 
         private void ProcessFin(

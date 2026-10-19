@@ -7,6 +7,8 @@ using Infrastructure.Extensions;
 using MFirewallApp.FileSystem;
 using MFirewallApp.Rules.StatefulRule;
 
+using MFirewallApp.Hubs;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // var contentPath = builder.Environment.ContentRootPath;  production
@@ -28,11 +30,17 @@ builder.Services.AddProblemDetails();
 builder.Services.AddHostedService<PacketCaptureService>();
 
 builder.Services.AddSingleton<IConnectionTracker, ConnectionTracker>();
+builder.Services.AddSingleton<ReportQueue>();
+builder.Services.AddSingleton<ConnectionQueue>();
 
 builder.Services.AddScoped<IPacketCaptureReceiver, LinuxPacketCaptureReceiver>();
+builder.Services.AddHostedService<ReportSender>();
+
 
 builder.Services.AddScoped<IPacketProcessingService, PacketProcessingService>();
 builder.Services.AddScoped<IRuleService, RuleService>();
+
+builder.Services.AddSignalR();
 
 builder.Services.AddExceptionHandler<MFirewallExceptionHandler>();
 
@@ -47,7 +55,12 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.MapGet("/status",() =>
+{
+    return Results.Ok();
+});
 
+app.MapHub<LoggerHub>("/logger");
 app.Run();
 
 

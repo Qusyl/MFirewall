@@ -1,8 +1,11 @@
 using Domain.Models.Packets;
 using MFirewallApp.FileSystem;
+using MFirewallApp.Hubs;
 using MFirewallApp.Interface;
 using MFirewallApp.Rules;
 using MFirewallApp.Verdict;
+using Microsoft.AspNetCore.SignalR;
+using Microsoft.Extensions.Logging;
 
 namespace MFirewallApp.Service
 {
@@ -14,17 +17,17 @@ namespace MFirewallApp.Service
 
         public PacketProcessingService(IConnectionTracker tracker, IRuleService ruleService)
         {
+          
             _tracker = tracker;
             _ruleService = ruleService;
         }
-        public PacketDecision Process(IPv4Packet packet)
+        public async Task<PacketDecision> ProcessAsync(IPv4Packet packet)
 {
-        var ruleDecision = _ruleService.CheckRules(packet);
+        var ruleDecision =await _ruleService.CheckRules(packet);
     
-        var trackerDecision = _tracker.ProcessConnection(packet);
+        var trackerDecision =await _tracker.ProcessConnectionAsync(packet);
 
-            FileLogger.AppendLogFile($"[TRACKER_DECISION]: {trackerDecision.Verdict} / {trackerDecision.Reason}");
-
+            
             if (ruleDecision.Verdict is Verdict.Verdict.DROP)
             {
                 return ruleDecision;

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MFirewallApp.StateInspection
+namespace MFirewallApp.Service
 {
-    public class TcpTracker
+    public class ConnectionSender
     {
         
     }

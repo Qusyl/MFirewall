@@ -28,13 +28,13 @@ namespace MFirewallApp.Rules.BaseRules
 
             var packetProtocol = packet.Header.Protocol;
 
-            FileLogger.AppendLogFile($"[PROTOCOL_RULE] {packetProtocol} = {configProtocol}?");
+          
             if ( configProtocol==packetProtocol )
             {
-                FileLogger.AppendLogFile($"[{RuleName}]: {Verdict.Verdict.DROP.ToString()}");
+                
                 return new PacketDecision(packet.Header.Identification, Verdict.Verdict.DROP, $"Protocol matched [{configProtocol}][{packetProtocol}]", RuleName);
             }
-            FileLogger.AppendLogFile($"[{RuleName}]: {Verdict.Verdict.ACCEPT.ToString()}");
+            
             return new PacketDecision(packet.Header.Identification, Verdict.Verdict.ACCEPT, $"Protocol not matched [{configProtocol}][{packetProtocol}]", RuleName);
         }
     }

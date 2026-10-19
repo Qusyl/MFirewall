@@ -1,7 +1,10 @@
 using Domain.Models.Packets;
 using Domain.Values;
+using MFirewallApp.Analyse;
 using MFirewallApp.FileSystem;
+using MFirewallApp.Hubs;
 using MFirewallApp.Interface;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -12,13 +15,14 @@ namespace MFirewallApp.Service
     {
         private readonly IServiceScopeFactory _scopeFactory;
 
+        
         private readonly NFQueue.NFQueue nFQueue;
         public PacketCaptureService(IServiceScopeFactory factory)
         {
             nFQueue = new NFQueue.NFQueue();
-
+           
             _scopeFactory = factory;
-            FileLogger.ClearLogFile();
+            
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -26,10 +30,9 @@ namespace MFirewallApp.Service
             var nfQueueTask = nFQueue.OpenNfqueueAsync(stoppingToken);
             using var scope = _scopeFactory.CreateScope();
             var rules = scope.ServiceProvider.GetServices<IPacketRule>();
-            foreach(var rule in rules)
-            {
-                Log(rule.RuleName);
-            }
+
+
+           
             var receiver = scope.ServiceProvider.GetRequiredService<IPacketCaptureReceiver>();
 
             var packetProcessor = scope.ServiceProvider.GetRequiredService<IPacketProcessingService>();
@@ -43,9 +46,15 @@ namespace MFirewallApp.Service
                 {
                     var ipV4Packet = new IPv4Packet(rawPacket.Data);
                     Log($"[{nameof(PacketCaptureService)}]: ТИП: {ipV4Packet.ExtractPacket().PacketType}");
-                 
 
-                        var verdict = packetProcessor.Process(ipV4Packet);
+
+                    var verdict =  await packetProcessor.ProcessAsync(ipV4Packet);
+
+                    var report = new FirewallReport(
+                        DateTimeOffset.UtcNow,
+                        verdict);
+
+                    
                         
                         nFQueue.SetVerdict(verdict.Verdict, rawPacket.ID);
                 }

@@ -23,7 +23,7 @@ namespace MFirewallApp.Rules.BaseRules
 
             if (configAddress == packetAddress)
             {
-                FileLogger.AppendLogFile($"[{RuleName}]: {Verdict.Verdict.DROP.ToString()}");
+              
                 return new PacketDecision(packet.Header.Identification, Verdict.Verdict.DROP, $"IP matched [{configAddress}][{packetAddress}]", RuleName);
             }
 

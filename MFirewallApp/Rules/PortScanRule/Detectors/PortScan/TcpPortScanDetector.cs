@@ -38,20 +38,14 @@ namespace MFirewallApp.Rules.PortScanRule.Detectors.PortScan
                 ClearExpiredPorts(threshold);
 
                 var countPorts = _attempts[packetSource];
-                FileLogger.AppendLogFile(
-                $"[UDP_PORT_SCAN_DETECTOR]: " +
-                $"Source={packet.Header.SourceAddress}, " +
-                $"Destination={packet.Header.DestinationAddress}, " +
-                $"Port={tcp.Header.DestinationPort}, " +
-                $"UniquePorts={ports.Count}, " +
-                $"Threshold={thresholdMaxCount}");
+               
                 if (countPorts.Count >= thresholdMaxCount)
                 {
                    
-                    FileLogger.AppendLogFile($"[TCP_PORT_SCAN_DETECTOR]: {Verdict.Verdict.DROP.ToString()} []");
+                   
                     return new PacketDecision(packet.Header.Identification, Verdict.Verdict.DROP, $"unique ports count exceeded [{countPorts.Count}]", "tcp port scan detector");
                 }
-                FileLogger.AppendLogFile($"[TCP_PORT_SCAN_DETECTOR]: {Verdict.Verdict.ACCEPT.ToString()}");
+                
                 return new PacketDecision(packet.Header.Identification, Verdict.Verdict.ACCEPT, "no reason for drop", "tcp port scan detector");
             }
            

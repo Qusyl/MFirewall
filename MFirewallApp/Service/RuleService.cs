@@ -1,9 +1,12 @@
 using System.Runtime.CompilerServices;
 using Domain.Models.Packets;
+using MFirewallApp.Analyse;
 using MFirewallApp.FileSystem;
+using MFirewallApp.Hubs;
 using MFirewallApp.Interface;
 using MFirewallApp.Rules;
 using MFirewallApp.Verdict;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Options;
 
 namespace MFirewallApp.Service
@@ -14,17 +17,21 @@ namespace MFirewallApp.Service
 
         private readonly IOptionsMonitor<FirewallConfiguration> _configurations;
 
-        public RuleService(IEnumerable<IPacketRule> rules, IOptionsMonitor<FirewallConfiguration> optionsMonitor)
+        private readonly ReportQueue queueReport;
+      
+
+        public RuleService(IEnumerable<IPacketRule> rules, IOptionsMonitor<FirewallConfiguration> optionsMonitor, ReportQueue reportQ)
         {
+            queueReport = reportQ;
             _rules = rules;
             _configurations = optionsMonitor;
         }
-        public PacketDecision CheckRules(IPv4Packet packet)
+        public async Task<PacketDecision>  CheckRules(IPv4Packet packet)
         {
             var verdictResult = _configurations.CurrentValue.RuleStrategy switch
             {
-                DropOrAcceptRuleStrategy.FIRST_MATCHING => WithFirstMatching(packet),
-                DropOrAcceptRuleStrategy.SCORE_BASED => WithScoreBased(packet),
+                DropOrAcceptRuleStrategy.FIRST_MATCHING => await WithFirstMatching(packet),
+                DropOrAcceptRuleStrategy.SCORE_BASED => await WithScoreBased(packet),
                 _ => throw new SwitchExpressionException()
             };
 
@@ -37,7 +44,7 @@ namespace MFirewallApp.Service
         {
             FileLogger.AppendLogFile(log);
         }
-        private PacketDecision WithFirstMatching(IPv4Packet packet)
+        private async Task<PacketDecision> WithFirstMatching(IPv4Packet packet)
         {
             if (packet is null)
             {
@@ -52,13 +59,17 @@ namespace MFirewallApp.Service
 
                 if (verdict.Verdict is Verdict.Verdict.DROP)
                 {
+                    var report = new FirewallReport(DateTimeOffset.UtcNow, verdict);
+                    queueReport.Equeue(report);
                     return verdict;
                 }
             }
-            return new PacketDecision(packet.Header.Identification, Verdict.Verdict.ACCEPT, "", "");
+            
+           
+            return new PacketDecision(packet.Header.Identification, Verdict.Verdict.ACCEPT, "No reason for drop", "[RULE_SERVICE]");
          
         }
-        private PacketDecision WithScoreBased(IPv4Packet packet)
+        private async Task<PacketDecision> WithScoreBased(IPv4Packet packet)
         {
 
             if (packet is null)
@@ -71,9 +82,10 @@ namespace MFirewallApp.Service
             {
 
                 var verdict = rule.Check(packet,parameters );
-                LOG($"[{rule.RuleName}]: {verdict.ToString()}");
                 if (verdict.Verdict is Verdict.Verdict.DROP && rule.RuleScore >= 100)
                 {
+                    var report = new FirewallReport(DateTimeOffset.UtcNow, verdict);
+                     queueReport.Equeue(report);
                     return verdict;
                 }
 
@@ -85,9 +97,12 @@ namespace MFirewallApp.Service
             LOG($"Получено {score} баллов");
             if (score < 75)
             {
-                return new PacketDecision(packet.Header.Identification, Verdict.Verdict.DROP, "Packet has not enough security score", "Score based strategy");
+                var decision = new PacketDecision(packet.Header.Identification, Verdict.Verdict.DROP, $"Packet has not enough security score : {score}", "[RULE_SERVICE]");
+                var report = new FirewallReport(DateTimeOffset.UtcNow, decision);
+                 queueReport.Equeue(report);
+                return decision;
             }
-            return  new PacketDecision(packet.Header.Identification, Verdict.Verdict.ACCEPT, "", "");
+            return  new PacketDecision(packet.Header.Identification, Verdict.Verdict.ACCEPT, "No reason for drop", "[RULE_SERVICE]");
         }
         } 
     

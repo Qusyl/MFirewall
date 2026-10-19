@@ -25,10 +25,10 @@ namespace MFirewallApp.Rules.BaseRules
             var packetIp = packet.Header.SourceAddress.ToString();
             if ( configIp==packetIp )
             {
-                FileLogger.AppendLogFile($"[{RuleName}]: {Verdict.Verdict.DROP.ToString()}");
+              
                 return new PacketDecision(packet.Header.Identification, Verdict.Verdict.DROP, $"SOURCE IP matched [{configIp}][{packetIp}]", RuleName);
             }
-                FileLogger.AppendLogFile($"[{RuleName}]: {Verdict.Verdict.ACCEPT.ToString()}");
+               
                return new PacketDecision(packet.Header.Identification, Verdict.Verdict.ACCEPT, $"SOURCE IP not matched [{configIp}][{packetIp}]", RuleName);
             }
            

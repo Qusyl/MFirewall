@@ -1,0 +1,17 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="MFirewallAppUI.LogWindow"
+        x:CompileBindings="False"
+        Title="Журнал firewall"
+        Width="620" Height="760">   
+    <DockPanel>
+    <ScrollViewer>
+      <StackPanel Margin="12" Spacing="4">
+
+      <ListBox x:Name="LogsList"
+                 Grid.Row="1"/>
+
+      </StackPanel>
+    </ScrollViewer>
+      </DockPanel>
+</Window>

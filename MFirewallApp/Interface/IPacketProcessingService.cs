@@ -8,6 +8,6 @@ namespace MFirewallApp.Interface
 {
     public interface IPacketProcessingService
     {
-        PacketDecision Process(IPv4Packet packet);
+       Task<PacketDecision> ProcessAsync(IPv4Packet packet);
     }
 }
