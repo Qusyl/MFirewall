@@ -1,0 +1,56 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:Avalonia.Controls"
+        x:Class="MFirewallAppUI.ConnectionTable"
+        x:CompileBindings="False"
+        Title="Таблица соединений"
+        Width="620" Height="760">
+           
+    <controls:DataGrid ItemsSource="{Binding Connections}" 
+                 CanUserSortColumns="True" 
+                 AutoGenerateColumns="False"
+                 IsReadOnly="True"
+                 Height="700">
+        <controls:DataGrid.Columns>
+        
+            <controls:DataGridTextColumn Header="IP источника" 
+                                   Binding="{Binding ConnectionKey.SourceIp}" 
+                                   CanUserSort="True"/>
+            
+          
+            <controls:DataGridTextColumn Header="Port источника" 
+                                   Binding="{Binding ConnectionKey.SourcePort}" 
+                                   CanUserSort="True"/>
+            
+            
+            <controls:DataGridTextColumn Header="IP назначения" 
+                                   Binding="{Binding ConnectionKey.DestionationIp}" 
+                                   CanUserSort="True"/>
+            
+            
+            <controls:DataGridTextColumn Header="Port назначения" 
+                                   Binding="{Binding ConnectionKey.DestionationPort}" 
+                                   CanUserSort="True"/>
+            
+          
+            <controls:DataGridTextColumn Header="Протокол" 
+                                   Binding="{Binding ConnectionKey.Protocol}" 
+                                   CanUserSort="True"/>
+            <controls:DataGridTextColumn Header="Статус соединения" 
+                                   Binding="{Binding ConnectionState.Status}" 
+                                   CanUserSort="True"/>
+            <controls:DataGridTextColumn Header="Время создания" 
+                                   Binding="{Binding ConnectionState.CreatedAt}" 
+                                   CanUserSort="True"/>
+            <controls:DataGridTextColumn Header="Время последней активности" 
+                                   Binding="{Binding ConnectionState.LastActive}" 
+                                   CanUserSort="True"/>
+            <controls:DataGridTextColumn Header="FIN отправителем" 
+                                   Binding="{Binding ConnectionState.ClientFinSeen}" 
+                                   CanUserSort="True"/>
+            <controls:DataGridTextColumn Header="FIN сервером" 
+                                   Binding="{Binding ConnectionState.ServerFinSeen}" 
+                                   CanUserSort="True"/>
+        </controls:DataGrid.Columns>
+    </controls:DataGrid>
+</Window>

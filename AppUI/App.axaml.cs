@@ -9,6 +9,7 @@ public partial class App : Application
     public override void Initialize()
     {
         AvaloniaXamlLoader.Load(this);
+        var _ = typeof(Avalonia.Controls.DataGrid);
     }
 
     public override void OnFrameworkInitializationCompleted()

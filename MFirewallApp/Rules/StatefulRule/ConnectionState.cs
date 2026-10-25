@@ -2,7 +2,7 @@
 
 namespace MFirewallApp.Rules.StatefulRule
 {
-    public sealed class ConnectionState
+    public sealed record ConnectionState()
     {
         public TcpConnectionStatus Status { get; set; }
         public DateTimeOffset CreatedAt { get; set; } = DateTimeOffset.UtcNow;

@@ -34,6 +34,7 @@
         <Button x:Name="LoadButton" Content="Загрузить из JSON" Click="OnLoadClick"/>
         <Button x:Name="SaveButton" Content="Сохранить в JSON" Click="OnSaveClick"/>
          <Button x:Name="JournalLogs" Content="Журнал" Click="OnLogWindow_Click"/>
+         <Button x:Name="ConnectionTable" Content="Таблица соединений" Click="OnConnectionTable_Click"/>
         <TextBlock x:Name="StatusText" VerticalAlignment="Center"/>
         <TextBlock x:Name="SignalText" VerticalAlignment="Center"/>
       </StackPanel>
@@ -86,14 +87,7 @@
               </StackPanel>
             </StackPanel>
 
-            <StackPanel Spacing="6" DataContext="{Binding ProtocolOptions}">
-              <CheckBox Content="Protocol" IsChecked="{Binding Enable}"/>
-              <StackPanel Classes="row">
-                <TextBlock Classes="lbl" Text="Protocol"/>
-                <ComboBox x:Name="ProtocolBox" SelectedItem="{Binding Protocol}"/>
-              </StackPanel>
-            </StackPanel>
-
+          
           </StackPanel>
         </Expander>
 

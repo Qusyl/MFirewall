@@ -2,7 +2,7 @@ using System.Collections.Concurrent;
 using System.Text;
 using Domain.Models.Packets;
 using MFirewallApp.Analyse;
-using MFirewallApp.FileSystem;
+
 using MFirewallApp.Interface;
 using MFirewallApp.Service;
 using MFirewallApp.Verdict;
@@ -113,6 +113,10 @@ namespace MFirewallApp.Rules.StatefulRule
 
             var isNewSyn = tcp.Header.IsSyn && !tcp.Header.IsAck;
            
+           if (isNewSyn)
+            {
+                return new PacketDecision(packet.Header.Identification, Verdict.Verdict.NO_MATCH, "New connection", "Stateful rule");
+            }
            
             if (known)
             {
@@ -131,10 +135,7 @@ namespace MFirewallApp.Rules.StatefulRule
 
                 return new PacketDecision(packet.Header.Identification, Verdict.Verdict.ACCEPT, "Tracked connection", "Stateful rule");
             }
-            if (isNewSyn)
-            {
-                return new PacketDecision(packet.Header.Identification, Verdict.Verdict.NO_MATCH, "New connection", "Stateful rule");
-            }
+            
             var dropDecision = new PacketDecision(packet.Header.Identification, Verdict.Verdict.DROP, "Unknown connection", "Stateful rule");
             
             repQueue.Equeue(new FirewallReport(DateTimeOffset.UtcNow,dropDecision));

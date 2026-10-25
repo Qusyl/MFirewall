@@ -35,6 +35,7 @@ builder.Services.AddSingleton<ConnectionQueue>();
 
 builder.Services.AddScoped<IPacketCaptureReceiver, LinuxPacketCaptureReceiver>();
 builder.Services.AddHostedService<ReportSender>();
+builder.Services.AddHostedService<ConnectionSender>();
 
 
 builder.Services.AddScoped<IPacketProcessingService, PacketProcessingService>();

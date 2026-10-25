@@ -1,27 +1,35 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Avalonia.Controls;
+using Avalonia.Interactivity;
+using MFirewallApp.Analyse;
 
 namespace MFirewallAppUI
 {
     public partial class LogWindow : Window
     {
+        public ObservableCollection<FirewallReport> Logs { get; } = new();
         public LogWindow()
         {
             InitializeComponent();
+            DataContext = this;
+            Logs.Add(new FirewallReport(DateTimeOffset.UtcNow, new MFirewallApp.Verdict.PacketDecision(0,MFirewallApp.Verdict.Verdict.NO_MATCH,"Test","Test")));
             
         }
-        public void AddLog(string message)
+        public void AddLog(FirewallReport report)
         {
-            var time = DateTimeOffset.UtcNow.ToString("HH:mm:ss");
-
-            LogsList.Items.Add($"[{time}] {message}");
+            Logs.Add(report);
         }
-         public void ClearLogs()
+        public void ClearLogs()
         {
-            LogsList.Items.Clear();
+           
+        }
+        private void OnClear_Log(object sender, RoutedEventArgs args)
+        {
+            ClearLogs();
         }
     }
 }

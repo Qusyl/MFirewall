@@ -1,17 +1,42 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:Avalonia.Controls"
         x:Class="MFirewallAppUI.LogWindow"
         x:CompileBindings="False"
         Title="Журнал firewall"
-        Width="620" Height="760">   
-    <DockPanel>
-    <ScrollViewer>
-      <StackPanel Margin="12" Spacing="4">
-
-      <ListBox x:Name="LogsList"
-                 Grid.Row="1"/>
-
-      </StackPanel>
-    </ScrollViewer>
-      </DockPanel>
+        Width="620" Height="760">
+           
+    <controls:DataGrid ItemsSource="{Binding Logs}" 
+                 CanUserSortColumns="True" 
+                 AutoGenerateColumns="False"
+                 IsReadOnly="True"
+                 Height="700">
+        <controls:DataGrid.Columns>
+        
+            <controls:DataGridTextColumn Header="Время" 
+                                   Binding="{Binding Identified}" 
+                                   CanUserSort="True"/>
+            
+          
+            <controls:DataGridTextColumn Header="Packet ID" 
+                                   Binding="{Binding PacketDecision.PacketQueueId}" 
+                                   CanUserSort="True"/>
+            
+            
+            <controls:DataGridTextColumn Header="Вердикт" 
+                                   Binding="{Binding PacketDecision.Verdict}" 
+                                   CanUserSort="True"/>
+            
+            
+            <controls:DataGridTextColumn Header="Причина" 
+                                   Binding="{Binding PacketDecision.Reason}" 
+                                   CanUserSort="True"/>
+            
+          
+            <controls:DataGridTextColumn Header="Правило" 
+                                   Binding="{Binding PacketDecision.MatchedRule}" 
+                                   CanUserSort="True"/>
+        </controls:DataGrid.Columns>
+    </controls:DataGrid>
+  
 </Window>

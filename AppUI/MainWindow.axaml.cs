@@ -10,12 +10,15 @@ using MFirewallApp.Analyse;
 using MFirewallApp.Rules;
 using Microsoft.AspNetCore.SignalR.Client;
 using MFirewallApp.FileSystem;
+using MFirewallApp.Rules.StatefulRule;
 
 namespace MFirewallAppUI;
 
 public partial class MainWindow : Window
 {
     private LogWindow? logWindow;
+
+    private ConnectionTable? connectionTable;
 
     private readonly HubConnection _loggerConnection;
 
@@ -76,15 +79,35 @@ public partial class MainWindow : Window
             {
                 LoadLogWindow();
                 {
-                    logWindow?.AddLog(log);
-                }  
+                    logWindow?.AddLog(report);
+                }
+            });
+        });
+        _loggerConnection.On<ConnectionSnapshot>("GetConnections", (snapshot) =>
+        {
+            var sourceIp = snapshot.ConnectionKey.SourceIp;
+            var sourcePort = snapshot.ConnectionKey.SourcePort;
+            var destinationIp = snapshot.ConnectionKey.DestionationIp;
+            var destinationPort = snapshot.ConnectionKey.DestinationPort;
+            var protocol = snapshot.ConnectionKey.Protocol;
+
+            var status = snapshot.ConnectionState.Status;
+            var created = snapshot.ConnectionState.CreatedAt;
+            var lastActive = snapshot.ConnectionState.LastActive;
+            var clientFin = snapshot.ConnectionState.ClientFinSeen;
+            var serverFin = snapshot.ConnectionState.ServerFinSeen;
+            Dispatcher.Post(() =>
+            {
+                LoadConnectionWindow();
+                connectionTable?.AddConnection(snapshot);
+
             });
         });
         _ = ConnectWithRetryAsync(_loggerConnection);       
        
     }
 
-    private static async Task  ConnectWithRetryAsync(HubConnection connection)
+    private static async Task ConnectWithRetryAsync(HubConnection connection)
     {
         while (true)
         {
@@ -92,14 +115,26 @@ public partial class MainWindow : Window
             {
                 await connection.StartAsync();
                 FileLogger.AppendLogFile($"[SignalR] Успешно подключились к Logger Hub");
-              
+
                 break;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 FileLogger.AppendLogFile($"[SignalR] Ошибка подключения к Logger Hub {ex?.Message}");
                 await Task.Delay(5000);
             }
+        }
+    }
+    private void LoadConnectionWindow()
+    {
+         if (connectionTable is null)
+        {
+            connectionTable = new ConnectionTable();
+            
+            connectionTable.Closed += (_, _) =>
+            {
+                connectionTable = null;
+            };
         }
     }
     private void LoadLogWindow()
@@ -110,7 +145,6 @@ public partial class MainWindow : Window
             
             logWindow.Closed += (_, _) =>
             {
-                logWindow.ClearLogs();
                 logWindow = null;
             };
         }
@@ -152,7 +186,7 @@ public partial class MainWindow : Window
     private void FillEnumLists()
     {
         RuleStrategyBox.ItemsSource = EnumValues(_config.RuleStrategy);
-        ProtocolBox.ItemsSource = EnumValues(_config.FirewallProtection.ProtocolOptions.Protocol);
+        
         AlgorithmBox.ItemsSource = EnumValues(_config.FirewallProtection.RateLimitOptions.Algorithm);
     }
 
@@ -176,6 +210,20 @@ public partial class MainWindow : Window
             logWindow.Activate();
         }
 
+    }
+
+    private void OnConnectionTable_Click(object? sender, RoutedEventArgs eventArgs)
+    {
+         LoadConnectionWindow();
+
+        if (!connectionTable!.IsVisible)
+        {
+            connectionTable.Show(this);
+        }
+        else
+        {
+            connectionTable.Activate();
+        }
     }
 
     private void SaveConfig()

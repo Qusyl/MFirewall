@@ -18,10 +18,6 @@
         "Enable": false,
         "SourcePort": 0
       },
-      "ProtocolOptions": {
-        "Enable": false,
-        "Protocol": 3
-      },
       "TcpPortScanOptions": {
         "Enable": false,
         "UniquePacketsThreshold": 10,

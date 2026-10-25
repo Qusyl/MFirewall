@@ -14,7 +14,7 @@ namespace MFirewallApp.Rules
 
         public SourcePortOptions SourcePortOptions { get; set; } = new();
 
-        public ProtocolOptions ProtocolOptions { get; set; } = new();
+        // public ProtocolOptions ProtocolOptions { get; set; } = new();
 
         public TcpPortScanOptions TcpPortScanOptions { get; set; } = new();
 
