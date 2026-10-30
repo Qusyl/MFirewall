@@ -20,7 +20,7 @@ namespace MFirewallAppUI
             Connections.Clear();
          
            
-        }
+        }   
 
         public void AddConnection(ConnectionSnapshot snapshot)
         {
