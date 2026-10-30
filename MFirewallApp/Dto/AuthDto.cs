@@ -8,6 +8,5 @@ namespace MFirewallApp.Dto
     public sealed record AuthDto(
         string UserId,
         string Email,
-        string Password,
         IEnumerable<string> Roles);
 }

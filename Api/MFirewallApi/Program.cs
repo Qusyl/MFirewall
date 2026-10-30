@@ -18,6 +18,12 @@ using MFirewallApp.Validators;
 using Microsoft.AspNetCore.Authentication;
 using Infrastructure.DbContext;
 using Microsoft.EntityFrameworkCore;
+using MFirewallApp.Dto;
+using MFirewallApp.Service.Auth;
+using Infrastructure.IdentityUser;
+using MFirewallApp;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -49,23 +55,49 @@ builder.Services
 .ValidateOnStart();
 
 
-builder.Services.AddOpenApi();
+
 
 builder.Services.AddProblemDetails();
-builder.Services.AddAuthorization(opts =>
-{
-    opts.FallbackPolicy = new Microsoft.AspNetCore.Authorization.AuthorizationPolicyBuilder()
-    .RequireAuthenticatedUser()
-    .Build();
-});
+
+builder.Services.AddAuthorization();
+builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddHostedService<PacketCaptureService>();
-builder.Services.AddHttpContextAccessor();
+builder.Services.AddHostedService<ReportSender>();
+builder.Services.AddHostedService<ConnectionSender>();
 
 builder.Services.AddSingleton<IConnectionTracker, ConnectionTracker>();
 builder.Services.AddSingleton<ReportQueue>();
 builder.Services.AddSingleton<ConnectionQueue>();
-builder.Services.AddSingleton<JwtValidator>();
+builder.Services.AddSingleton<IPasswordHasher, PasswordHashService>();
+
+builder.Services.AddScoped<IPacketCaptureReceiver, LinuxPacketCaptureReceiver>();
+builder.Services.AddScoped<IPacketProcessingService, PacketProcessingService>();
+builder.Services.AddScoped<IRuleService, RuleService>();
+builder.Services.AddScoped<MFirewallApp.Interface.IAuthenticationService, MFirewallApp.Service.Auth.AuthenticationService>();
+builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<IIdentityService, IdentityUserService>();
+builder.Services.AddScoped<IProxyService, HttpProxyService>();
+builder.Services.AddScoped<IProxyPolicyService, ProxyPolicyService>();
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+.AddJwtBearer(opt =>
+{
+    opt.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!)),
+
+        ValidateIssuer = true,
+        ValidIssuer = builder.Configuration["Jwt:Issuer"],
+
+        ValidateAudience = true,
+        ValidAudience = builder.Configuration["Jwt:Audience"],
+
+        ValidateLifetime = true,
+        ClockSkew = TimeSpan.FromSeconds(30)
+    };
+});
 builder.Services.AddCors(opt =>
 {
     opt.AddPolicy("AllowAll", policy =>
@@ -76,23 +108,22 @@ builder.Services.AddCors(opt =>
     });
 });
 
-builder.Services.AddScoped<IPacketCaptureReceiver, LinuxPacketCaptureReceiver>();
-builder.Services.AddHostedService<ReportSender>();
-builder.Services.AddHostedService<ConnectionSender>();
 
-
-builder.Services.AddScoped<IPacketProcessingService, PacketProcessingService>();
-builder.Services.AddScoped<IRuleService, RuleService>();
-builder.Services.AddScoped<IProxyService, HttpProxyService>();
-builder.Services.AddScoped<IProxyPolicyService, ProxyPolicyService>();
 builder.Services.AddDbContext<AppDbContext>(opt =>
 {
     opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+.AddEntityFrameworkStores<AppDbContext>()
+.AddDefaultTokenProviders();
+
 builder.Services.AddSignalR();
 
 builder.Services.AddExceptionHandler<MFirewallExceptionHandler>();
+
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
@@ -100,7 +131,8 @@ app.UseExceptionHandler();
 
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 
 
@@ -113,9 +145,27 @@ app.UseCors("AllowAll");
 
 app.UseMiddleware<HttpProxyValidateMiddleware>();
 
-app.UseMiddleware<JwtTokenMiddleware>();
+// app.UseMiddleware<JwtTokenMiddleware>();
 app.UseAuthorization();
+var auth = app.MapGroup("/auth").WithTags("Auth");
 
+app.MapPost("/register", async (UserRegistrationDto dto, [FromServices] MFirewallApp.Interface.IAuthenticationService svc) =>
+{
+    var result = await svc.RegisterAsync(dto);
+    return result.IsSuccess ?
+    Results.Ok(new { token = result.Value }) :
+    Results.BadRequest(new { error = result.Error });
+})
+.RequireRateLimiting("auth");
+
+app.MapPost("/login", async (UserLoginDto dto,[FromServices] MFirewallApp.Interface.IAuthenticationService svc) =>
+{
+    var result = await svc.LoginAsync(dto);
+
+    return result.IsSuccess ?
+    Results.Ok(new { token = result.Value}) :
+    Results.Json(new { error = "Invalid credentials"}, statusCode: 401);
+});
 app.MapGet("/status",() =>
 {
     return Results.Ok();

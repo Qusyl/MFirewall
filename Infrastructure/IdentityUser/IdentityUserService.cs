@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
+using MFirewallApp;
 using MFirewallApp.Interface;
 using Microsoft.AspNetCore.Identity;
 
@@ -33,7 +35,7 @@ namespace Infrastructure.IdentityUser
             
         }
 
-        public async Task<(bool IsSuccess, string UserId)> CreateUserAsync( string email, string passwordHash)
+        public async Task<Result<string, string>> CreateUserAsync( string email, string passwordHash)
         {
             var id = Guid.NewGuid()
             .ToString();
@@ -41,14 +43,20 @@ namespace Infrastructure.IdentityUser
             {
                 Id = id,
                 Email = email,
+                UserName = email,
                 PasswordHash = passwordHash
             });
 
             if (!createdUser.Succeeded)
             {
-                return (false, id);
+                var errorLog = new StringBuilder();
+                foreach(var error in createdUser.Errors)
+                {
+                    errorLog.Append($"-|[{error.Code}] - {error.Description}|-");
+                }
+                return Result<string, string>.Failure(errorLog.ToString());
             }
-            return (true, id);
+            return Result<string, string>.Success(id);
         }
 
         public async Task<string> GetUserIdByEmail(string email)

@@ -7,7 +7,7 @@ namespace MFirewallApp.Interface
 {
     public interface IIdentityService
     {
-        Task<(bool IsSuccess, string UserId)> CreateUserAsync( string email, string passwordHash);
+        Task<Result<string, string>> CreateUserAsync( string email, string passwordHash);
 
         Task<string> GetUserIdByEmail(string email);
 

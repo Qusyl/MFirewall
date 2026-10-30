@@ -38,7 +38,7 @@ namespace MFirewallApp.Service
                 ["sub"] = dto.UserId,
                 ["email"] = dto.Email,
                 ["jti"] = Guid.NewGuid().ToString(),
-                ["role"] = dto.Roles.ToArray(),
+                ["roles"] = dto.Roles.ToArray(),
                 ["iss"] = _jwtOptions.Issuer,
                 ["aud"] = _jwtOptions.Audience,
                 ["nbf"] = now.ToUnixTimeSeconds(),
