@@ -14,5 +14,7 @@ namespace MFirewallApp.Rules
 
         public UrlOptions UrlOptions { get; set; } = new();
 
+        public HttpsOptions HttpsOptions { get; set; } = new();
+
     }
 }

@@ -20,7 +20,26 @@
         {
             "NotAllowedQueryParameters":
             [
-
+                "admin",
+                "debug"
+            ],
+            "NotAllowedKeyWords":
+            [
+                "casino",
+                "drop",
+                "malware"
+            ],
+            "BlockedExtensions":
+            [
+                ".zip",
+                ".exe"
+            ]
+        },
+        "HttpsOptions":
+        {
+            "AllowedPorts":
+            [
+                443
             ]
         }
     }

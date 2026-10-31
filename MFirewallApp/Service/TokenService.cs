@@ -42,7 +42,7 @@ namespace MFirewallApp.Service
                 ["iss"] = _jwtOptions.Issuer,
                 ["aud"] = _jwtOptions.Audience,
                 ["nbf"] = now.ToUnixTimeSeconds(),
-                ["exp"] = _jwtOptions.ExpirationTime
+                ["exp"] = now.AddMinutes(_jwtOptions.ExpirationTime).ToUnixTimeSeconds()
             };
 
             var header64base = Base64UrlEncode(JsonSerializer.SerializeToUtf8Bytes(header));

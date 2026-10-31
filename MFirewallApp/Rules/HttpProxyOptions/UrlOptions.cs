@@ -8,5 +8,8 @@ namespace MFirewallApp.Rules.HttpProxyOptions
     public class UrlOptions
     {
         public List<string> NotAllowedQueryParameters { get; set; } = new();
+
+        public List<string> NotAllowedKeyWords { get; set; } = new();
+        public List<string> BlockedExtensions { get; set; } = new();
     }
 }

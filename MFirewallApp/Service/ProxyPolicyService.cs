@@ -20,7 +20,52 @@ namespace MFirewallApp.Service
         {
             _proxyConfig = proxyConfig;
         }
-        public  async Task<Result<string>> IsAllowedDomain(string? domain)
+        private async Task<Result<string>> NotContainsBlockedExtension(string url)
+        {
+            var blockedExtensions = _proxyConfig.CurrentValue.UrlOptions.BlockedExtensions;
+            if (!Uri.TryCreate(url, UriKind.Absolute, out var parsedUrl))
+            {
+                return Result<string>.Failure("Url parse error");
+            }
+
+            var extension = Path.GetExtension(parsedUrl.AbsolutePath);
+             System.Console.WriteLine($"extension = {extension}");
+
+            if (string.IsNullOrWhiteSpace(extension))
+            {
+                return Result<string>.Success;
+            }
+           
+            var blockedExtension = blockedExtensions.FirstOrDefault(e => extension.Equals(e, StringComparison.OrdinalIgnoreCase));
+
+            if (blockedExtension != null)
+            {
+                return Result<string>.Failure($"File extension {blockedExtension} is blocked");
+            }
+
+            return Result<string>.Success;
+        }
+        private async Task<Result<string>> NotContainsBlockedKeyWords(string url)
+        {
+            var blockedKeywords = _proxyConfig.CurrentValue.UrlOptions.NotAllowedKeyWords;
+
+            if (!Uri.TryCreate(url, UriKind.Absolute, out var parsedUrl))
+            {
+                return Result<string>.Failure("Url parse error");
+            }
+            var textToCheck = Uri.UnescapeDataString(parsedUrl.PathAndQuery);
+            var blockedKeyword = blockedKeywords
+            .FirstOrDefault(k => !string.IsNullOrEmpty(k)
+            && textToCheck.Contains(k, StringComparison.OrdinalIgnoreCase));
+
+            if (blockedKeyword != null)
+            {
+                return Result<string>.Failure($"Blocked keyword {blockedKeyword} found in URL");
+            }
+            return Result<string>.Success;
+
+        }
+        private  async Task<Result<string>> IsAllowedDomain(string? domain)
         {
             if(domain == null)
             {
@@ -45,7 +90,7 @@ namespace MFirewallApp.Service
             return Result<string>.Success;
         }
 
-        public async Task<Result<string>> IsAllowedUrl(string? url)
+        private async Task<Result<string>> IsAllowedUrl(string? url)
         {
 
             if (Uri.TryCreate(url, UriKind.Absolute, out var parsedUrl))
@@ -79,10 +124,13 @@ namespace MFirewallApp.Service
        
         public async Task<Result<string>> ShouldAccept(HttpRequest request)
         {
+            
             var tasks = new List<Task<Result<string>>>()
             {
-                IsAllowedDomain(request.Headers["Host"]),
-                IsAllowedUrl(UriHelper.GetDisplayUrl(request))
+                IsAllowedDomain(request.Host.Host),
+                IsAllowedUrl(UriHelper.GetDisplayUrl(request)),
+                NotContainsBlockedKeyWords(UriHelper.GetDisplayUrl(request)),
+                NotContainsBlockedExtension(UriHelper.GetDisplayUrl(request))
             };
 
             var result = await Task.WhenAll(tasks);

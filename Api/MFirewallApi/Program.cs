@@ -24,6 +24,10 @@ using Infrastructure.IdentityUser;
 using MFirewallApp;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.OpenApi;
+using MFirewallApi.Document;
+using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -79,8 +83,20 @@ builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IIdentityService, IdentityUserService>();
 builder.Services.AddScoped<IProxyService, HttpProxyService>();
 builder.Services.AddScoped<IProxyPolicyService, ProxyPolicyService>();
+builder.Services.AddScoped<IHttpForwarder, HttpForwarder>();
+builder.Services.AddHttpClient("ForwardProxy")
+.ConfigurePrimaryHttpMessageHandler(() => new SocketsHttpHandler
+{
+    UseProxy = false,
+    AllowAutoRedirect = false,
+    UseCookies = false
+});
 
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+builder.Services.AddAuthentication(opt =>
+{
+    opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
 .AddJwtBearer(opt =>
 {
     opt.TokenValidationParameters = new TokenValidationParameters
@@ -119,11 +135,15 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
 .AddDefaultTokenProviders();
 
 builder.Services.AddSignalR();
+builder.Services.AddOpenApi(opt =>
+{
+    opt.AddDocumentTransformer<BearerSecuritySchemeTransformer>();
+});
 
 builder.Services.AddExceptionHandler<MFirewallExceptionHandler>();
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+
 
 var app = builder.Build();
 
@@ -131,8 +151,8 @@ app.UseExceptionHandler();
 
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    app.MapOpenApi();
+    app.MapScalarApiReference();
 }
 
 
@@ -141,9 +161,11 @@ app.UseHttpsRedirection();
 app.UseRouting();
 
 app.UseCors("AllowAll");
+app.UseAuthentication();
 
 
 app.UseMiddleware<HttpProxyValidateMiddleware>();
+app.UseMiddleware<HttpForwardMiddleware>();
 
 // app.UseMiddleware<JwtTokenMiddleware>();
 app.UseAuthorization();
@@ -166,10 +188,17 @@ app.MapPost("/login", async (UserLoginDto dto,[FromServices] MFirewallApp.Interf
     Results.Ok(new { token = result.Value}) :
     Results.Json(new { error = "Invalid credentials"}, statusCode: 401);
 });
-app.MapGet("/status",() =>
+app.MapGet("/status", () =>
 {
     return Results.Ok();
 });
+app.MapGet("/test", () =>
+{
+    return Results.Ok(new { status = "Success" });
+}).RequireAuthorization(new AuthorizationPolicyBuilder()
+.AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
+.RequireAuthenticatedUser()
+.Build());
 
 app.MapHub<LoggerHub>("/logger");
 app.Run();

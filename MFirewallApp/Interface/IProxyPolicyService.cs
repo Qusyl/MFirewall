@@ -10,8 +10,6 @@ namespace MFirewallApp.Interface
     {
         Task<Result<string>> ShouldAccept(HttpRequest request);
 
-        Task<Result<string>> IsAllowedDomain(string? domain);
-
-        Task<Result<string>> IsAllowedUrl(string? url);
+    
     }
 }
