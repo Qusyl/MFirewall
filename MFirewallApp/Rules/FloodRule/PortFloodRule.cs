@@ -26,17 +26,17 @@ namespace MFirewallApp.Rules.FloodRule
 
             if (transportPacket is TcpPacket)
             {
-                var UdpDetector = new UdpFloodDetector(udpHistory);
+                var tcpDetector = new TcpSynFloodDetector(tcpHistory);
 
-                var verdict = UdpDetector.ShouldBlock(packet, configuration);
+                var verdict = tcpDetector.ShouldBlock(packet, configuration);
 
                 return verdict;
             }
             else
             {
-                var TcpDetector = new TcpSynFloodDetector(tcpHistory);
+                var udpDetector = new UdpFloodDetector(udpHistory);
 
-                var verdict = TcpDetector.ShouldBlock(packet, configuration);
+                var verdict = udpDetector.ShouldBlock(packet, configuration);
 
                 return verdict;
             }

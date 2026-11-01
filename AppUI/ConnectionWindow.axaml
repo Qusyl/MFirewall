@@ -29,7 +29,7 @@
             
             
             <controls:DataGridTextColumn Header="Port назначения" 
-                                   Binding="{Binding ConnectionKey.DestionationPort}" 
+                                   Binding="{Binding ConnectionKey.DestinationPort}" 
                                    CanUserSort="True"/>
             
           

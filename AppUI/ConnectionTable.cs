@@ -1,4 +1,5 @@
 
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
@@ -28,6 +29,8 @@ namespace MFirewallAppUI
             {
                 if (snapshot.ConnectionState != connSnapshot.ConnectionState)
                 {
+                    Console.WriteLine(
+                    $"SRC={snapshot.ConnectionKey.SourcePort}, DST={snapshot.ConnectionKey.DestinationPort}");
                     _existing[snapshot.ConnectionKey] = snapshot;
                     var index = Connections.IndexOf(connSnapshot);
                     if (index >= 0)

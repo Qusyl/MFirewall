@@ -28,8 +28,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.OpenApi;
 using MFirewallApi.Document;
 using Scalar.AspNetCore;
+using MFirewallApi.Networking;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.WebHost.UseUrls("http://localhost:5120");
 
 // var contentPath = builder.Environment.ContentRootPath;  production
 var contentPath = "/home/denis/Documents/Kursovie/Security/Api/MFirewallApi";
@@ -69,6 +71,7 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddHostedService<PacketCaptureService>();
 builder.Services.AddHostedService<ReportSender>();
 builder.Services.AddHostedService<ConnectionSender>();
+builder.Services.AddHostedService<ProxyTcpServer>();
 
 builder.Services.AddSingleton<IConnectionTracker, ConnectionTracker>();
 builder.Services.AddSingleton<ReportQueue>();
@@ -84,6 +87,8 @@ builder.Services.AddScoped<IIdentityService, IdentityUserService>();
 builder.Services.AddScoped<IProxyService, HttpProxyService>();
 builder.Services.AddScoped<IProxyPolicyService, ProxyPolicyService>();
 builder.Services.AddScoped<IHttpForwarder, HttpForwarder>();
+builder.Services.AddScoped<ITunelHandler, ConnectTunelHandler>();
+builder.Services.AddScoped<IProxyDispatcher, ProxyTcpDispatcher>();
 builder.Services.AddHttpClient("ForwardProxy")
 .ConfigurePrimaryHttpMessageHandler(() => new SocketsHttpHandler
 {

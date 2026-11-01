@@ -27,7 +27,7 @@ namespace MFirewallApp.Rules.BaseRules
                 return new PacketDecision(packet.Header.Identification, Verdict.Verdict.DROP, $"IP matched [{configAddress}][{packetAddress}]", RuleName);
             }
 
-            return new PacketDecision(packet.Header.Identification, Verdict.Verdict.ACCEPT, $"IP not mached [{configAddress}][{packetAddress}]", RuleName);
+            return new PacketDecision(packet.Header.Identification, Verdict.Verdict.NO_MATCH, $"IP not mached [{configAddress}][{packetAddress}]", RuleName);
         
         }
     }

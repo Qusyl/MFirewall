@@ -1,0 +1,11 @@
+# TCP
+sudo iptables -I INPUT 1 -i lo -p tcp \
+  -j NFQUEUE --queue-num 0 --queue-bypass
+
+# UDP
+sudo iptables -I INPUT 1 -i lo -p udp \
+  -j NFQUEUE --queue-num 0 --queue-bypass
+
+# ICMP
+sudo iptables -I INPUT 1 -i lo -p icmp \
+  -j NFQUEUE --queue-num 0 --queue-bypass

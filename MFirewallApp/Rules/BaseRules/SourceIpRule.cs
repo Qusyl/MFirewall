@@ -25,11 +25,13 @@ namespace MFirewallApp.Rules.BaseRules
             var packetIp = packet.Header.SourceAddress.ToString();
             if ( configIp==packetIp )
             {
-              
+              Console.WriteLine(
+                $"IPv4 PARSED: SRC={packet.Header.SourceAddress}, " +
+            $"DST={packet.Header.DestinationAddress}");
                 return new PacketDecision(packet.Header.Identification, Verdict.Verdict.DROP, $"SOURCE IP matched [{configIp}][{packetIp}]", RuleName);
             }
                
-               return new PacketDecision(packet.Header.Identification, Verdict.Verdict.ACCEPT, $"SOURCE IP not matched [{configIp}][{packetIp}]", RuleName);
+               return new PacketDecision(packet.Header.Identification, Verdict.Verdict.NO_MATCH, $"SOURCE IP not matched [{configIp}][{packetIp}]", RuleName);
             }
            
         }

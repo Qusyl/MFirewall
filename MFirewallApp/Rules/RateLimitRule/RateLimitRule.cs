@@ -1,14 +1,9 @@
-
 using System.Collections.Concurrent;
-using System.Runtime.CompilerServices;
-
 using Domain.Models.Packets;
 using Domain.Values;
 using MFirewallApp.Interface;
-using MFirewallApp.Rules.FloodRule.Detectors.Flood;
 using MFirewallApp.Rules.PortScanRule.Options;
 using MFirewallApp.Verdict;
-
 
 namespace MFirewallApp.Rules.RateLimitRule
 {
@@ -18,221 +13,278 @@ namespace MFirewallApp.Rules.RateLimitRule
 
         public int RuleScore => 100;
 
-        private readonly ConcurrentDictionary<RateLimitKey, FixedWindowState> _windowStorage = new();
+        private readonly ConcurrentDictionary<
+            RateLimitKey,
+            FixedWindowState> _windowStorage = new();
 
-        private readonly ConcurrentDictionary<RateLimitKey, TokenBucketState> _bucketStorage = new();
+        private readonly ConcurrentDictionary<
+            RateLimitKey,
+            TokenBucketState> _bucketStorage = new();
 
-        public PacketDecision Check(IPv4Packet packet, FirewallProtection configuration)
+
+        public PacketDecision Check(
+            IPv4Packet packet,
+            FirewallProtection configuration)
         {
             var options = configuration.RateLimitOptions;
 
-            if (options.Algorithm is RateLimitAlgorithm.FIXED_WINDOW)
+            if (!options.Enable)
+            {
+                return NoMatch(packet, "Rate limiting disabled");
+            }
+
+            if (options.Algorithm == RateLimitAlgorithm.FIXED_WINDOW)
             {
                 return FixedWindow(packet, options);
             }
 
+            if (!options.TokenBucket.Enable)
+            {
+                return NoMatch(packet, "Token bucket disabled");
+            }
+
             return TokenBucket(packet, options);
         }
-        private PacketDecision TokenBucket(IPv4Packet packet, RateLimitOptions options)
+
+
+  
+        private PacketDecision FixedWindow(
+            IPv4Packet packet,
+            RateLimitOptions options)
         {
-            var currentIp = packet.Header.SourceAddress;
+            var exceededRules = new List<string>();
+
+            var now = DateTimeOffset.UtcNow;
+
+            
+            if (options.Ip.Enable)
+            {
+                var key = new RateLimitKey(
+                    RateLimitScope.IP,
+                    packet.Header.SourceAddress.ToString());
+
+                if (IsFixedWindowExceeded(
+                    key,
+                    options.Ip.MaxPackets,
+                    options.Ip.WindowSeconds,
+                    now))
+                {
+                    exceededRules.Add("IP");
+                }
+            }
+
+         
             var transportPacket = packet.ExtractPacket();
-            var currentTime = DateTimeOffset.UtcNow;
-            var protocol = packet.Header.Protocol;
-            ushort port = transportPacket switch
+
+            ushort? destinationPort = transportPacket switch
             {
                 UdpPacket udp => udp.Header.DestinationPort,
                 TcpPacket tcp => tcp.Header.DestinationPort,
-                _ => ushort.MaxValue
+                _ => null
+            };
+
+          
+            if (options.Port.Enable && destinationPort.HasValue)
+            {
+                var key = new RateLimitKey(
+                    RateLimitScope.PORT,
+                    destinationPort.Value.ToString());
+
+                if (IsFixedWindowExceeded(
+                    key,
+                    options.Port.MaxPackets,
+                    options.Port.WindowSeconds,
+                    now))
+                {
+                    exceededRules.Add("PORT");
+                }
+            }
+
+            if (options.Protocol.Enable)
+            {
+                var key = new RateLimitKey(
+                    RateLimitScope.PROTOCOL,
+                    packet.Header.Protocol.ToString());
+
+                if (IsFixedWindowExceeded(
+                    key,
+                    options.Protocol.MaxPackets,
+                    options.Protocol.WindowSeconds,
+                    now))
+                {
+                    exceededRules.Add("PROTOCOL");
+                }
+            }
+
+            if (exceededRules.Count > 0)
+            {
+                return new PacketDecision(
+                    packet.Header.Identification,
+                    Verdict.Verdict.DROP,
+                    $"Rate limit exceeded: {string.Join(", ", exceededRules)}",
+                    RuleName);
+            }
+
+            return NoMatch(packet, "Fixed Window limit not exceeded");
+        }
+
+
+        private bool IsFixedWindowExceeded(
+            RateLimitKey key,
+            int maxPackets,
+            int windowSeconds,
+            DateTimeOffset now)
+        {
+            var state = _windowStorage.GetOrAdd(
+                key,
+                _ => new FixedWindowState
+                {
+                    WindowStart = now,
+                    PacketCount = 0
+                });
+
+            lock (state.syncRoot)
+            {
+               
+                if (now >= state.WindowStart.AddSeconds(windowSeconds))
+                {
+                   
+                    state.WindowStart = now;
+                    state.PacketCount = 0;
+                }
+
+                state.PacketCount++;
+
+                Console.WriteLine(
+                    $"[FIXED WINDOW] Key={key}, " +
+                    $"Count={state.PacketCount}/{maxPackets}");
+
+                return state.PacketCount > maxPackets;
+            }
+        }
+
+
+
+        private PacketDecision TokenBucket(
+            IPv4Packet packet,
+            RateLimitOptions options)
+        {
+            var exceededRules = new List<string>();
+
+            var now = DateTimeOffset.UtcNow;
+
+            var transportPacket = packet.ExtractPacket();
+
+            ushort? destinationPort = transportPacket switch
+            {
+                UdpPacket udp => udp.Header.DestinationPort,
+                TcpPacket tcp => tcp.Header.DestinationPort,
+                _ => null
             };
 
             
             if (options.Ip.Enable)
             {
-                var key = new RateLimitKey(RateLimitScope.IP, currentIp.ToString());
-                var state = _bucketStorage.GetOrAdd(key, _ => new TokenBucketState
+                var key = new RateLimitKey(
+                    RateLimitScope.IP,
+                    packet.Header.SourceAddress.ToString());
+
+                if (!TryConsumeToken(key, options.TokenBucket, now))
                 {
-                    Tokens = options.TokenBucket.Capacity,
-                    LastRefill = currentTime
-                });
-
-                lock (state.SyncRoot)
-                {
-                    var elapsedSeconds = (currentTime - state.LastRefill).TotalSeconds;
-
-                    state.Tokens = Math.Min(
-                      options.TokenBucket.Capacity,
-                     state.Tokens +
-                     elapsedSeconds * options.TokenBucket.TokenPerSeconds);
-
-                    state.LastRefill = currentTime;
-
-                    if (state.Tokens < 1)
-                    {
-                        return new PacketDecision(packet.Header.Identification, Verdict.Verdict.DROP, $"Token limit exceeded for current IP", RuleName);
-                    }
-                    state.Tokens -= options.TokenBucket.TokenPerPacket;
+                    exceededRules.Add("IP");
                 }
-                
             }
-            if (options.Port.Enable && port != ushort.MaxValue)
+
+       
+            if (options.Port.Enable && destinationPort.HasValue)
             {
-                var key = new RateLimitKey(RateLimitScope.PORT, port.ToString());
-                var state = _bucketStorage.GetOrAdd(key, _ => new TokenBucketState
+                var key = new RateLimitKey(
+                    RateLimitScope.PORT,
+                    destinationPort.Value.ToString());
+
+                if (!TryConsumeToken(key, options.TokenBucket, now))
                 {
-                    Tokens = options.TokenBucket.Capacity,
-                    LastRefill = currentTime
-                });
-
-                lock (state.SyncRoot)
-                {
-                    var elapsedSeconds = (currentTime - state.LastRefill).TotalSeconds;
-
-                    state.Tokens = Math.Min(
-                      options.TokenBucket.Capacity,
-                     state.Tokens +
-                     elapsedSeconds * options.TokenBucket.TokenPerSeconds);
-
-                    state.LastRefill = currentTime;
-
-                    if (state.Tokens < 1)
-                    {
-                         return new PacketDecision(packet.Header.Identification, Verdict.Verdict.DROP, $"Token limit exceeded for current PORT", RuleName);
-                    }
-                    state.Tokens -= options.TokenBucket.TokenPerPacket;
+                    exceededRules.Add("PORT");
                 }
             }
+
+            
             if (options.Protocol.Enable)
             {
-                var key = new RateLimitKey(RateLimitScope.PROTOCOL, protocol.ToString());
-                var state = _bucketStorage.GetOrAdd(key, _ => new TokenBucketState
+                var key = new RateLimitKey(
+                    RateLimitScope.PROTOCOL,
+                    packet.Header.Protocol.ToString());
+
+                if (!TryConsumeToken(key, options.TokenBucket, now))
                 {
-                    Tokens = options.TokenBucket.Capacity,
-                    LastRefill = currentTime
-                });
-
-                lock (state.SyncRoot)
-                {
-                    var elapsedSeconds = (currentTime - state.LastRefill).TotalSeconds;
-
-                    state.Tokens = Math.Min(
-                      options.TokenBucket.Capacity,
-                     state.Tokens +
-                     elapsedSeconds * options.TokenBucket.TokenPerSeconds);
-
-                    state.LastRefill = currentTime;
-
-                    if (state.Tokens < 1)
-                    {
-                         return new PacketDecision(packet.Header.Identification, Verdict.Verdict.DROP, $"Token limit exceeded for current protocol", RuleName);
-                    }
-                    state.Tokens -= options.TokenBucket.TokenPerPacket;
+                    exceededRules.Add("PROTOCOL");
                 }
-              
             }
-             return new PacketDecision(packet.Header.Identification, Verdict.Verdict.ACCEPT, "No reason for drop", RuleName);
+
+            if (exceededRules.Count > 0)
+            {
+                return new PacketDecision(
+                    packet.Header.Identification,
+                    Verdict.Verdict.DROP,
+                    $"Token bucket exceeded: {string.Join(", ", exceededRules)}",
+                    RuleName);
+            }
+
+            return NoMatch(packet, "Token bucket limit not exceeded");
         }
 
-        private PacketDecision FixedWindow(IPv4Packet packet, RateLimitOptions options)
+
+        private bool TryConsumeToken(
+            RateLimitKey key,
+            TokenBucketOptions options,
+            DateTimeOffset now)
         {
-            var currentIp = packet.Header.SourceAddress;
-            var transportPacket = packet.ExtractPacket();
-            var currentTime = DateTimeOffset.UtcNow;
-            var protocol = packet.Header.Protocol;
-            ushort port = transportPacket switch
-            {
-                UdpPacket udp => udp.Header.DestinationPort,
-                TcpPacket tcp => tcp.Header.DestinationPort,
-                _ => ushort.MaxValue
-            };
-
-            if (options.Ip.Enable)
-            {
-                var ipKey = new RateLimitKey(RateLimitScope.IP, currentIp.ToString());
-                var state = _windowStorage.GetOrAdd(ipKey, _ => new FixedWindowState
+            var state = _bucketStorage.GetOrAdd(
+                key,
+                _ => new TokenBucketState
                 {
-                    WindowStart = currentTime,
-                    PacketCount = 1
+                    Tokens = options.Capacity,
+                    LastRefill = now
                 });
 
-                lock (state.syncRoot)
-                {
-                    if (state.WindowStart + TimeSpan.FromSeconds(options.Ip.WindowSeconds) < currentTime)
-                    {
-                        state = new FixedWindowState
-                        {
-                            WindowStart = currentTime,
-                            PacketCount = 0
-                        };
-                    }
-
-                    state.PacketCount++;
-
-                    if(state.PacketCount > options.Ip.MaxPackets)
-                    {
-                         return new PacketDecision(packet.Header.Identification, Verdict.Verdict.DROP, $"Packet IP count exceed {state.PacketCount}/{options.Ip.MaxPackets}", RuleName);
-                    }
-                }
-            }
-
-            if (options.Port.Enable)
+            lock (state.SyncRoot)
             {
-                var portKey = new RateLimitKey(RateLimitScope.PORT, port.ToString());
-                var state = _windowStorage.GetOrAdd(portKey, _ => new FixedWindowState
+                
+                var elapsedSeconds =
+                    Math.Max(0, (now - state.LastRefill).TotalSeconds);
+
+                
+                state.Tokens = Math.Min(
+                    options.Capacity,
+                    state.Tokens +
+                    elapsedSeconds * options.TokenPerSeconds);
+
+                state.LastRefill = now;
+
+             
+                if (state.Tokens < options.TokenPerPacket)
                 {
-                    WindowStart = currentTime,
-                    PacketCount = 1
-                });
-
-                lock (state.syncRoot)
-                {
-                    if (state.WindowStart + TimeSpan.FromSeconds(options.Port.WindowSeconds) < currentTime)
-                    {
-                        state = new FixedWindowState
-                        {
-                            WindowStart = currentTime,
-                            PacketCount = 0
-                        };
-                    }
-
-                    state.PacketCount++;
-
-                    if(state.PacketCount > options.Port.MaxPackets)
-                    {
-                         return new PacketDecision(packet.Header.Identification, Verdict.Verdict.NO_MATCH, "Not enabled", RuleName);
-                    }
+                    return false;
                 }
+
+              
+                state.Tokens -= options.TokenPerPacket;
+
+                return true;
             }
-            if (options.Protocol.Enable)
-            {
-                var protocolKey = new RateLimitKey(RateLimitScope.PROTOCOL, protocol.ToString());
-                var state = _windowStorage.GetOrAdd(protocolKey, _ => new FixedWindowState
-                {
-                    WindowStart = currentTime,
-                    PacketCount = 1
-                });
+        }
 
-                lock (state.syncRoot)
-                {
-                    if (state.WindowStart + TimeSpan.FromSeconds(options.Protocol.WindowSeconds) < currentTime)
-                    {
-                        state = new FixedWindowState
-                        {
-                            WindowStart = currentTime,
-                            PacketCount = 0
-                        };
-                    }
 
-                    state.PacketCount++;
 
-                    if(state.PacketCount > options.Protocol.MaxPackets)
-                    {
-                         return new PacketDecision(packet.Header.Identification, Verdict.Verdict.DROP, $"Packets protocol count exceeded {state.PacketCount}/{options.Protocol.MaxPackets}", RuleName);
-                    }
-                }
-            }
-            return new PacketDecision(packet.Header.Identification, Verdict.Verdict.ACCEPT, "No reason for drop", RuleName);
+        private PacketDecision NoMatch(
+            IPv4Packet packet,
+            string reason)
+        {
+            return new PacketDecision(
+                packet.Header.Identification,
+                Verdict.Verdict.NO_MATCH,
+                reason,
+                RuleName);
         }
     }
 }
-

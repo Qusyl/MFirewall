@@ -1,3 +1,4 @@
+using System.Net;
 using Domain.Models.Packets;
 using Domain.Values;
 using MFirewallApp.Analyse;
@@ -45,16 +46,12 @@ namespace MFirewallApp.Service
                 try
                 {
                     var ipV4Packet = new IPv4Packet(rawPacket.Data);
-                    Log($"[{nameof(PacketCaptureService)}]: ТИП: {ipV4Packet.ExtractPacket().PacketType}");
-
 
                     var verdict =  await packetProcessor.ProcessAsync(ipV4Packet);
 
                     var report = new FirewallReport(
                         DateTimeOffset.UtcNow,
                         verdict);
-
-                    
                         
                         nFQueue.SetVerdict(verdict.Verdict, rawPacket.ID);
                 }

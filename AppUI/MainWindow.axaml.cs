@@ -42,7 +42,7 @@ public partial class MainWindow : Window
         InitializeComponent();
         LoadConfig();
         _loggerConnection = new HubConnectionBuilder()
-        .WithUrl("http://localhost:5118/logger")
+        .WithUrl("http://localhost:5120/logger")
         .WithAutomaticReconnect()
         .Build();
         _loggerConnection.Reconnecting += error =>

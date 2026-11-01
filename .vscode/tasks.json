@@ -13,6 +13,7 @@
             ],
             "problemMatcher": "$msCompile"
         },
+        
         {
             "label": "build-avalonia",
             "command": "dotnet",
