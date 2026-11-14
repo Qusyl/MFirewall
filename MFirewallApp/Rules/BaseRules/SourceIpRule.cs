@@ -1,3 +1,4 @@
+using System.Net;
 using Domain.Models.Packets;
 using MFirewallApp.FileSystem;
 using MFirewallApp.Interface;
@@ -15,24 +16,45 @@ namespace MFirewallApp.Rules.BaseRules
         {
             if (!configuration.SourceIpOptions.Enable)
             {
-
-       
-                return new PacketDecision(packet.Header.Identification, Verdict.Verdict.NO_MATCH, "Not enabled", RuleName);
+                return new PacketDecision(
+                    packet.Header.Identification,
+                    Verdict.Verdict.NO_MATCH,
+                    "Not enabled",
+                    RuleName);
             }
 
-            var configIp = configuration.SourceIpOptions.SourceAddress;
-
-            var packetIp = packet.Header.SourceAddress.ToString();
-            if ( configIp==packetIp )
-            {
-              Console.WriteLine(
-                $"IPv4 PARSED: SRC={packet.Header.SourceAddress}, " +
-            $"DST={packet.Header.DestinationAddress}");
-                return new PacketDecision(packet.Header.Identification, Verdict.Verdict.DROP, $"SOURCE IP matched [{configIp}][{packetIp}]", RuleName);
-            }
-               
-               return new PacketDecision(packet.Header.Identification, Verdict.Verdict.NO_MATCH, $"SOURCE IP not matched [{configIp}][{packetIp}]", RuleName);
-            }
            
+            var networks = new List<IPNetwork>(configuration.SourceIpOptions.SourceAddress.Count);
+            foreach (var s in configuration.SourceIpOptions.SourceAddress)
+            {
+                if (IPNetwork.TryParse(s, out var net))
+                    networks.Add(net);
+            }
+
+        
+            var packetIp = packet.Header.SourceAddress;
+
+            
+            foreach (var net in networks)
+            {
+                if (net.Contains(packetIp))
+                {
+                    return new PacketDecision(
+                        packet.Header.Identification,
+                        Verdict.Verdict.DROP,
+                        $"SOURCE IP matched {packetIp} in {net}",
+                        RuleName);
+                }
+            }
+
+            return new PacketDecision(
+                packet.Header.Identification,
+                Verdict.Verdict.NO_MATCH,
+                $"SOURCE IP not matched [{string.Join(", ", networks)}][{packetIp}]",
+                RuleName);
         }
     }
+}
+           
+    
+

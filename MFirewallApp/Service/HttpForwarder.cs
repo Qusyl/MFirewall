@@ -78,35 +78,42 @@ namespace MFirewallApp.Service
             proxyRequest.Headers.TryAddWithoutValidation("X-Forwarded-Proto", request.Scheme);
 
             using var client = _httpClient.CreateClient("ForwardProxy");
+            try
+            {
+                using var serverResponse = await client.SendAsync(proxyRequest, HttpCompletionOption.ResponseHeadersRead, cts);
 
-            using var serverResponse = await client.SendAsync(proxyRequest, HttpCompletionOption.ResponseHeadersRead, cts);
+                _logger.LogInformation("ServerResponse[{0}]", serverResponse.StatusCode.ToString());
 
+                context.Response.StatusCode = (int)serverResponse.StatusCode;
+
+                foreach (var header in serverResponse.Headers)
+                {
+                    if (!forribdenHeaders.Contains(header.Key.ToLower()))
+                    {
+                        context.Response.Headers[header.Key] = header.Value.ToArray();
+                    }
+
+                }
+
+                foreach (var header in serverResponse.Content.Headers)
+                {
+                    if (!forribdenHeaders.Contains(header.Key.ToLower()))
+                    {
+                        context.Response.Headers[header.Key] = header.Value.ToArray();
+                    }
+
+                }
+
+
+                _logger.LogInformation("ServerResponse[{0}]", serverResponse.Content.ToString());
+                await serverResponse.Content.CopyToAsync(context.Response.Body, cts);
+            }
+            catch(Exception ex)
+            {
+                System.Console.WriteLine($"Http Forward exception : {ex.Message}");
+            }
+           
             
-            _logger.LogInformation("ServerResponse[{0}]", serverResponse.StatusCode.ToString());
-
-            context.Response.StatusCode = (int)serverResponse.StatusCode;
-
-            foreach (var header in serverResponse.Headers)
-            {
-                if (!forribdenHeaders.Contains(header.Key.ToLower()))
-                {
-                     context.Response.Headers[header.Key] = header.Value.ToArray();
-                }
-               
-            }
-
-            foreach (var header in serverResponse.Content.Headers)
-            {
-                if (!forribdenHeaders.Contains(header.Key.ToLower()))
-                {
-                    context.Response.Headers[header.Key] = header.Value.ToArray();
-                }
-
-            }
-
-       
-             _logger.LogInformation("ServerResponse[{0}]", serverResponse.Content.ToString());
-            await serverResponse.Content.CopyToAsync(context.Response.Body, cts);
 
         }
     }

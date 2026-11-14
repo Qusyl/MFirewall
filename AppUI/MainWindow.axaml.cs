@@ -17,51 +17,79 @@ namespace MFirewallAppUI;
 public partial class MainWindow : Window
 {
     private LogWindow? logWindow;
-
     private ConnectionTable? connectionTable;
-
+    private HttpWindow? _httpProxyWindow;
     private readonly HubConnection _loggerConnection;
 
     private const string ConfigPath =
         "/home/denis/Documents/Kursovie/Security/Api/MFirewallApi/configuration/firewall_configuration.json";
 
     private sealed class ConfigFileRoot
-{
-    public FirewallConfiguration FirewallConfiguration { get; set; } = new();
-}
+    {
+        public FirewallConfiguration FirewallConfiguration { get; set; } = new();
+    }
+
     private static readonly JsonSerializerOptions JsonOptions = new()
     {
         WriteIndented = true,
         PropertyNameCaseInsensitive = true
     };
 
+    
+
+    private bool _isAdmin = false;
+    public bool IsAdmin
+    {
+        get => _isAdmin;
+        set
+        {
+            if (_isAdmin == value) return;
+            _isAdmin = value;
+            UpdateVisualState();
+        }
+    }
+
+    private bool _isAuthorized = false;
+    public bool IsAuthorized
+    {
+        get => _isAuthorized;
+        set
+        {
+            if (_isAuthorized == value) return;
+            _isAuthorized = value;
+            UpdateVisualState();
+        }
+    }
+
     private FirewallConfiguration _config = new();
 
     public MainWindow()
     {
         InitializeComponent();
+        Opened += (_, _) => UpdateVisualState();
         LoadConfig();
+
         _loggerConnection = new HubConnectionBuilder()
-        .WithUrl("http://localhost:5120/logger")
-        .WithAutomaticReconnect()
-        .Build();
+            .WithUrl("http://localhost:5120/logger")
+            .WithAutomaticReconnect()
+            .Build();
+
         _loggerConnection.Reconnecting += error =>
         {
             FileLogger.AppendLogFile($"[SignalR] Переподключение: {error?.Message}");
-
             return Task.CompletedTask;
         };
         _loggerConnection.Reconnected += connectionId =>
-        {FileLogger.AppendLogFile($"[SignalR] Переподключились: {connectionId}");
-          
+        {
+            FileLogger.AppendLogFile($"[SignalR] Переподключились: {connectionId}");
             return Task.CompletedTask;
         };
         _loggerConnection.Closed += error =>
         {
             FileLogger.AppendLogFile($"[SignalR] Соединение закрыто: {error?.Message}");
-         
             return Task.CompletedTask;
         };
+
         _loggerConnection.On<FirewallReport>("GetReport", (report) =>
         {
             var reason = report.PacketDecision.Reason ?? "не указано";
@@ -69,42 +97,74 @@ public partial class MainWindow : Window
             var verdict = report.PacketDecision.Verdict;
             var id = report.PacketDecision.PacketQueueId;
             var log = $"[{report.Identified.ToString("HH-mm-ss")}] "
-            + $"пакет[{id}] "
-            + $"правило {rule} "
-            + $"вердикт {verdict}"
-            + $"причина {reason}"
-            ;
+                    + $"пакет[{id}] "
+                    + $"правило {rule} "
+                    + $"вердикт {verdict} "
+                    + $"причина {reason}";
             FileLogger.AppendLogFile("ПОЛУЧЕН ЛОГ ОТ СИГНАЛ! " + log);
+
             Dispatcher.Post(() =>
             {
                 LoadLogWindow();
-                {
-                    logWindow?.AddLog(report);
-                }
+                logWindow?.AddLog(report);
             });
         });
+
         _loggerConnection.On<ConnectionSnapshot>("GetConnections", (snapshot) =>
         {
-            var sourceIp = snapshot.ConnectionKey.SourceIp;
-            var sourcePort = snapshot.ConnectionKey.SourcePort;
-            var destinationIp = snapshot.ConnectionKey.DestionationIp;
-            var destinationPort = snapshot.ConnectionKey.DestinationPort;
-            var protocol = snapshot.ConnectionKey.Protocol;
-
-            var status = snapshot.ConnectionState.Status;
-            var created = snapshot.ConnectionState.CreatedAt;
-            var lastActive = snapshot.ConnectionState.LastActive;
-            var clientFin = snapshot.ConnectionState.ClientFinSeen;
-            var serverFin = snapshot.ConnectionState.ServerFinSeen;
             Dispatcher.Post(() =>
             {
                 LoadConnectionWindow();
                 connectionTable?.AddConnection(snapshot);
-
             });
         });
-        _ = ConnectWithRetryAsync(_loggerConnection);       
-       
+
+        _ = ConnectWithRetryAsync(_loggerConnection);
+    }
+
+    private void UpdateVisualState()
+    {
+        // Защита: если вдруг вызовут до InitializeComponent (например, из будущего кода)
+        if (AuthOverlay is null || ContentRoot is null || RoleBadge is null || RoleText is null)
+            return;
+
+        AuthOverlay.IsVisible = !IsAuthorized;
+
+        // Только админ может редактировать контент
+        ContentRoot.IsEnabled = IsAuthorized && IsAdmin;
+
+        RoleBadge.Classes.Set("admin", IsAuthorized && IsAdmin);
+        RoleBadge.Classes.Set("user", !IsAuthorized || !IsAdmin);
+
+        RoleText.Text = !IsAuthorized ? "Гость"
+                      : IsAdmin       ? "Администратор"
+                                      : "Пользователь";
+    }
+
+    private void OnLoginAgainClick(object? sender, RoutedEventArgs e)
+    {
+        var auth = new AuthorizationWindow();
+        auth.Closed += (_, _) =>
+        {
+            if (!auth.IsAuthorized) return;
+            IsAuthorized = true;
+            IsAdmin = auth.IsAdmin;
+        };
+        auth.ShowDialog(this);
+    }
+
+    private void OnHttpProxy_Click(object? sender, RoutedEventArgs e)
+    {
+        if (_httpProxyWindow is null)
+        {
+            _httpProxyWindow = new HttpWindow();
+            _httpProxyWindow.Closed += (_, _) => _httpProxyWindow = null;
+        }
+
+        if (!_httpProxyWindow.IsVisible)
+            _httpProxyWindow.Show(this);
+        else
+            _httpProxyWindow.Activate();
     }
 
     private static async Task ConnectWithRetryAsync(HubConnection connection)
@@ -114,43 +174,85 @@ public partial class MainWindow : Window
             try
             {
                 await connection.StartAsync();
-                FileLogger.AppendLogFile($"[SignalR] Успешно подключились к Logger Hub");
-
+                FileLogger.AppendLogFile("[SignalR] Успешно подключились к Logger Hub");
                 break;
             }
             catch (Exception ex)
             {
-                FileLogger.AppendLogFile($"[SignalR] Ошибка подключения к Logger Hub {ex?.Message}");
+                FileLogger.AppendLogFile($"[SignalR] Ошибка подключения к Logger Hub {ex.Message}");
                 await Task.Delay(5000);
             }
         }
     }
+
+    private void OnAddDestinationIp(object? sender, RoutedEventArgs args)
+    {
+        var subnetIp = NewDestinationIpBox.Text?.Trim();
+        var subnetMask = NewDestinationMaskBox.Text?.Trim();
+        var subnet = $"{subnetIp}/{subnetMask}";
+        if (!string.IsNullOrEmpty(subnet) && !_config.FirewallProtection.DestinationIpOptions.DestinationAddress.Contains(subnet))
+        {
+            _config.FirewallProtection.DestinationIpOptions.DestinationAddress.Add(subnet);
+            RefreshAllLists();
+            NewDestinationIpBox.Text = string.Empty;
+            NewDestinationMaskBox.Text = string.Empty;
+        }
+    }
+    private void OnAddSourceIp(object? sender, RoutedEventArgs args)
+    {
+        var subnetIp = NewSourceIpBox.Text?.Trim();
+        var subnetMask = NewSourceMaskBox.Text?.Trim();
+        var subnet = $"{subnetIp}/{subnetMask}";
+        if (!string.IsNullOrEmpty(subnet) && !_config.FirewallProtection.SourceIpOptions.SourceAddress.Contains(subnet))
+        {
+            _config.FirewallProtection.SourceIpOptions.SourceAddress.Add(subnet);
+            RefreshAllLists();
+            NewDestinationIpBox.Text = string.Empty;
+            NewDestinationMaskBox.Text = string.Empty;
+        }
+    }
+
+    private void OnRemoveSourceIp(object? sender, RoutedEventArgs args)
+    {
+         if(SourceIpList.SelectedItem is string subnet)
+            {
+                _config.FirewallProtection.SourceIpOptions.SourceAddress.Remove(subnet);
+                RefreshAllLists();
+            }
+    }
+    private void RefreshAllLists()
+    {
+        SourceIpList.ItemsSource = _config.FirewallProtection.SourceIpOptions.SourceAddress;
+        DestinationIpList.ItemsSource = _config.FirewallProtection.DestinationIpOptions.DestinationAddress;
+    }
+    private void OnRemoveDestinationIp(object? sender, RoutedEventArgs args)
+    {
+        if(DestinationIpList.SelectedItem is string subnet)
+            {
+                _config.FirewallProtection.DestinationIpOptions.DestinationAddress.Remove(subnet);
+                RefreshAllLists();
+            }
+    }
+
     private void LoadConnectionWindow()
     {
-         if (connectionTable is null)
+        if (connectionTable is null)
         {
             connectionTable = new ConnectionTable();
-            
-            connectionTable.Closed += (_, _) =>
-            {
-                connectionTable = null;
-            };
+            connectionTable.Closed += (_, _) => connectionTable = null;
         }
     }
+
     private void LoadLogWindow()
     {
-         if (logWindow is null)
+        if (logWindow is null)
         {
             logWindow = new LogWindow();
-            
-            logWindow.Closed += (_, _) =>
-            {
-                logWindow = null;
-            };
+            logWindow.Closed += (_, _) => logWindow = null;
         }
     }
-    private void OnLoadClick(object? sender, RoutedEventArgs e) => LoadConfig();
 
+    private void OnLoadClick(object? sender, RoutedEventArgs e) => LoadConfig();
     private void OnSaveClick(object? sender, RoutedEventArgs e) => SaveConfig();
 
     private void LoadConfig()
@@ -159,10 +261,11 @@ public partial class MainWindow : Window
         {
             if (File.Exists(ConfigPath))
             {
-                
                 var json = File.ReadAllText(ConfigPath);
                 using var doc = JsonDocument.Parse(json);
-                var node = doc.RootElement.TryGetProperty("FirewallConfiguration", out var section) ? section : doc.RootElement;
+                var node = doc.RootElement.TryGetProperty("FirewallConfiguration", out var section)
+                    ? section
+                    : doc.RootElement;
                 _config = node.Deserialize<FirewallConfiguration>(JsonOptions) ?? new FirewallConfiguration();
                 StatusText.Text = "Загружено: " + ConfigPath;
             }
@@ -178,15 +281,14 @@ public partial class MainWindow : Window
             StatusText.Text = "Ошибка чтения: " + ex.Message;
         }
 
-        FillEnumLists();      
-        DataContext = _config; 
+        FillEnumLists();
+        RefreshAllLists();
+        DataContext = _config;
     }
 
-   
     private void FillEnumLists()
     {
         RuleStrategyBox.ItemsSource = EnumValues(_config.RuleStrategy);
-        
         AlgorithmBox.ItemsSource = EnumValues(_config.FirewallProtection.RateLimitOptions.Algorithm);
     }
 
@@ -202,38 +304,27 @@ public partial class MainWindow : Window
         LoadLogWindow();
 
         if (!logWindow!.IsVisible)
-        {
             logWindow.Show(this);
-        }
         else
-        {
             logWindow.Activate();
-        }
-
     }
 
     private void OnConnectionTable_Click(object? sender, RoutedEventArgs eventArgs)
     {
-         LoadConnectionWindow();
+        LoadConnectionWindow();
 
         if (!connectionTable!.IsVisible)
-        {
             connectionTable.Show(this);
-        }
         else
-        {
             connectionTable.Activate();
-        }
     }
 
     private void SaveConfig()
     {
         try
         {
-           
             Focus();
 
-            
             var json = JsonSerializer.Serialize(
                 new ConfigFileRoot { FirewallConfiguration = _config }, JsonOptions);
 

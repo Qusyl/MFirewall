@@ -19,7 +19,7 @@ namespace MFirewallApp.Service.Auth
             _passwordService = passwordService;
             _tokenService = tokenService;
         }
-        public async Task<Result<string,string>> LoginAsync(UserLoginDto loginDto)
+        public async Task<Result<AuthResponseDto,string>> LoginAsync(UserLoginDto loginDto)
         {
             var email = loginDto.Email;
 
@@ -29,7 +29,7 @@ namespace MFirewallApp.Service.Auth
 
             if (string.IsNullOrEmpty(hashedPassword))
             {
-                return Result<string, string>.Failure("User not found");
+                return Result<AuthResponseDto, string>.Failure("User not found");
             }
 
             bool IsCorrect = _passwordService.VerifyPassword(password, hashedPassword);
@@ -41,16 +41,18 @@ namespace MFirewallApp.Service.Auth
                 var roles = await _userIdentityService.GetUserRoles(userId);
                 var authDto = new AuthDto(userId, email, roles);
                 var token = _tokenService.GenerateAccessToken(authDto);
+
+                var userRoles = await _userIdentityService.GetUserRoles(userId);
                 if (string.IsNullOrEmpty(token)){
-                    return Result<string, string>.Failure("[login] Token generation error");
+                    return Result<AuthResponseDto, string>.Failure("[login] Token generation error");
                 }
-                return Result<string, string>.Success(token);
+                return Result<AuthResponseDto, string>.Success(new AuthResponseDto(token, userRoles));
             }
-            return Result<string, string>.Failure("Invalid password or email");
+            return Result<AuthResponseDto, string>.Failure("Invalid password or email");
 
         }
 
-        public async Task<Result<string,string>> RegisterAsync(UserRegistrationDto registerDto)
+        public async Task<Result<AuthResponseDto,string>> RegisterAsync(UserRegistrationDto registerDto)
         {
             var email = registerDto.Email;
 
@@ -62,14 +64,16 @@ namespace MFirewallApp.Service.Auth
 
             if (!result.IsSuccess)
             {
-                return Result<string, string>.Failure($"Error while create user : {result.Error!}");
+                return Result<AuthResponseDto, string>.Failure($"Error while create user : {result.Error!}");
             }
             var authDto = new AuthDto(result.Value!, email, new List<string>());
             var token = _tokenService.GenerateAccessToken(authDto);
-             if (string.IsNullOrEmpty(token)){
-                    return Result<string, string>.Failure("[registration] Token generation error");
-                }
-            return Result<string, string>.Success(token);
+            if (string.IsNullOrEmpty(token))
+            {
+                return Result<AuthResponseDto, string>.Failure("[registration] Token generation error");
+            }
+            var userRoles = await _userIdentityService.GetUserRoles(result.Value!);
+            return Result<AuthResponseDto, string>.Success(new AuthResponseDto(token, userRoles));
         }
     }
 }

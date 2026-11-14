@@ -21,10 +21,14 @@ namespace MFirewallApp.Rules.FloodRule
 
         public PacketDecision Check(IPv4Packet packet, FirewallProtection configuration)
         {
+            if(!configuration.TcpSynFloodOptions.Enable && !configuration.UdpFloodOptions.Enable)
+            {
+                return new PacketDecision(packet.Header.Identification, Verdict.Verdict.NO_MATCH, "Not enabled", RuleName);
+            }
 
             var transportPacket = packet.ExtractPacket();
 
-            if (transportPacket is TcpPacket)
+            if (transportPacket is TcpPacket && configuration.TcpSynFloodOptions.Enable)
             {
                 var tcpDetector = new TcpSynFloodDetector(tcpHistory);
 
@@ -32,13 +36,17 @@ namespace MFirewallApp.Rules.FloodRule
 
                 return verdict;
             }
-            else
+            if(transportPacket is UdpPacket && configuration.UdpFloodOptions.Enable)
             {
                 var udpDetector = new UdpFloodDetector(udpHistory);
 
                 var verdict = udpDetector.ShouldBlock(packet, configuration);
 
                 return verdict;
+            }
+            else
+            {
+                return new PacketDecision(packet.Header.Identification, Verdict.Verdict.NO_MATCH, "Not enabled", RuleName);
             }
         }
     }

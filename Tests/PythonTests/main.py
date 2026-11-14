@@ -26,10 +26,10 @@ def main():
         tests.test_source_port(779)
 
     elif choice == "2":
-        tests.test_destination_port(779)
+        tests.test_destination_port(775)
 
     elif choice == "3":
-        tests.test_source_ip("127.0.0.3")
+        tests.test_source_ip("127.0.0.25")
 
     elif choice == "4":
         tests.test_destination_ip("127.0.0.17")

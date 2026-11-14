@@ -12,6 +12,9 @@ namespace MFirewallAppUI
     public partial class LogWindow : Window
     {
         public ObservableCollection<FirewallReport> Logs { get; } = new();
+
+       
+
         public LogWindow()
         {
             InitializeComponent();

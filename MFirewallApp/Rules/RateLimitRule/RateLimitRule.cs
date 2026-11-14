@@ -69,6 +69,7 @@ namespace MFirewallApp.Rules.RateLimitRule
                     options.Ip.WindowSeconds,
                     now))
                 {
+                    
                     exceededRules.Add("IP");
                 }
             }
@@ -155,9 +156,7 @@ namespace MFirewallApp.Rules.RateLimitRule
 
                 state.PacketCount++;
 
-                Console.WriteLine(
-                    $"[FIXED WINDOW] Key={key}, " +
-                    $"Count={state.PacketCount}/{maxPackets}");
+                
 
                 return state.PacketCount > maxPackets;
             }

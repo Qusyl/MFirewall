@@ -8,6 +8,8 @@ namespace MFirewallApp.Rules
 {
     public class HttpProxyConfiguration
     {
+        public SubnetOptions SubnetOptions { get; set; } = new();
+        
         public AllowedDomainOptions AllowedDomainOptions { get; set; } = new();
 
         public BlackListDomainOptions BlackListDomainOptions { get; set; } = new();
@@ -15,6 +17,7 @@ namespace MFirewallApp.Rules
         public UrlOptions UrlOptions { get; set; } = new();
 
         public HttpsOptions HttpsOptions { get; set; } = new();
+        
 
     }
 }

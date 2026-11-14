@@ -8,7 +8,7 @@ namespace MFirewallApp.Interface
 {
     public interface IAuthenticationService
     {
-        Task<Result<string,string>> RegisterAsync(UserRegistrationDto registerDto);
-        Task<Result<string,string>> LoginAsync(UserLoginDto loginDto);
+        Task<Result<AuthResponseDto,string>> RegisterAsync(UserRegistrationDto registerDto);
+        Task<Result<AuthResponseDto,string>> LoginAsync(UserLoginDto loginDto);
     }
 }

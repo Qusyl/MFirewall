@@ -4,15 +4,19 @@
     "FirewallProtection": {
       "DestinationIpOptions": {
         "Enable": false,
-        "DestinationAddress": "127.0.0.17"
+        "DestinationAddress": [
+          "201.13.1.0/24"
+        ]
       },
       "DestinationPortOptions": {
         "Enable": false,
-        "DestinationPort": 778
+        "DestinationPort": 775
       },
       "SourceIpOptions": {
-        "Enable": false,
-        "SourceAddress": "127.0.0.3"
+        "Enable": true,
+        "SourceAddress": [
+          "127.0.0.96/27"
+        ]
       },
       "SourcePortOptions": {
         "Enable": false,
@@ -25,7 +29,7 @@
       },
       "UdpPortScanOptions": {
         "Enable": false,
-        "UniquePacketsThreshold": 12,
+        "UniquePacketsThreshold": 50,
         "WindowSeconds": 3
       },
       "TcpSynFloodOptions": {
@@ -35,26 +39,26 @@
       },
       "UdpFloodOptions": {
         "Enable": false,
-        "MaxPackets": 301,
+        "MaxPackets": 300,
         "WindowSeconds": 3
       },
       "RateLimitOptions": {
-        "Enable": true,
-        "Algorithm": "TOKEN_BUCKET",
+        "Enable": false,
+        "Algorithm": "FIXED_WINDOW",
         "TokenBucket": {
-          "Enable": true,
+          "Enable": false,
           "Capacity": 99,
           "TokenPerSeconds": 50,
           "TokenPerPacket": 5
         },
         "Ip": {
           "Enable": false,
-          "MaxPackets": 6000,
+          "MaxPackets": 12000,
           "WindowSeconds": 1
         },
         "Port": {
-          "Enable": true,
-          "MaxPackets": 100,
+          "Enable": false,
+          "MaxPackets": 300,
           "WindowSeconds": 1
         },
         "Protocol": {

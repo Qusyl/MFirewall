@@ -1,46 +1,43 @@
 {
-    "HttpProxyConfiguration" : 
-    {
-        "AllowedDomainOptions":
-        {
-            "AllowedDomains":
-            [
-                "*"
-            ]
-        },
-        "BlackListDomainOptions":
-        {
-            "BlackList":
-            [
-                "example.com",
-                "example2.com"
-            ]
-        },
-        "UrlOptions":
-        {
-            "NotAllowedQueryParameters":
-            [
-                "admin",
-                "debug"
-            ],
-            "NotAllowedKeyWords":
-            [
-                "casino",
-                "drop",
-                "malware"
-            ],
-            "BlockedExtensions":
-            [
-                ".zip",
-                ".exe"
-            ]
-        },
-        "HttpsOptions":
-        {
-            "AllowedPorts":
-            [
-                443
-            ]
-        }
+  "HttpProxyConfiguration": {
+    "SubnetOptions": {
+      "BlockedCidrList": [
+        "203.0.113.11/32",
+        "203.0.113.12/32",
+        "201.0.113.12/32"
+      ]
+    },
+    "AllowedDomainOptions": {
+      "AllowedDomains": [
+        "*"
+      ]
+    },
+    "BlackListDomainOptions": {
+      "BlackList": [
+        "example.com",
+        "exic.com",
+        "papaya.ru"
+      ]
+    },
+    "UrlOptions": {
+      "NotAllowedQueryParameters": [
+        "admin",
+        "debug"
+      ],
+      "NotAllowedKeyWords": [
+        "casino",
+        "drop",
+        "malware"
+      ],
+      "BlockedExtensions": [
+        ".zip",
+        ".exe"
+      ]
+    },
+    "HttpsOptions": {
+      "AllowedPorts": [
+        443
+      ]
     }
+  }
 }

@@ -41,7 +41,7 @@ namespace MFirewallApp.Rules.FloodRule.Detectors.Flood
                 {
                     if (!history.TryRegister(now, window, maxPackets))
                     {
-                        return new PacketDecision(packet.Header.Identification, Verdict.Verdict.DROP, $"tcp packets exceeded [{maxPackets}]", "udp flood detector");
+                        return new PacketDecision(packet.Header.Identification, Verdict.Verdict.DROP, $"tcp packets exceeded [{maxPackets}]", "tcp flood detector");
                     }
                 }
 
@@ -54,7 +54,7 @@ namespace MFirewallApp.Rules.FloodRule.Detectors.Flood
                 return new PacketDecision(packet.Header.Identification, Verdict.Verdict.ACCEPT, "No reason for drop", "tcp syn flood detector");
             }
 
-            return new PacketDecision(packet.Header.Identification, Verdict.Verdict.NO_MATCH, "Packet is not tcp", "udp flood detector");
+            return new PacketDecision(packet.Header.Identification, Verdict.Verdict.NO_MATCH, "Packet is not tcp", "tcp flood detector");
         }
     }
 }

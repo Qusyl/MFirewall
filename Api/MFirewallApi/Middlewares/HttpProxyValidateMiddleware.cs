@@ -18,28 +18,8 @@ namespace MFirewallApi.Middlewares
         }
 
         public async Task InvokeAsync(HttpContext context, IProxyService proxyService, IOptionsMonitor<HttpProxyConfiguration> config)
-        {
-            // if (HttpMethods.IsConnect(context.Request.Method))
-            // {
-            //     if (!ProxyRequestDetector.TryGetConnectTarget(context, out var host, out var port))
-            //     {
-            //         context.Response.StatusCode = StatusCodes.Status400BadRequest;
-
-            //         return;
-            //     }
-
-            //     var allowedPorts = config.CurrentValue.HttpsOptions.AllowedPorts;
-            //     if (!allowedPorts.Contains(port))
-            //     {
-            //         context.Response.StatusCode = StatusCodes.Status403Forbidden;
-            //         await context.Response.WriteAsync($"Port {port} is found on blocked ports");
-            //         return;
-            //     }
-
-            //     context.Response.StatusCode = StatusCodes.Status501NotImplemented;
-
-            //     return;
-            // }
+    {
+            
             if (!ProxyRequestDetector.IsProxyRequest(context))
             {
                 await _next(context);

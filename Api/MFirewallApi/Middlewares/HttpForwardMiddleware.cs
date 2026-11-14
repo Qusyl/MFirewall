@@ -1,7 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
+using MFirewallApp.Dto;
 using MFirewallApp.Interface;
 
 namespace MFirewallApi.Middlewares
@@ -19,6 +22,7 @@ namespace MFirewallApi.Middlewares
         {
             if (!ProxyRequestDetector.IsProxyRequest(context))
             {
+               
                 await _next(context);
                 return;
             }

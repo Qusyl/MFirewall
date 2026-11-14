@@ -2,6 +2,8 @@ using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 
+using Avalonia.Threading;
+
 namespace MFirewallAppUI;
 
 public partial class App : Application
@@ -12,12 +14,30 @@ public partial class App : Application
         var _ = typeof(Avalonia.Controls.DataGrid);
     }
 
-    public override void OnFrameworkInitializationCompleted()
+    public override async void OnFrameworkInitializationCompleted()
     {
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+    {
+        var main = new MainWindow();
+        desktop.MainWindow = main;
+
+        
+        main.Opened += async (_, _) =>
         {
-            desktop.MainWindow = new MainWindow();
-        }
+            var auth = new AuthorizationWindow();
+            await auth.ShowDialog(main);   
+
+            if (!auth.IsAuthorized)
+            {
+                desktop.Shutdown();
+                return;
+            }
+
+            main.IsAdmin = auth.IsAdmin;
+            main.IsAuthorized = auth.IsAuthorized;
+          
+        };
+    }
 
         base.OnFrameworkInitializationCompleted();
     }

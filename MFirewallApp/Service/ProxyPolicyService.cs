@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
@@ -65,6 +66,7 @@ namespace MFirewallApp.Service
             return Result<string>.Success;
 
         }
+        
         private  async Task<Result<string>> IsAllowedDomain(string? domain)
         {
             if(domain == null)
@@ -102,7 +104,7 @@ namespace MFirewallApp.Service
                 string? forribdenParameter ="";
                 foreach (var parameter in parsedParameters.AllKeys)
                 {
-                    if (forribdenParameters.Contains(parameter))
+                    if (forribdenParameters.Contains(parameter!))
                     {
                         contains = true;
                         forribdenParameter = parameter;
@@ -124,14 +126,16 @@ namespace MFirewallApp.Service
        
         public async Task<Result<string>> ShouldAccept(HttpRequest request)
         {
-            
+
             var tasks = new List<Task<Result<string>>>()
             {
+                
                 IsAllowedDomain(request.Host.Host),
                 IsAllowedUrl(UriHelper.GetDisplayUrl(request)),
                 NotContainsBlockedKeyWords(UriHelper.GetDisplayUrl(request)),
                 NotContainsBlockedExtension(UriHelper.GetDisplayUrl(request))
             };
+            
 
             var result = await Task.WhenAll(tasks);
 

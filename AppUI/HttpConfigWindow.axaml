@@ -1,0 +1,153 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="MFirewallAppUI.HttpWindow"
+        x:CompileBindings="False"
+        Title="Конфигуратор HTTP-прокси"
+        Width="620" Height="720">
+
+  <Window.Styles>
+    <Style Selector="TextBlock.lbl">
+      <Setter Property="Width" Value="220"/>
+      <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+    <Style Selector="StackPanel.row">
+      <Setter Property="Orientation" Value="Horizontal"/>
+      <Setter Property="Spacing" Value="6"/>
+    </Style>
+    <Style Selector="StackPanel.row > TextBox, StackPanel.row > ComboBox">
+      <Setter Property="Width" Value="280"/>
+    </Style>
+    <Style Selector="Expander">
+      <Setter Property="HorizontalAlignment" Value="Stretch"/>
+      <Setter Property="Margin" Value="0,0,0,6"/>
+    </Style>
+    <Style Selector="ListBox">
+      <Setter Property="Height" Value="120"/>
+      <Setter Property="BorderThickness" Value="1"/>
+      <Setter Property="BorderBrush" Value="Gray"/>
+    </Style>
+  </Window.Styles>
+
+  <DockPanel>
+
+    <Border DockPanel.Dock="Bottom" Padding="12" BorderThickness="0,1,0,0" BorderBrush="Gray">
+      <StackPanel Orientation="Horizontal" Spacing="10">
+        <Button x:Name="LoadButton" Content="Загрузить из JSON" Click="OnLoadClick"/>
+        <Button x:Name="SaveButton" Content="Сохранить в JSON" Click="OnSaveClick"/>
+        <TextBlock x:Name="StatusText" VerticalAlignment="Center"/>
+      </StackPanel>
+    </Border>
+
+    <ScrollViewer>
+      <StackPanel Margin="12" Spacing="4">
+        
+  <Expander Header="Запрещённые подсети" IsExpanded="True">
+  <StackPanel Spacing="8">
+
+    
+    <Grid ColumnDefinitions="*,110,Auto,Auto" ColumnSpacing="8">
+      <TextBox x:Name="NewSubnetIpBox"
+               Grid.Column="0"
+               Watermark="например, 192.168.1.0"
+               VerticalAlignment="Center"/>
+
+      <NumericUpDown x:Name="NewSubnetMaskBox"
+                     Grid.Column="1"
+                     Minimum="0"
+                     Maximum="32"
+                     Value="24"
+                     FormatString="0"
+                     VerticalAlignment="Center"/>
+
+      <Button Grid.Column="2" Content="Добавить" Click="OnAddSubnet"/>
+      <Button Grid.Column="3" Content="Удалить" Click="OnRemoveSubnet"/>
+    </Grid>
+
+    <TextBlock Text="Подсети" FontWeight="SemiBold" Foreground="#555" Margin="8,0,0,0"/>
+    <ListBox x:Name="SubnetsList" Height="150">
+      <ListBox.ItemTemplate>
+        <DataTemplate>
+          <TextBlock Text="{Binding}"
+                     FontFamily="Consolas,monospace"
+                     VerticalAlignment="Center"/>
+        </DataTemplate>
+      </ListBox.ItemTemplate>
+    </ListBox>
+  </StackPanel>
+</Expander>
+        <!-- AllowedDomains -->
+        <Expander Header="Разрешённые домены" IsExpanded="True">
+          <StackPanel Spacing="6">
+            <StackPanel Classes="row">
+              <TextBox x:Name="NewAllowedDomainBox" Watermark="например, *.example.com"/>
+              <Button Content="Добавить" Click="OnAddAllowedDomain"/>
+              <Button Content="Удалить" Click="OnRemoveAllowedDomain"/>
+            </StackPanel>
+            <ListBox x:Name="AllowedDomainsList"/>
+          </StackPanel>
+        </Expander>
+
+        <!-- BlackList -->
+        <Expander Header="Чёрный список доменов" IsExpanded="True">
+          <StackPanel Spacing="6">
+            <StackPanel Classes="row">
+              <TextBox x:Name="NewBlackDomainBox" Watermark="например, example.com"/>
+              <Button Content="Добавить" Click="OnAddBlackDomain"/>
+              <Button Content="Удалить" Click="OnRemoveBlackDomain"/>
+            </StackPanel>
+            <ListBox x:Name="BlackListDomainsList"/>
+          </StackPanel>
+        </Expander>
+
+        <!-- NotAllowedQueryParameters -->
+        <Expander Header="Запрещённые query-параметры">
+          <StackPanel Spacing="6">
+            <StackPanel Classes="row">
+              <TextBox x:Name="NewQueryParamBox" Watermark="например, admin"/>
+              <Button Content="Добавить" Click="OnAddQueryParam"/>
+              <Button Content="Удалить" Click="OnRemoveQueryParam"/>
+            </StackPanel>
+            <ListBox x:Name="QueryParamsList"/>
+          </StackPanel>
+        </Expander>
+
+        <!-- NotAllowedKeyWords -->
+        <Expander Header="Запрещённые ключевые слова">
+          <StackPanel Spacing="6">
+            <StackPanel Classes="row">
+              <TextBox x:Name="NewKeywordBox" Watermark="например, casino"/>
+              <Button Content="Добавить" Click="OnAddKeyword"/>
+              <Button Content="Удалить" Click="OnRemoveKeyword"/>
+            </StackPanel>
+            <ListBox x:Name="KeywordsList"/>
+          </StackPanel>
+        </Expander>
+
+        <!-- BlockedExtensions -->
+        <Expander Header="Заблокированные расширения">
+          <StackPanel Spacing="6">
+            <StackPanel Classes="row">
+              <TextBox x:Name="NewExtensionBox" Watermark="например, .exe"/>
+              <Button Content="Добавить" Click="OnAddExtension"/>
+              <Button Content="Удалить" Click="OnRemoveExtension"/>
+            </StackPanel>
+            <ListBox x:Name="ExtensionsList"/>
+          </StackPanel>
+        </Expander>
+
+        <!-- AllowedPorts -->
+        <Expander Header="Разрешённые HTTPS-порты">
+          <StackPanel Spacing="6">
+            <StackPanel Classes="row">
+              <NumericUpDown x:Name="NewPortBox" Minimum="1" Maximum="65535" FormatString="0" Width="160"/>
+              <Button Content="Добавить" Click="OnAddPort"/>
+              <Button Content="Удалить" Click="OnRemovePort"/>
+            </StackPanel>
+            <ListBox x:Name="PortsList"/>
+          </StackPanel>
+        </Expander>
+
+      </StackPanel>
+    </ScrollViewer>
+  </DockPanel>
+</Window>

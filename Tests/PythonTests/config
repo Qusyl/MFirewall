@@ -9,3 +9,10 @@ sudo iptables -I INPUT 1 -i lo -p udp \
 # ICMP
 sudo iptables -I INPUT 1 -i lo -p icmp \
   -j NFQUEUE --queue-num 0 --queue-bypass
+
+для Rate Limit если что
+sudo iptables -I INPUT 1 \
+  -i lo \
+  -s 127.0.0.2 \
+  -p udp \
+  -j NFQUEUE --queue-num 0 --queue-bypass

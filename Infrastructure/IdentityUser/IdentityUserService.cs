@@ -12,10 +12,12 @@ namespace Infrastructure.IdentityUser
     public class IdentityUserService : IIdentityService
     {
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public IdentityUserService(UserManager<ApplicationUser> userManager)
+        public IdentityUserService(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
+            _roleManager = roleManager;
         }
     
         public async Task<bool> ConvocatRoleAsync(string userId, string role)
@@ -46,6 +48,13 @@ namespace Infrastructure.IdentityUser
                 UserName = email,
                 PasswordHash = passwordHash
             });
+
+            if (!await _roleManager.RoleExistsAsync("Admin"))
+            {
+                await _roleManager.CreateAsync(new IdentityRole("Admin"));
+            }
+            var user = await _userManager.FindByIdAsync(id);
+            await _userManager.AddToRoleAsync(user!, "Admin");
 
             if (!createdUser.Succeeded)
             {

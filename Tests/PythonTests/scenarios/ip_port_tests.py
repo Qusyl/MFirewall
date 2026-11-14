@@ -79,7 +79,7 @@ class IpPortTests:
     def test_destination_ip(
         self,
         blocked_ip: str,
-        allowed_ip: str = "127.0.0.3"
+        allowed_ip: str = "201.13.1.15"
     ):
         print("\n=== DESTINATION IP TEST ===")
 

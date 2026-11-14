@@ -20,6 +20,10 @@ namespace MFirewallApp.Rules.PortScanRule
         public int RuleScore => 100;
         public PacketDecision Check(IPv4Packet packet, FirewallProtection configuration)
         {
+            if(!configuration.TcpPortScanOptions.Enable && !configuration.UdpPortScanOptions.Enable)
+            {
+                return new PacketDecision(packet.Header.Identification, Verdict.Verdict.NO_MATCH, "Not enabled", RuleName);
+            }
             var detector = PortScanDetectorFactory.Create(packet, _attempts);
 
             if(detector is null)

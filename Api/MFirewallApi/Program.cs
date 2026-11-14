@@ -29,9 +29,10 @@ using Microsoft.OpenApi;
 using MFirewallApi.Document;
 using Scalar.AspNetCore;
 using MFirewallApi.Networking;
+using System.Threading.RateLimiting;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.WebHost.UseUrls("http://localhost:5120");
+builder.WebHost.UseUrls("http://0.0.0.0:5120");
 
 // var contentPath = builder.Environment.ContentRootPath;  production
 var contentPath = "/home/denis/Documents/Kursovie/Security/Api/MFirewallApi";
@@ -62,7 +63,22 @@ builder.Services
 
 
 
-
+builder.Services.AddRateLimiter(options =>
+{
+    options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
+    options.GlobalLimiter = PartitionedRateLimiter.Create<HttpContext, string>(context => 
+    RateLimitPartition.GetTokenBucketLimiter(
+        partitionKey: context.Connection.RemoteIpAddress?.ToString() ?? "anonymous",
+        factory: _ => new TokenBucketRateLimiterOptions
+        {
+            TokenLimit = 100,
+            TokensPerPeriod = 10,
+            ReplenishmentPeriod = TimeSpan.FromSeconds(1),
+            QueueLimit = 0,
+            AutoReplenishment = true
+        }
+    ));
+});
 builder.Services.AddProblemDetails();
 
 builder.Services.AddAuthorization();
@@ -161,7 +177,7 @@ if (app.Environment.IsDevelopment())
 }
 
 
-
+app.UseRateLimiter();
 app.UseHttpsRedirection();
 app.UseRouting();
 
@@ -172,7 +188,6 @@ app.UseAuthentication();
 app.UseMiddleware<HttpProxyValidateMiddleware>();
 app.UseMiddleware<HttpForwardMiddleware>();
 
-// app.UseMiddleware<JwtTokenMiddleware>();
 app.UseAuthorization();
 var auth = app.MapGroup("/auth").WithTags("Auth");
 
@@ -180,7 +195,7 @@ app.MapPost("/register", async (UserRegistrationDto dto, [FromServices] MFirewal
 {
     var result = await svc.RegisterAsync(dto);
     return result.IsSuccess ?
-    Results.Ok(new { token = result.Value }) :
+    Results.Ok(result.Value ) :
     Results.BadRequest(new { error = result.Error });
 })
 .RequireRateLimiting("auth");
@@ -190,7 +205,7 @@ app.MapPost("/login", async (UserLoginDto dto,[FromServices] MFirewallApp.Interf
     var result = await svc.LoginAsync(dto);
 
     return result.IsSuccess ?
-    Results.Ok(new { token = result.Value}) :
+    Results.Ok(result.Value) :
     Results.Json(new { error = "Invalid credentials"}, statusCode: 401);
 });
 app.MapGet("/status", () =>

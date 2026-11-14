@@ -41,7 +41,7 @@
             "preLaunchTask": "build",
             "program": "${workspaceFolder}/Api/MFirewallApi/bin/Debug/net10.0/MFirewallApi.dll",
             "args":[ "--urls",
-                "http://localhost:5120"],
+                "http://0.0.0.0:5120"],
             "cwd": "${workspaceFolder}",
             "stopAtEntry": false,
             "console": "internalConsole",
